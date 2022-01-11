@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/PerfMonitor/MonitorPlotPanel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/PerfMonitor/MonitorPlotPanelPerf.gd" type="Script" id=2]
+
+[node name="MonitorPlotPanelPerf" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Label" parent="." index="0"]
+margin_top = -26.0
+margin_right = 3.0
+margin_bottom = 27.0
+
+[node name="LabelMin" parent="." index="2"]
+margin_top = 14.0
+margin_bottom = 31.0

@@ -1,0 +1,124 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://res/menu_background.png" type="Texture" id=1]
+[ext_resource path="res://res/Cinzel/static/Cinzel-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://res/Cinzel/static/Cinzel-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://res/wood_wall.png" type="Texture" id=4]
+[ext_resource path="res://menu.cs" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 190
+outline_size = 10
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 80
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -1.0
+margin_top = 1.0
+margin_right = 2415.0
+margin_bottom = 1356.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 1031.92
+margin_top = 257.32
+margin_right = 2205.92
+margin_bottom = 514.32
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 0.92549 )
+custom_colors/font_outline_modulate = Color( 1, 0.87451, 0.87451, 0.364706 )
+custom_constants/shadow_offset_x = 16
+custom_constants/shadow_offset_y = 14
+custom_constants/shadow_as_outline = 8
+text = "Fort Seige   "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuOptions" type="Node2D" parent="."]
+position = Vector2( 81, 50 )
+
+[node name="StartOption" type="Node2D" parent="MenuOptions"]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="MenuOptions/StartOption"]
+position = Vector2( 79.9995, 288.069 )
+rotation = -1.57079
+scale = Vector2( 3, 4 )
+normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="MenuOptions/StartOption"]
+margin_left = 77.0
+margin_top = 130.0
+margin_right = 744.0
+margin_bottom = 290.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Start Game"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsOption" type="Node2D" parent="MenuOptions"]
+position = Vector2( -2.7467, 212.162 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="MenuOptions/OptionsOption"]
+position = Vector2( 79.9997, 254.254 )
+rotation = -1.57079
+scale = Vector2( 2.76276, 4 )
+normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="MenuOptions/OptionsOption"]
+margin_left = 80.0
+margin_top = 107.0
+margin_right = 743.0
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitOption" type="Node2D" parent="MenuOptions"]
+position = Vector2( 8.2533, 380.162 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="MenuOptions/ExitOption"]
+position = Vector2( 79.9997, 262.511 )
+rotation = -1.57079
+scale = Vector2( 2.40586, 3.91211 )
+normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="MenuOptions/ExitOption"]
+margin_left = 80.0
+margin_top = 136.0
+margin_right = 732.0
+margin_bottom = 268.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Exit"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="MenuOptions/StartOption/TouchScreenButton" to="." method="OnStartGameButtonPressed"]
+[connection signal="pressed" from="MenuOptions/ExitOption/TouchScreenButton" to="." method="ExitPressed"]

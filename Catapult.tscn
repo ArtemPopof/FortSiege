@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://res/catapult.svg" type="Texture" id=1]
+[ext_resource path="res://res/catapult_neck.svg" type="Texture" id=2]
+[ext_resource path="res://Catapult.cs" type="Script" id=3]
+[ext_resource path="res://res/wood_wall.png" type="Texture" id=4]
+[ext_resource path="res://res/stone.svg" type="Texture" id=5]
+[ext_resource path="res://StoneBall.tscn" type="PackedScene" id=7]
+
+[node name="Catapult" type="Node2D"]
+script = ExtResource( 3 )
+ballScene = ExtResource( 7 )
+
+[node name="MaxX" type="Position2D" parent="."]
+position = Vector2( 2, -92.5947 )
+rotation = 0.54609
+
+[node name="Neck" type="Node2D" parent="."]
+position = Vector2( 78.9155, 21.1278 )
+rotation = 0.824227
+
+[node name="BallPosition" type="Position2D" parent="Neck"]
+position = Vector2( -119.01, -5.78749 )
+
+[node name="BallTexture" type="TextureRect" parent="Neck"]
+margin_left = -139.016
+margin_top = -28.1088
+margin_right = -98.0161
+margin_bottom = 12.8912
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture" type="TextureRect" parent="Neck"]
+anchor_right = 0.113
+margin_left = -139.016
+margin_top = -21.0927
+margin_right = 11.9838
+margin_bottom = 21.9073
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Neck"]
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -133.614, -26.1946 )
+scale = Vector2( 2.49571, 0.271321 )
+normal = ExtResource( 4 )
+shape_visible = false
+
+[node name="Body" type="TextureRect" parent="."]
+margin_left = -98.0845
+margin_top = -81.8722
+margin_right = 117.915
+margin_bottom = 72.1278
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Neck/TouchScreenButton" to="." method="NeckTouched"]
+[connection signal="released" from="Neck/TouchScreenButton" to="." method="NeckReleased"]

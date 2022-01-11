@@ -1,0 +1,58 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Panel",
+"class": "MonitorPlotPanel",
+"language": "GDScript",
+"path": "res://addons/PerfMonitor/MonitorPlotPanel.gd"
+} ]
+_global_script_class_icons={
+"MonitorPlotPanel": ""
+}
+
+[application]
+
+config/name="Fort Sidge"
+run/main_scene="res://main.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=2413
+window/size/height=1360
+window/size/resizable=false
+window/size/borderless=true
+window/size/fullscreen=true
+window/dpi/allow_hidpi=true
+window/handheld/orientation="reverse_landscape"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[mono]
+
+debugger_agent/wait_timeout=15000
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+vram_compression/import_pvrtc=true
+environment/default_environment="res://default_env.tres"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://res/Sky_back.svg" type="Texture" id=1]
+[ext_resource path="res://res/grass_back.svg" type="Texture" id=2]
+[ext_resource path="res://Clouds.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Background.cs" type="Script" id=5]
+
+[node name="Backgound" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="SkyBack" type="TextureRect" parent="."]
+margin_right = 2455.0
+margin_bottom = 1113.0
+mouse_filter = 2
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Clouds" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 4 )
+cloudCount = 15
+maxY = 325
+
+[node name="TerrainBack" type="TextureRect" parent="."]
+margin_top = 5.0
+margin_right = 2453.0
+margin_bottom = 1241.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MinY" type="Position2D" parent="."]
+position = Vector2( 519.409, 1013.44 )

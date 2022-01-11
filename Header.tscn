@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://res/Inter/static/Inter-Black.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://res/star coin shine/star coin 2.png" type="Texture" id=2]
+[ext_resource path="res://PropertyLabel.cs" type="Script" id=3]
+[ext_resource path="res://Header.cs" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.309804, 0.290196, 0.290196, 1 )
+
+[sub_resource type="AtlasTexture" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 62
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="Header" type="Panel"]
+margin_right = 2415.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 80 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 30.0
+margin_right = 2280.0
+margin_bottom = 130.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="HBoxContainer" parent="HBoxContainer"]
+margin_right = 500.0
+margin_bottom = 130.0
+custom_constants/separation = 22
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/BackButton"]
+scale = Vector2( 259.475, 80.9458 )
+normal = SubResource( 2 )
+
+[node name="ArrowLeft" type="Label" parent="HBoxContainer/BackButton"]
+margin_right = 59.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 55, 0 )
+mouse_filter = 0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 3 )
+text = "←"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/BackButton"]
+margin_left = 81.0
+margin_top = 27.0
+margin_right = 500.0
+margin_bottom = 103.0
+custom_fonts/font = SubResource( 3 )
+text = "Choose Level"
+
+[node name="Spacer" type="Panel" parent="HBoxContainer"]
+margin_left = 504.0
+margin_right = 1504.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 1000, 0 )
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 1508.0
+margin_right = 2281.0
+margin_bottom = 130.0
+grow_horizontal = 0
+rect_min_size = Vector2( 773, 0 )
+custom_constants/separation = 10
+alignment = 2
+
+[node name="MoneyCount" type="Label" parent="HBoxContainer/HBoxContainer"]
+margin_left = 557.0
+margin_top = 27.0
+margin_right = 643.0
+margin_bottom = 103.0
+custom_fonts/font = SubResource( 3 )
+text = "50"
+script = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/HBoxContainer"]
+margin_left = 653.0
+margin_right = 773.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 20, 0 )
+custom_constants/margin_right = 10
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="MoneyIcon" type="TextureRect" parent="HBoxContainer/HBoxContainer/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 110.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 90, 40 )
+texture = ExtResource( 2 )
+expand = true
+
+[connection signal="gui_input" from="HBoxContainer/BackButton/ArrowLeft" to="." method="onArrowInputSignal"]

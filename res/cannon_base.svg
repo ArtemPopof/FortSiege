@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Created with Vectornator for iOS (http://vectornator.io/) --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="100%" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" xmlns:vectornator="http://vectornator.io" version="1.1" viewBox="0 0 372 168">
+<metadata>
+<vectornator:setting key="DimensionsVisible" value="1"/>
+<vectornator:setting key="PencilOnly" value="0"/>
+<vectornator:setting key="SnapToPoints" value="0"/>
+<vectornator:setting key="OutlineMode" value="0"/>
+<vectornator:setting key="CMYKEnabledKey" value="0"/>
+<vectornator:setting key="RulersVisible" value="1"/>
+<vectornator:setting key="SnapToEdges" value="0"/>
+<vectornator:setting key="GuidesVisible" value="1"/>
+<vectornator:setting key="DisplayWhiteBackground" value="0"/>
+<vectornator:setting key="doHistoryDisabled" value="0"/>
+<vectornator:setting key="SnapToGuides" value="1"/>
+<vectornator:setting key="TimeLapseWatermarkDisabled" value="0"/>
+<vectornator:setting key="Units" value="Points"/>
+<vectornator:setting key="DynamicGuides" value="0"/>
+<vectornator:setting key="IsolateActiveLayer" value="0"/>
+<vectornator:setting key="SnapToGrid" value="0"/>
+</metadata>
+<defs/>
+<g id="Layer 1" vectornator:layerName="Layer 1">
+<path stroke="#5e3b16" stroke-width="12.8075" d="M141.19+47.7707L352.577+7.39655C355.645+6.81067+358.607+8.82241+359.192+11.8899L364.657+40.5018C365.243+43.5693+363.231+46.5309+360.164+47.1168L148.776+87.4909C145.709+88.0768+142.747+86.0651+142.161+82.9976L136.696+54.3857C136.11+51.3182+138.122+48.3566+141.19+47.7707Z" fill="#5e3b16" stroke-linecap="butt" opacity="1" stroke-linejoin="round"/>
+<path stroke="#5e3b16" stroke-width="12.8075" d="M18.6922+147.527L140.121+57.7612C141.883+56.4586+144.106+56.4197+145.086+57.6744L154.227+69.3777C155.206+70.6324+154.572+72.7055+152.81+74.0081L31.3812+163.774C29.6191+165.077+27.3962+165.115+26.4163+163.861L17.276+152.158C16.2961+150.903+16.9301+148.83+18.6922+147.527Z" fill="#5e3b16" stroke-linecap="butt" opacity="1" stroke-linejoin="round"/>
+</g>
+</svg>

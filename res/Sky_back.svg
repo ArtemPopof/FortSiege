@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Created with Vectornator for iOS (http://vectornator.io/) --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="100%" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" xmlns:vectornator="http://vectornator.io" version="1.1" viewBox="0 0 3370.82 2384.24">
+<metadata>
+<vectornator:setting key="DimensionsVisible" value="1"/>
+<vectornator:setting key="PencilOnly" value="0"/>
+<vectornator:setting key="SnapToPoints" value="0"/>
+<vectornator:setting key="GuidesVisible" value="1"/>
+<vectornator:setting key="OutlineMode" value="0"/>
+<vectornator:setting key="RulersVisible" value="1"/>
+<vectornator:setting key="SnapToEdges" value="0"/>
+<vectornator:setting key="CMYKEnabledKey" value="0"/>
+<vectornator:setting key="DisplayWhiteBackground" value="0"/>
+<vectornator:setting key="doHistoryDisabled" value="0"/>
+<vectornator:setting key="SnapToGuides" value="1"/>
+<vectornator:setting key="TimeLapseWatermarkDisabled" value="0"/>
+<vectornator:setting key="Units" value="Millimeters"/>
+<vectornator:setting key="SnapToGrid" value="0"/>
+<vectornator:setting key="DynamicGuides" value="0"/>
+<vectornator:setting key="IsolateActiveLayer" value="0"/>
+</metadata>
+<defs>
+<linearGradient y1="1250.06" id="LinearGradient" x1="1281.25" y2="1263.66" x2="4100.38" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-0.0064852 1.15381 -1.15381 -0.0064852 3106.21 -1093.99)">
+<stop stop-color="#47b8ff" offset="0"/>
+<stop stop-color="#ffffff" offset="1"/>
+</linearGradient>
+<linearGradient y1="89.257" id="LinearGradient_2" x1="1298.18" y2="89.257" x2="1298.7" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1 0 0 1 0 0)">
+<stop stop-color="#000000" offset="0"/>
+<stop stop-color="#ffffff" offset="1"/>
+</linearGradient>
+</defs>
+<g id="Layer 1" vectornator:layerName="Layer 1">
+<path d="M3441.67-1768.01L3411.28+3638.92L-168.08+3618.8L-137.689-1788.13L3441.67-1768.01Z" opacity="1" fill="url(#LinearGradient)"/>
+<path d="M1298.18+83.3116L1298.7+83.3116L1298.7+95.2025L1298.18+95.2025L1298.18+83.3116Z" opacity="1" fill="url(#LinearGradient_2)"/>
+</g>
+</svg>

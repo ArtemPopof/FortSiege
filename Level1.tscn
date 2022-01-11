@@ -1,0 +1,375 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://res/wood_wall.png" type="Texture" id=1]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Level.cs" type="Script" id=3]
+[ext_resource path="res://Prefab.cs" type="Script" id=4]
+[ext_resource path="res://StoneWall.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10.2233, 40.1178 )
+
+[node name="Level" type="Node2D"]
+position = Vector2( 0.256226, -2.56038 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+name = "Level 1"
+
+[node name="Wall9" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( -72.5353, -38.7352 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall9"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall9"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall10" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( 71.4658, -38.7352 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall10"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall10"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="WallLongHorizontal6" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( 0.289734, -88.9422 )
+rotation = 1.57079
+mass = 2.07
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="WallLongHorizontal6"]
+margin_left = -10.0
+margin_top = -80.0
+margin_right = 10.0
+margin_bottom = 80.0
+texture = ExtResource( 1 )
+region_rect = Rect2( -1, 2, 55, 162 )
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLongHorizontal6"]
+visible = false
+scale = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="Wall11" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( -72.5353, -139.735 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall11"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall11"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall12" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( 71.4658, -140.026 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall12"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall12"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="WallLongHorizontal7" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( 0.197891, -191.218 )
+rotation = 1.57079
+mass = 2.25
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="WallLongHorizontal7"]
+margin_left = -10.0
+margin_top = -80.0
+margin_right = 10.0
+margin_bottom = 80.0
+texture = ExtResource( 1 )
+region_rect = Rect2( -1, 2, 55, 162 )
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLongHorizontal7"]
+visible = false
+scale = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="Wall13" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( -72.5353, -241.736 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall13"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall13"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall14" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( 71.4658, -241.736 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall14"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall14"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="WallLongHorizontal8" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( 0.128448, -372.942 )
+rotation = 1.57079
+mass = 2.25
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="WallLongHorizontal8"]
+margin_left = -10.0
+margin_top = -80.0
+margin_right = 10.0
+margin_bottom = 80.0
+texture = ExtResource( 1 )
+region_rect = Rect2( -1, 2, 55, 162 )
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLongHorizontal8"]
+visible = false
+scale = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="Wall15" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( -72.5353, -423.736 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall15"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall15"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall17" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( -72.5353, -322.736 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall17"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall17"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall18" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( 71.4647, -322.736 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall18"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall18"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall16" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( 71.4658, -423.736 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Wall16"]
+margin_left = -10.0
+margin_top = -40.0
+margin_right = 10.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall16"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="WallLongHorizontal9" type="RigidBody2D" parent="." groups=[
+"Prefab",
+]]
+position = Vector2( -2.43991, -474.617 )
+rotation = 1.57079
+mass = 2.25
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="WallLongHorizontal9"]
+margin_left = -10.0
+margin_top = -80.0
+margin_right = 10.0
+margin_bottom = 80.0
+texture = ExtResource( 1 )
+region_rect = Rect2( -1, 2, 55, 162 )
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLongHorizontal9"]
+visible = false
+scale = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="StoneWall" parent="." instance=ExtResource( 5 )]
+position = Vector2( -133.66, -76.3779 )
+rotation = -1.17091
+scale = Vector2( 1, 1 )
+
+[node name="Coin" parent="." instance=ExtResource( 7 )]
+position = Vector2( -30.9495, -423.255 )
+
+[node name="Coin2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 35.5239, -425.773 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1.63052, -279.707 )

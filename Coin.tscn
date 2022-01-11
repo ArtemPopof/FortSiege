@@ -1,0 +1,51 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://res/star coin rotate/star coin rotate 2.png" type="Texture" id=1]
+[ext_resource path="res://res/star coin rotate/star coin rotate 3.png" type="Texture" id=2]
+[ext_resource path="res://res/star coin rotate/star coin rotate 1.png" type="Texture" id=3]
+[ext_resource path="res://res/star coin rotate/star coin rotate 4.png" type="Texture" id=4]
+[ext_resource path="res://res/star coin rotate/star coin rotate 5.png" type="Texture" id=5]
+[ext_resource path="res://res/star coin rotate/star coin rotate 6.png" type="Texture" id=6]
+[ext_resource path="res://Coin.cs" type="Script" id=7]
+[ext_resource path="res://res/coin.wav" type="AudioStream" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Rotation",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5.81519, 5.84248 )
+
+[sub_resource type="AtlasTexture" id=3]
+
+[node name="Coin" type="RigidBody2D"]
+input_pickable = true
+mass = 0.16
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.994322, -0.0500698 )
+scale = Vector2( 0.0147148, 0.0147148 )
+frames = SubResource( 1 )
+animation = "Rotation"
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.179047, 0.2179 )
+shape = SubResource( 2 )
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( -32.5686, -33.4571 )
+scale = Vector2( 67.8916, 66.8844 )
+normal = SubResource( 3 )
+
+[connection signal="input_event" from="." to="." method="OnInputEvent"]
+[connection signal="pressed" from="TouchScreenButton" to="." method="OnClicked"]

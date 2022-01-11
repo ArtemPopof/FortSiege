@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://RandomFlyingBalls.cs" type="Script" id=1]
+[ext_resource path="res://ball.tscn" type="PackedScene" id=2]
+
+[node name="RandomFlyingBalls" type="Node2D"]
+script = ExtResource( 1 )
+areaToFire = Rect2( 0, 0, 1000, 600 )
+
+[node name="Ball1" parent="." instance=ExtResource( 2 )]
+
+[node name="Ball2" parent="." instance=ExtResource( 2 )]
+
+[node name="Ball3" parent="." instance=ExtResource( 2 )]

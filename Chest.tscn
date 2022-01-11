@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://res/chest.png" type="Texture" id=1]
+[ext_resource path="res://Chest.cs" type="Script" id=2]
+[ext_resource path="res://BrokenChest.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.0395, 32.5779 )
+
+[node name="Chest" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+script = ExtResource( 2 )
+brokenObjectScene = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="RigidBody2D"]
+margin_left = -31.5327
+margin_top = -32.55
+margin_right = 31.4673
+margin_bottom = 30.45
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
