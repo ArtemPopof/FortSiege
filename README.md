@@ -1,5 +1,5 @@
 # FortSiege
-Medival clone of Angry Birds game written in C# with Godot Engine
+Medieval clone of Angry Birds game written in C# with Godot Engine
 
 
 ## ATTENTION!!! WORK IN PROGRESS, NOT READY FOR USE, YOUR DEVICE CAN BE DAMAGED SEVERELY
