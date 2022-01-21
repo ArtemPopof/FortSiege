@@ -48,6 +48,7 @@ public class Enemy : RigidBody2D
  }
 
  private void Die() {
+     if (died) return;
      died = true;
      
      var soundIndex = ((int)GD.RandRange(0, deathSoundCount));

@@ -25,6 +25,8 @@ public class Catapult : Weapon
     private float maxDegreesRotation = 47.2f;
     private float firingTimeoutSeconds = -1;
 
+    private float neckDegreesLoading = 0;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -66,6 +68,11 @@ public class Catapult : Weapon
         NeckReleased();
     }
 
+    public override Vector2 GetProjectileStartPosition()
+    {
+        return ballPosition.GlobalPosition;
+    }
+
     public override void _Process(float delta)
     {
         if (firingTimeoutSeconds != -1) {
@@ -95,10 +102,10 @@ public class Catapult : Weapon
 
     private void FireBall()
     {
-        GD.Print("Release ball, speed: " + firingForce);
+        GD.Print("Release ball, speed: " + GetFireVelocity().x + ", " + GetFireVelocity().y);
         GetNode<TextureRect>("Neck/BallTexture").Visible = false;
         LoadWithBall();
-        loadedBall.Fire(firingForce * 600f, (firingForce * firingForce) * -500f);
+        loadedBall.Fire(GetFireVelocity().x, GetFireVelocity().y);
 
         EmitSignal("Fired");
 
@@ -138,7 +145,17 @@ public class Catapult : Weapon
 
         var forceValue = (90 - neck.GlobalRotationDegrees) / 90f;
 
+        neckDegreesLoading = neck.GlobalRotationDegrees;
+
+        //EmitSignal("ProjectilePositionChanged", GetProjectileStartPosition());
+        EmitSignal("FireVelocityChanged", GetFireVelocity());  
         EmitSignal("ForceChanged", forceValue);
+    }
+
+    private Vector2 GetFireVelocity()
+    {
+        var force = (90 - neckDegreesLoading) / 90f;
+        return new Vector2(force * 600f, force * -300f);
     }
 
     public void NeckTouched()
@@ -155,8 +172,6 @@ public class Catapult : Weapon
         GD.Print("released");
         settingStrength = false;
 
-       //neckMaxPointDegrees = neck.GlobalRotationDegrees;
-
         firing = true;
         firingTime = 0;
         firingForce = (90 - neck.GlobalRotationDegrees) / 90f;
@@ -166,6 +181,11 @@ public class Catapult : Weapon
     {
         GD.Print("Set catapult neck rotation to " + value * 90 + " degrees");
         neck.RotationDegrees = maxDegreesRotation - (value * (90 - maxDegreesRotation));
+
+        neckDegreesLoading = neck.GlobalRotationDegrees;
+
+        //EmitSignal("ProjectilePositionChanged", GetProjectileStartPosition());
+        EmitSignal("FireVelocityChanged", GetFireVelocity());
     }
 
     public override void SetTrajectory(float value)

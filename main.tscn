@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://res/Cinzel/static/Cinzel-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://res/Full-Background.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://menu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://cannon.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/PerfMonitor/MonitorPlotPanelPerf.tscn" type="PackedScene" id=9]
+[ext_resource path="res://graphics/TrajectoryPainter.tscn" type="PackedScene" id=10]
 [ext_resource path="res://EnemyCounterPanel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://TimerWidget.tscn" type="PackedScene" id=12]
 [ext_resource path="res://LevelLabel.cs" type="Script" id=13]
@@ -76,7 +77,7 @@ position = Vector2( -64, -50 )
 testVelocity = Vector2( 0, 0 )
 
 [node name="FireButton" type="Node2D" parent="."]
-position = Vector2( 77.5402, 157.666 )
+position = Vector2( 77.54, 150 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="FireButton"]
 position = Vector2( -25.243, 93.9332 )
@@ -135,7 +136,6 @@ margin_bottom = 881.213
 color = Color( 1, 1, 1, 0.384314 )
 
 [node name="Menu" parent="." instance=ExtResource( 7 )]
-visible = false
 
 [node name="MonitorPlotPanelPerf" parent="." instance=ExtResource( 9 )]
 margin_left = 1994.95
@@ -214,15 +214,20 @@ position = Vector2( 56, 15 )
 script = ExtResource( 21 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 0, 167 )
+position = Vector2( 1, 1241 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1200.01, 1123.05 )
+position = Vector2( 1209.85, 51.9258 )
 shape = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
+
+[node name="TrajectoryDisplayer" parent="." instance=ExtResource( 10 )]
+visible = false
+color = Color( 1, 1, 1, 0 )
+color = Color( 1, 1, 1, 0 )
 
 [connection signal="LevelChanged" from="." to="LevelLabel" method="LevelChanged"]
 [connection signal="pressed" from="FireButton/TouchScreenButton" to="." method="FireButtonPressed"]

@@ -14,12 +14,17 @@ public abstract class Weapon : Node2D
     public delegate void TrajectoryChanged(float value);
     [Signal]
     public delegate void ForceChanged(float value);
+    [Signal]
+    public delegate void FireVelocityChanged(Vector2 fireVelocity);
+    [Signal]
+    public delegate void ProjectilePositionChanged(Vector2 projectilePosition);
 
     public abstract void Reset();
     public abstract void SetEnabled(bool enabled);
     public abstract void Fire();
-    public abstract void SetTrajectory(float value);
+     public abstract void SetTrajectory(float value);
     public abstract void SetForce(float value);
+    public abstract Vector2 GetProjectileStartPosition();
 
     public void ClearProjectiles()
     {

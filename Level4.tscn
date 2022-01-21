@@ -8,10 +8,10 @@
 [ext_resource path="res://PlanksWall.tscn" type="PackedScene" id=6]
 [ext_resource path="res://StoneWallLong.tscn" type="PackedScene" id=7]
 
-[node name="Level3" type="Node2D"]
+[node name="Level4" type="Node2D"]
 position = Vector2( -406.954, -7.92865 )
 script = ExtResource( 4 )
-name = "Level 3"
+name = "Level 4"
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 442.247, -71.1687 )
@@ -20,7 +20,7 @@ position = Vector2( 442.247, -71.1687 )
 position = Vector2( 7.34304, -251.512 )
 
 [node name="Enemy3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 442.335, -713.955 )
+position = Vector2( 432.101, -699.461 )
 
 [node name="Enemy4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 619.021, -71.0852 )
@@ -86,25 +86,25 @@ position = Vector2( 433.548, -188.362 )
 rotation = 1.57079
 
 [node name="StoneWall21" parent="." instance=ExtResource( 6 )]
-position = Vector2( 311.279, -297.115 )
+position = Vector2( 311.279, -292.429 )
 scale = Vector2( 1, 1 )
 
 [node name="StoneWall22" parent="." instance=ExtResource( 6 )]
-position = Vector2( 556.836, -295.589 )
+position = Vector2( 556.836, -290.903 )
 scale = Vector2( 1, 1 )
 
 [node name="StoneWall7" parent="." instance=ExtResource( 1 )]
-position = Vector2( 433.548, -400.362 )
+position = Vector2( 433.548, -395.249 )
 rotation = 1.57079
 
 [node name="StoneWall23" parent="." instance=ExtResource( 6 )]
-position = Vector2( 311.279, -507.115 )
+position = Vector2( 311.279, -499.87 )
 scale = Vector2( 1, 1 )
 
 [node name="StoneWall24" parent="." instance=ExtResource( 6 )]
-position = Vector2( 556.836, -505.589 )
+position = Vector2( 556.836, -498.344 )
 scale = Vector2( 1, 1 )
 
 [node name="StoneWall8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 433.548, -610.362 )
+position = Vector2( 433.548, -603.117 )
 rotation = 1.57079

@@ -93,7 +93,6 @@ public class cannon : Weapon
         usedProjectiles.Add(ballInstance);
 
         var ballPosition = (Position2D) GetNode<Position2D>("CannonShaft/BallPosition");
-        //var ballBody = (RigidBody2D) ballInstance.GetNode<RigidBody2D>("Ball");
         ballInstance.GlobalPosition = ballPosition.GlobalPosition;
         ball = ballInstance;
 
@@ -111,6 +110,11 @@ public class cannon : Weapon
         currentState = FireState.READY;
 
         EmitSignal("Fired");
+    }
+
+    public override Vector2 GetProjectileStartPosition()
+    {
+        return GetNode<Position2D>("CannonShaft/BallPosition").GlobalPosition;
     }
 
     public override void Reset() {

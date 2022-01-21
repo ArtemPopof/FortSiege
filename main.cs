@@ -44,6 +44,7 @@ public class main : Node2D
     private CoinSpawner coinSpawner;
     private CoinCounter coinCounter;
     private LevelSlider fireLevelSlider;
+    private TrajectoryPainter trajectoryPainter;
 
     [Export]
     private PackedScene menuScene;
@@ -77,6 +78,7 @@ public class main : Node2D
         coinSpawner = GetNode<CoinSpawner>("CoinSpawner");
         coinCounter = GetNode<CoinCounter>("CoinCounter");
         fireLevelSlider = GetNode<LevelSlider>("LevelSlider");
+        trajectoryPainter = GetNode<TrajectoryPainter>("TrajectoryDisplayer");
 
         coinSpawner.counter = coinCounter;
     }
@@ -109,6 +111,9 @@ public class main : Node2D
         weapon.SetEnabled(true);
         weapon.Connect("Fired", this, "BallFired");
         weapon.Connect("ForceChanged", fireLevelSlider, "SetLevel");
+        weapon.Connect("ProjectilePositionChanged", trajectoryPainter, "SetTrajectoryStart");
+        weapon.Connect("FireVelocityChanged", trajectoryPainter, "SetStartVelocity");
+
         fireLevelSlider.Connect("LevelChanged", weapon, "SetForce");
         
         ResetFireState();
@@ -124,6 +129,10 @@ public class main : Node2D
         background.Init();
 
         coinCounter.SetCount(0);
+
+        trajectoryPainter.RectGlobalPosition = weapon.GetProjectileStartPosition();
+        trajectoryPainter.Visible = true;
+        trajectoryPainter.SetGroundY(GetNode<StaticBody2D>("StaticBody2D").GlobalPosition.y);
 
         GD.Print("Current coin count: " + coinCounter.count);
         
@@ -186,6 +195,10 @@ public class main : Node2D
         sceneObject.Position = instancePosition.Position;
 
         AddChildBelowNode(weapon, sceneObject);
+
+        if (currentLevelObject != null) {
+            currentLevelObject.QueueFree();
+        }
 
         currentLevelObject = sceneObject as Level;
         currentLevelObject.Connect("AllEnemiesAreDead", this, "AllEnemiesAreDead");

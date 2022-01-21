@@ -88,6 +88,7 @@ public class Level : Node2D
         EmitSignal("LevelEnemyDied", enemy);
 
         if (enemiesLeft == 0) {
+            GD.Print("[" + name + "] EMIT ALL ENEMIES DIED SIGNAL");
             EmitSignal("AllEnemiesAreDead");
         }
     }

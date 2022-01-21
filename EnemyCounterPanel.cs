@@ -20,6 +20,8 @@ public class EnemyCounterPanel : Node2D
 
     private List<EnemyIcon> enemyIcons;
 
+    private List<Node> objects;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -30,6 +32,7 @@ public class EnemyCounterPanel : Node2D
         referenceCrossImage.Visible = false;
 
         enemyIcons = new List<EnemyIcon>();
+        objects = new List<Node>();
     }
 
     public void Init(List<Enemy> enemies) {
@@ -80,11 +83,17 @@ public class EnemyCounterPanel : Node2D
         image.Visible = true;
         
         AddChild(image);
+        objects.Add((Node) image);
 
         enemyIcon.crossTexture = image;
     }
 
     public void Reset() {
+        foreach (var node in objects)
+        {
+            node.QueueFree();
+        }
+
         if (enemyIcons == null) return;
         
         foreach (var enemyIcon in enemyIcons)
