@@ -9,8 +9,13 @@ public class MobileCamera : Node2D
         ZOOM
     }
 
+    [Export]
+    public float zoomSpeed = 0.01f;
+
     [Signal]
     public delegate void Moved(Vector2 position);
+    [Signal]
+    public delegate void ZoomChanged(Vector2 zoom);
 
     public bool Enabled { get; set; }
 
@@ -33,6 +38,33 @@ public class MobileCamera : Node2D
         {
             return;
         }
+
+        if (@event is InputEventPanGesture panGesture)
+        {
+            if (panGesture.Delta.y > 0)
+            {
+                var zoom = new Vector2(camera.Zoom.x - zoomSpeed * panGesture.Delta.LengthSquared() / 10, camera.Zoom.y - zoomSpeed * panGesture.Delta.LengthSquared() / 10);
+                if (zoom.x < 0.1)
+                {
+                    zoom = new Vector2(0.1f, 0.1f);
+                }
+                camera.Zoom = zoom;
+            }
+            else
+            {
+                var zoom = camera.Zoom = new Vector2(camera.Zoom.x + zoomSpeed * panGesture.Delta.LengthSquared() / 10, camera.Zoom.y + zoomSpeed * panGesture.Delta.LengthSquared() / 10);
+                if (zoom.x > 1)
+                {
+                    zoom = new Vector2(1, 1);
+                }
+                camera.Zoom = zoom;
+            }
+
+            EmitSignal("ZoomChanged", camera.Zoom);
+
+            return;
+        }
+
 
         if (@event is InputEventScreenTouch touch)
 		{

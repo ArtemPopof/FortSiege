@@ -288,18 +288,17 @@ public class main : Node2D
         ResetFireState();
         
         levelDoneLabel.Visible = false;
-        GetNode<Node2D>("RestartButton").Visible = false;
+        GetNode<Node2D>("UILayout/RestartButton").Visible = false;
     }
 
     private void LevelOver(String message, bool gameover = false) {
-        var label = GetNode<Label>("LevelDone");
-        label.Text = message;
-        label.Visible = true;
+        levelDoneLabel.Text = message;
+        levelDoneLabel.Visible = true;
         gameStarted = false;
         fireButton.Visible = false;
 
-        GetNode<Label>("RestartButton/HBoxContainer/MarginContainer/Label").Text = gameover ? "Restart" : "Next Level";
-        GetNode<Node2D>("RestartButton").Visible = true;
+        GetNode<Label>("UILayout/RestartButton/HBoxContainer/MarginContainer/Label").Text = gameover ? "Restart" : "Next Level";
+        GetNode<Node2D>("UILayout/RestartButton").Visible = true;
 
         if (!gameover)
         {
@@ -323,7 +322,7 @@ public class main : Node2D
 
         currentLevelNode.QueueFree();
 
-        GetNode<Label>("LevelDone").Visible = false;
+        levelDoneLabel.Visible = false;
         ResetFireState();
 
         counterPanel.Reset();
@@ -404,6 +403,6 @@ public class main : Node2D
          Restart();
      }
 
-     GetNode<Node2D>("RestartButton").Visible = false;
+     GetNode<Node2D>("UILayout/RestartButton").Visible = false;
  }
 }
