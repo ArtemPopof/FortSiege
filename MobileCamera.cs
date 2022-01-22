@@ -19,9 +19,12 @@ public class MobileCamera : Node2D
 
     private CameraState state;
 
+    private Camera2D camera;
+
     public override void _Ready()
     {
         Enabled = false;
+        camera = GetNode<Camera2D>("Camera2D");
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -54,9 +57,35 @@ public class MobileCamera : Node2D
 		}
 
         var diff = (drag.Position - dragStartPos);
-        Position = new Vector2(cameraDragStartPos.x - diff.x, cameraDragStartPos.y + diff.y);
+        var cameraPos = new Vector2(cameraDragStartPos.x - diff.x, cameraDragStartPos.y + diff.y);
 
+        Position = GetPositionInBounds(cameraPos);
         EmitSignal("Moved", Position);
+    }
+
+    private Vector2 GetPositionInBounds(Vector2 position)
+    {
+        var cameraViewportWidth = camera.Zoom.x * GetViewportRect().Size.x;
+        var cameraViewportHeight = camera.Zoom.y * GetViewportRect().Size.y;
+
+        if (position.x < 0)
+        {
+            position.x = 0;
+        }
+        if (position.x + cameraViewportWidth > GetViewportRect().Size.x)
+        {
+            position.x = GetViewportRect().Size.x - cameraViewportWidth;
+        }
+        if (position.y < 0)
+        {
+            position.y = 0;
+        }
+        if (position.y + cameraViewportHeight > GetViewportRect().Size.y)
+        {
+            position.y = GetViewportRect().Size.y - cameraViewportHeight;
+        }
+
+        return position;
     }
 
 }
