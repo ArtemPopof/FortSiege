@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://res/Cinzel/Cinzel-VariableFont_wght.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://res/Inter/static/Inter-Black.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.239216, 0.0352941, 0.0352941, 1 )
+
+[sub_resource type="Theme" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 58
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 62
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="MainMenuHeader" type="Panel"]
+margin_right = 2412.0
+margin_bottom = 221.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 2.0
+margin_right = 2413.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="Container" parent="HBoxContainer"]
+margin_right = 200.0
+margin_bottom = 221.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="BackButton" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 204.0
+margin_right = 1204.0
+margin_bottom = 221.0
+rect_min_size = Vector2( 1000, 0 )
+custom_constants/separation = 22
+
+[node name="Label" type="Label" parent="HBoxContainer/BackButton"]
+margin_top = 71.0
+margin_right = 327.0
+margin_bottom = 150.0
+custom_fonts/font = SubResource( 6 )
+text = "Fort Sidge"
+
+[node name="Spacer" type="Panel" parent="HBoxContainer"]
+margin_left = 1208.0
+margin_right = 1643.0
+margin_bottom = 221.0
+rect_min_size = Vector2( 435, 0 )
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 1647.0
+margin_right = 2420.0
+margin_bottom = 221.0
+grow_horizontal = 0
+rect_min_size = Vector2( 773, 0 )
+custom_constants/separation = 10
+alignment = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/HBoxContainer"]
+margin_left = 373.0
+margin_right = 773.0
+margin_bottom = 221.0
+rect_min_size = Vector2( 400, 0 )
+
+[node name="Label2" type="Label" parent="HBoxContainer/HBoxContainer/Panel"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 401.0
+margin_bottom = 222.0
+custom_fonts/font = SubResource( 2 )
+text = "Choose
+Weapon"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

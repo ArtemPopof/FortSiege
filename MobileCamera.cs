@@ -71,12 +71,18 @@ public class MobileCamera : Node2D
             if (touch.IsPressed())
             {
                 GD.Print("Start moving camera");
-                //state = CameraState.DRAG;
+                state = CameraState.DRAG;
                 dragStartPos = touch.Position;
                 cameraDragStartPos = Position;
+
+                if (state == CameraState.DRAG)
+                {
+                    GD.Print("Touch second time");
+                }
             }
             else
             {
+                state = CameraState.IDLE;
                 GD.Print("Finish moving camera");
             }
 
