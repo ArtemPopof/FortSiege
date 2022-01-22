@@ -45,11 +45,14 @@ public class main : Node2D
     private CoinCounter coinCounter;
     private LevelSlider fireLevelSlider;
     private TrajectoryPainter trajectoryPainter;
+    private Node2D menu;
+    private StaticToCamera uiLayer;
 
     [Export]
     private PackedScene menuScene;
     private Node2D menuNode;
     private Header header;
+    private MobileCamera camera;
 
     private float timeSinceLastShot;
     private bool fired;
@@ -64,7 +67,9 @@ public class main : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        GD.Print("Main: Init");
+        GD.Print("\n[Main] Init");
+
+        var startTicks = DateTime.Now.Ticks;
 
         // erase all cache
         //StorageManager.Clear();
@@ -72,31 +77,45 @@ public class main : Node2D
         StorageManager.Init();
         Data.Init();
         UIManager.Init();
+        ObjectManager.Init();
 
-        counterPanel = GetNode<EnemyCounterPanel>("EnemyCounterPanel");
-        fireButton = GetNode<Node2D>("FireButton");
-        coinSpawner = GetNode<CoinSpawner>("CoinSpawner");
-        coinCounter = GetNode<CoinCounter>("CoinCounter");
-        fireLevelSlider = GetNode<LevelSlider>("LevelSlider");
+        uiLayer = GetNode<StaticToCamera>("UILayout");
+        menu = GetNode<Node2D>("UILayout/Menu");
+        counterPanel = GetNode<EnemyCounterPanel>("UILayout/EnemyCounterPanel");
+        fireButton = GetNode<Node2D>("UILayout/FireButton");
+        coinCounter = GetNode<CoinCounter>("UILayout/CoinCounter");
+        fireLevelSlider = GetNode<LevelSlider>("UILayout/LevelSlider");
+
         trajectoryPainter = GetNode<TrajectoryPainter>("TrajectoryDisplayer");
+        camera = GetNode<MobileCamera>("MobileCamera");
+        coinSpawner = GetNode<CoinSpawner>("CoinSpawner");
+
+        uiLayer.Connect(camera);
 
         coinSpawner.counter = coinCounter;
+
+        var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
+
+        GD.Print($"\n[Main] Initialised in {time} ms \n\n\n");
     }
 
     private void ExitFromWeaponShop()
     {
-        GetNode<Node2D>("Menu").Visible = true;
+        menu.Visible = true;
         menuNode.Visible = false;
     }
     
     public void StartGame() {
+        GD.Print("\n[Main] Start Game");
+
+        var startTicks = DateTime.Now.Ticks;
+
         currentLevel = 1;
         gameStarted = true;
         fired = false;
         levelsCleared = true;
         state = GameState.ONGOING_GAME;
 
-        var menu = GetNode<Node2D>("Menu");
         menu.Visible = false;
         menuNode.Visible = false;
 
@@ -118,16 +137,13 @@ public class main : Node2D
         
         ResetFireState();
 
-        timer = GetNode<TimerWidget>("TimerWidget");
-        timer.Reset(60);
-
-        shotCounter = GetNode<ShotCounter>("ShotCounter");
-
-        levelDoneLabel = GetNode<Label>("LevelDone");
-
+        timer = GetNode<TimerWidget>("UILayout/TimerWidget");
+        shotCounter = GetNode<ShotCounter>("UILayout/ShotCounter");
+        levelDoneLabel = GetNode<Label>("UILayout/LevelDone");
         background = GetNode<Background>("Backgound");
-        background.Init();
 
+        timer.Reset(60);
+        background.Init();
         coinCounter.SetCount(0);
 
         trajectoryPainter.RectGlobalPosition = weapon.GetProjectileStartPosition();
@@ -137,6 +153,12 @@ public class main : Node2D
         GD.Print("Current coin count: " + coinCounter.count);
         
         LoadCurrentLevel();
+
+        camera.Enabled = true;
+
+        var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
+
+        GD.Print($"\n[Main] Initialised in {time} ms \n\n\n");
     }
 
     private void ResetFireState()
@@ -144,12 +166,12 @@ public class main : Node2D
         if (weapon.info.controlTrajectory)
         {
             fireState = FireState.READY;
-            GetNode<Label>("FireButton/Label").Text = "Set";
+            GetNode<Label>("UILayout/FireButton/Label").Text = "Set";
         }
         else 
         {
             fireState = FireState.SET_TRAJECTORY;
-            GetNode<Label>("FireButton/Label").Text = "Fire";
+            GetNode<Label>("UILayout/FireButton/Label").Text = "Fire";
         }
 
         fireLevelSlider.SetLevel(0.0f);
@@ -323,7 +345,7 @@ public class main : Node2D
             header.Connect("BackActionFired", this, "ExitFromWeaponShop");
             menuNode.Connect("ScreenDone", this, "StartGame");
 
-            AddChildBelowNode(GetNode<Node2D>("CoinCounter"), menuNode);
+            AddChildBelowNode(coinCounter, menuNode);
 
             menuNode.GlobalPosition = new Vector2(0, 0);
 
@@ -331,7 +353,7 @@ public class main : Node2D
         }
 
         menuNode.Visible = true;
-        GetNode<Node2D>("Menu").Visible = false;
+        menu.Visible = false;
     }
 
     public void AllEnemiesAreDead() {
