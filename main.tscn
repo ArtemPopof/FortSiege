@@ -24,14 +24,14 @@
 [ext_resource path="res://MobileCamera.cs" type="Script" id=22]
 [ext_resource path="res://UIManager.cs" type="Script" id=23]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1492.51, 47.8794 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 65
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 75
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
@@ -89,7 +89,7 @@ position = Vector2( 1, 1241 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 1209.85, 51.9258 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="TrajectoryDisplayer" parent="." instance=ExtResource( 10 )]
 visible = false
@@ -112,7 +112,7 @@ normal = ExtResource( 4 )
 margin_left = 1.0
 margin_right = 249.0
 margin_bottom = 74.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Set"
 align = 1
@@ -138,7 +138,7 @@ margin_top = 29.6916
 margin_right = 498.867
 margin_bottom = 131.692
 rect_pivot_offset = Vector2( 51.4364, 74.2216 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Level name"
 valign = 1
 script = ExtResource( 13 )
@@ -171,7 +171,7 @@ visible = false
 margin_top = 283.0
 margin_right = 2456.0
 margin_bottom = 771.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Victory"
 align = 1
@@ -221,7 +221,7 @@ normal = ExtResource( 4 )
 margin_top = 35.0
 margin_right = 350.0
 margin_bottom = 124.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Restart"
 align = 1
