@@ -18,17 +18,12 @@ public class PropertyBasedActivator : Node2D
     {
         var index = StorageManager.GetInt(property);
 
-        var child = GetChildren()[index] as Weapon;
+        //var child = GetChildren()[index] as Weapon;
+        var child = GetChildren()[index] as Node2D;
         child.Visible = true;
 
         activeChild = child;
 
-        child.info = Data.weapons[child.GetIndex()];
+        //child.info = Data.weapons[child.GetIndex()];
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

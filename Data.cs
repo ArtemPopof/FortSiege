@@ -22,7 +22,7 @@ public class Data
 
         weapons = new List<WeaponInfo>(2);
 
-        var possesionArray = ToPossesionArray(possesion, weapons.Capacity);
+        var possesionArray = Util.ToPossesionArray(possesion, weapons.Capacity);
 
         var catapult = new WeaponInfo();
         catapult.cost = 0;
@@ -46,20 +46,6 @@ public class Data
         weapons.Add(cannon);
 
         GD.Print("weapons loaded");
-    }
-
-    private static bool[] ToPossesionArray(string dataString, int weaponCount)
-    {
-        var strings = dataString.Split(';');
-
-        var array = new bool[weaponCount];
-        
-        for (var i = 0; i < strings.Length; i++)
-        {
-            array[int.Parse(strings[i])] = true;
-        }
-
-        return array;
     }
 
     public static void AddToPossesion(int weaponIndex)

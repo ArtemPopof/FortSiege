@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://res/map.svg" type="Texture" id=1]
 [ext_resource path="res://res/stone.svg" type="Texture" id=2]
@@ -6,19 +6,33 @@
 [ext_resource path="res://res/Cinzel/Cinzel-VariableFont_wght.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://res/catapult_neck.svg" type="Texture" id=5]
 [ext_resource path="res://res/cannon.png" type="Texture" id=6]
+[ext_resource path="res://PropertyBasedActivator.cs" type="Script" id=7]
+[ext_resource path="res://res/knight.svg" type="Texture" id=8]
+[ext_resource path="res://ui/GlobalMap.cs" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 outline_size = 1
 font_data = ExtResource( 4 )
 
+[sub_resource type="AtlasTexture" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0705882, 0.490196, 0, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 9
+
 [node name="LevelMap" type="Node2D"]
+script = ExtResource( 9 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -104.619
-margin_top = -35.677
-margin_right = 2599.38
-margin_bottom = 1355.32
+margin_left = -106.408
+margin_top = -36.2881
+margin_right = 2597.59
+margin_bottom = 1354.71
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
@@ -31,12 +45,28 @@ __meta__ = {
 position = Vector2( 274.478, 996.596 )
 
 [node name="Label" type="Label" parent="Levels/Level1"]
-margin_left = -177.526
-margin_top = -175.008
-margin_right = 58.4735
-margin_bottom = -82.0078
+margin_left = 68.1478
+margin_top = -19.9838
+margin_right = 304.147
+margin_bottom = 73.0164
 custom_fonts/font = SubResource( 1 )
 text = "Level 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Levels/Level1"]
+position = Vector2( -56.7873, -52.3705 )
+scale = Vector2( 114.89, 99.1158 )
+normal = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="Levels/Level1"]
+margin_left = -86.7085
+margin_top = -229.909
+margin_right = 58.2915
+margin_bottom = 15.0914
+texture = ExtResource( 8 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -45,12 +75,25 @@ __meta__ = {
 position = Vector2( 502.842, 830.111 )
 
 [node name="Label2" type="Label" parent="Levels/Level2"]
-margin_left = 58.5248
-margin_top = -42.1619
-margin_right = 294.525
-margin_bottom = 50.8381
+margin_left = -306.282
+margin_top = -222.147
+margin_right = -70.2821
+margin_bottom = -129.147
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 0.27451 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 0.27451 )
 text = "Level 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Levels/Level2"]
+margin_left = -86.7085
+margin_top = -229.909
+margin_right = 58.2915
+margin_bottom = 15.0914
+texture = ExtResource( 8 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -58,11 +101,22 @@ __meta__ = {
 [node name="Level3" type="Node2D" parent="Levels"]
 position = Vector2( 716.947, 638.58 )
 
+[node name="TextureRect2" type="TextureRect" parent="Levels/Level3"]
+margin_left = -81.4149
+margin_top = -215.736
+margin_right = 63.5851
+margin_bottom = 29.2643
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label3" type="Label" parent="Levels/Level3"]
-margin_left = -79.4235
-margin_top = -131.26
-margin_right = 156.576
-margin_bottom = -38.2603
+margin_left = 41.7699
+margin_top = -228.806
+margin_right = 277.769
+margin_bottom = -135.806
 custom_fonts/font = SubResource( 1 )
 text = "Level 3"
 __meta__ = {
@@ -72,11 +126,22 @@ __meta__ = {
 [node name="Level4" type="Node2D" parent="Levels"]
 position = Vector2( 961.044, 768.232 )
 
+[node name="TextureRect3" type="TextureRect" parent="Levels/Level4"]
+margin_left = -81.1518
+margin_top = -227.149
+margin_right = 63.8482
+margin_bottom = 17.8511
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label4" type="Label" parent="Levels/Level4"]
-margin_left = 46.827
-margin_top = -126.335
-margin_right = 282.827
-margin_bottom = -33.3353
+margin_left = 48.1407
+margin_top = -152.61
+margin_right = 284.141
+margin_bottom = -59.6106
 custom_fonts/font = SubResource( 1 )
 text = "Level 4"
 __meta__ = {
@@ -85,6 +150,8 @@ __meta__ = {
 
 [node name="WeaponIcons" type="Node2D" parent="."]
 position = Vector2( 117, 989 )
+script = ExtResource( 7 )
+property = "CurrentWeapon"
 
 [node name="Catapult" type="Node2D" parent="WeaponIcons"]
 position = Vector2( -28, 2 )
@@ -131,6 +198,16 @@ margin_right = 132.242
 margin_bottom = 66.1096
 texture = ExtResource( 6 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PassedMark" type="Panel" parent="."]
+margin_left = 238.809
+margin_top = 959.343
+margin_right = 310.809
+margin_bottom = 1032.34
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
