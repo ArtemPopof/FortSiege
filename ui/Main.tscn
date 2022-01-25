@@ -54,6 +54,8 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="StartButton/Panel"]
+anchor_left = -0.00437615
+anchor_right = -0.00437615
 margin_top = -13.0
 margin_right = 377.0
 margin_bottom = 211.0
@@ -64,3 +66,5 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="pressed" from="StartButton/TouchScreenButton" to="." method="OnStartButtonPressed"]

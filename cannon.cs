@@ -27,9 +27,15 @@ public class cannon : Weapon
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        base._Ready();
         fired = false;
         force = 0.1f;
         lastLookAtPosition = new Vector2(Position.x + 100, Position.y);
+    }
+
+    public override int GetIndex()
+    {
+        return 0;
     }
 
     public override void _UnhandledInput(InputEvent @event)

@@ -30,6 +30,8 @@ public class Catapult : Weapon
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        base._Ready();
+
         balls = new List<Ball>(5);
 
         neck = GetNode<Node2D>("Neck");
@@ -38,6 +40,11 @@ public class Catapult : Weapon
         maxTouchX = GetNode<Position2D>("MaxX").GlobalPosition.x;
         maxTouchY = neck.GlobalPosition.y - 10;
         //maxDegreesRotation = neck.GlobalRotation;
+    }
+
+    public override int GetIndex()
+    {
+        return 0;
     }
 
     private void LoadWithBall() 

@@ -5,9 +5,13 @@ public class MainMapScene : Node2D
 {
     [Signal]
     public delegate void ChangeScreen(String screen);
+    [Signal]
+    public delegate void StartGame(int levelIndex);
 
     private MainMenuHeader header;
     private GlobalMap map;
+
+    private int selectedLevelIndex;
 
     public override void _Ready()
     {
@@ -16,6 +20,10 @@ public class MainMapScene : Node2D
         header.Connect("ChangeWeapon", this, "ChangeWeapon");
 
         map = GetNode<GlobalMap>("LevelMap");
+
+        map.Init();
+
+        selectedLevelIndex = map.SelectedLevel;
     }
 
     public void OnChangeScreen(String screen)
@@ -29,6 +37,12 @@ public class MainMapScene : Node2D
         StorageManager.Save();
 
         map.Update();
+    }
+
+    public void OnStartButtonPressed()
+    {
+        GD.Print("[MainMapScene] Start level " + selectedLevelIndex);
+        EmitSignal("StartGame", selectedLevelIndex);
     }
 
 

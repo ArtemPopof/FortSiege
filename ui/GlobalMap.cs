@@ -3,10 +3,15 @@ using System;
 
 public class GlobalMap : Node2D
 {
-    public override void _Ready()
+    [Signal]
+    public delegate void LevelSelected(int index);
+
+    public int SelectedLevel {get; private set;} = 0;
+
+    public void Init()
     {
         GD.Print("Open global map");
-        
+
         var passedLevels = StorageManager.GetString(PropertyKeys.PASSED_LEVELS_LIST);
         if (passedLevels == null)
         {
@@ -26,6 +31,8 @@ public class GlobalMap : Node2D
             GD.Print("Level " + i + " passed: " + possesedArray[i]);
             UpdateLevelState(levelNodes[i] as Node2D, possesedArray[i]);
         }
+        
+        SelectedLevel = GetLastLevel(possesedArray);
     }
 
     private void UpdateLevelState(Node2D levelNode, bool isPassed)
@@ -46,5 +53,18 @@ public class GlobalMap : Node2D
             passedMark.Visible = false;
             enemyIcon.Visible = true;
         }
+    }
+
+    public int GetLastLevel(bool[] levelPassArray)
+    {
+        int max = 0;
+        for (int i = 0; i < levelPassArray.Length; i++)
+        {
+            if (!levelPassArray[i]) return max;
+
+            max = i;
+        }
+
+        return max;
     }
 }

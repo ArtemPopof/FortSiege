@@ -18,10 +18,6 @@ public enum FireState
 
 public class main : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
     [Signal]
     public delegate void LevelChanged(Level level);
 
@@ -57,6 +53,7 @@ public class main : Node2D
     private Node2D menuNode;
     private Header header;
     private MobileCamera camera;
+    private MainMapScene mainMenu;
 
     private float timeSinceLastShot;
     private bool fired;
@@ -69,20 +66,27 @@ public class main : Node2D
     }
 
     main() {
+        GD.Print("\n[Main] Init");
+        var startTicks = DateTime.Now.Ticks;
+
         StorageManager.Init();
+        Data.Init();
+
+        var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
+
+        GD.Print($"\n[Main] Initialised in {time} ms \n\n\n");
     }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        GD.Print("\n[Main] Init");
+        GD.Print("\n[Main] Ready");
 
         var startTicks = DateTime.Now.Ticks;
 
         // erase all cache
         //StorageManager.Clear();
 
-        Data.Init();
         UIManager.Init();
         ObjectManager.Init();
 
@@ -106,12 +110,14 @@ public class main : Node2D
         uiLayer.AddChildBelowNode(menu, mapMenu);
         mapMenu.Visible = true;
 
-        (mapMenu as MainMapScene).Connect("ChangeScreen", this, "ChangeScreen");
+        mainMenu = (mapMenu as MainMapScene);
+        mainMenu.Connect("ChangeScreen", this, "ChangeScreen");
+        mainMenu.Connect("StartGame", this, "StartGame");
         //
 
         var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
 
-        GD.Print($"\n[Main] Initialised in {time} ms \n\n\n");
+        GD.Print($"\n[Main] Ready in {time} ms \n\n\n");
     }
 
     public void ChangeScreen(int screen)
@@ -130,20 +136,21 @@ public class main : Node2D
         menu.Visible = true;
         menuNode.Visible = false;
     }
-    
-    public void StartGame() {
+
+    public void StartGame(int level) {
         GD.Print("\n[Main] Start Game");
 
         var startTicks = DateTime.Now.Ticks;
 
-        currentLevel = 1;
+        currentLevel = level;
         gameStarted = true;
         fired = false;
         levelsCleared = true;
         state = GameState.ONGOING_GAME;
 
         menu.Visible = false;
-        menuNode.Visible = false;
+        mainMenu.Visible = false;
+        //menuNode.Visible = false;
 
         fireLevelSlider.Visible = true;
 
@@ -235,7 +242,7 @@ public class main : Node2D
         weapon.ClearProjectiles();
         //
 
-        var packedLevel = ResourceLoader.Load<PackedScene>("res://Level" + currentLevel.ToString() + ".tscn");
+        var packedLevel = ResourceLoader.Load<PackedScene>("res://Level" + (currentLevel + 1).ToString() + ".tscn");
         var sceneObject = packedLevel.Instance<Node2D>();
 
         var instancePosition = GetNode<Position2D>("BuildingPosition");

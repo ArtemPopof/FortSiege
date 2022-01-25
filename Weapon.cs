@@ -19,6 +19,12 @@ public abstract class Weapon : Node2D
     [Signal]
     public delegate void ProjectilePositionChanged(Vector2 projectilePosition);
 
+    public override void _Ready()
+    {
+        info = Data.weapons[GetIndex()];
+    }
+
+    public abstract int GetIndex();
     public abstract void Reset();
     public abstract void SetEnabled(bool enabled);
     public abstract void Fire();
