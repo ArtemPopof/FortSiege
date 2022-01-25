@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://res/Cinzel/static/Cinzel-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://res/Full-Background.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://StaticToCamera.cs" type="Script" id=21]
 [ext_resource path="res://MobileCamera.cs" type="Script" id=22]
 [ext_resource path="res://UIManager.cs" type="Script" id=23]
+[ext_resource path="res://ui/Main.tscn" type="PackedScene" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1492.51, 47.8794 )
@@ -41,6 +42,7 @@ font_data = ExtResource( 6 )
 [node name="GameMain" type="Node2D"]
 script = ExtResource( 3 )
 menuScene = ExtResource( 19 )
+mapMenuScene = ExtResource( 24 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -1.0

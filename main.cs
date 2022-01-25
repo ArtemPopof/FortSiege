@@ -48,8 +48,12 @@ public class main : Node2D
     private Node2D menu;
     private StaticToCamera uiLayer;
 
+
     [Export]
     private PackedScene menuScene;
+    [Export]
+    private PackedScene mapMenuScene;
+
     private Node2D menuNode;
     private Header header;
     private MobileCamera camera;
@@ -64,6 +68,10 @@ public class main : Node2D
         StorageManager.Save();
     }
 
+    main() {
+        StorageManager.Init();
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -74,7 +82,6 @@ public class main : Node2D
         // erase all cache
         //StorageManager.Clear();
 
-        StorageManager.Init();
         Data.Init();
         UIManager.Init();
         ObjectManager.Init();
@@ -94,9 +101,28 @@ public class main : Node2D
 
         coinSpawner.counter = coinCounter;
 
+        // instanciate main map menu
+        var mapMenu = mapMenuScene.Instance() as Node2D;
+        uiLayer.AddChildBelowNode(menu, mapMenu);
+        mapMenu.Visible = true;
+
+        (mapMenu as MainMapScene).Connect("ChangeScreen", this, "ChangeScreen");
+        //
+
         var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
 
         GD.Print($"\n[Main] Initialised in {time} ms \n\n\n");
+    }
+
+    public void ChangeScreen(int screen)
+    {
+        if (screen == Constants.WEAPON_SHOP_SCREEN)
+        {
+            OpenWeaponsShop();
+            return;
+        }
+        
+        GD.Print("NO SUCH SCREEN FOUND " + screen);
     }
 
     private void ExitFromWeaponShop()
@@ -335,7 +361,7 @@ public class main : Node2D
         LoadCurrentLevel();
     }
 
-    public void OnMenuGameStartedSignal()
+    private void OpenWeaponsShop()
     {
         if (menuNode == null) {
             menuNode =  menuScene.Instance<WeaponShop>();
