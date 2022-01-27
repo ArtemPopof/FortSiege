@@ -6,6 +6,8 @@ public class GameObject : RigidBody2D
 
     private Vector2 externalVelocity = new Vector2(-1, -1);
 
+    public DamageController DamageController {set; private get;}
+
     public override void _Ready()
     {
         AddToGroup(BASE_GROUP);
@@ -19,13 +21,11 @@ public class GameObject : RigidBody2D
         LinearVelocity = new Vector2(x, y);
     }
 
-    // public override void _IntegrateForces(Physics2DDirectBodyState physicsState) {
-	// 	if (this.externalVelocity.x == -1) {
-    //         return;
-	// 	}
+    public override void _IntegrateForces(Physics2DDirectBodyState physicsState) {
+		if (this.DamageController == null) {
+            return;
+		}
 
-	// 	physicsState.LinearVelocity = new Vector2(LinearVelocity.x + externalVelocity.x, LinearVelocity.y + externalVelocity.y);
-
-    //     this.externalVelocity.x = -1;
-	// }
+        DamageController.CalculateDamage(physicsState);
+    }
 }

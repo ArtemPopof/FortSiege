@@ -34,6 +34,10 @@ public class ExplosionSphere : Node2D
             var distance = (1 / area.Position.DistanceTo(body.Position));
 
             var gameObject = body as GameObject;
+            if (body.GetParent().IsInGroup(Enemy.GROUP_NAME))
+            {
+                (body.GetParent() as Enemy).Explode(power * distance);
+            }
             gameObject.SetVelocity(-1 * toBody.x * power * 2000 * distance, -1 * toBody.y * power * 2000 * distance);
 
             GD.Print("Set velocity for " + gameObject.GetParent().Name + ": " + toBody.x * power *  2000 * distance);
