@@ -12,6 +12,7 @@ public class Catapult : Weapon
     private float currentFiringSpeed;
 
     private Position2D ballPosition;
+    private AudioStreamPlayer2D releaseSound;
     private Node2D neck;
     [Export]
 	public PackedScene ballScene;
@@ -36,6 +37,7 @@ public class Catapult : Weapon
 
         neck = GetNode<Node2D>("Neck");
         ballPosition = GetNode<Position2D>("Neck/BallPosition");
+        releaseSound = GetNode<AudioStreamPlayer2D>("ReleaseSound");
 
         maxTouchX = GetNode<Position2D>("MaxX").GlobalPosition.x;
         maxTouchY = neck.GlobalPosition.y - 10;
@@ -178,6 +180,8 @@ public class Catapult : Weapon
         }
         GD.Print("released");
         settingStrength = false;
+
+        releaseSound.Playing = true;
 
         firing = true;
         firingTime = 0;

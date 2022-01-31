@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/MainMenuHeader.tscn" type="PackedScene" id=2]
 [ext_resource path="res://res/Inter/static/Inter-Black.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://ui/MainMapScene.cs" type="Script" id=4]
+[ext_resource path="res://res/menu.mp3" type="AudioStream" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.498039, 0.737255, 0.466667, 1 )
@@ -66,5 +67,10 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = 6.118
+autoplay = true
 
 [connection signal="pressed" from="StartButton/TouchScreenButton" to="." method="OnStartButtonPressed"]

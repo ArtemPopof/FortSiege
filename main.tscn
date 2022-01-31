@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://res/Cinzel/static/Cinzel-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://res/Full-Background.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://MobileCamera.cs" type="Script" id=22]
 [ext_resource path="res://UIManager.cs" type="Script" id=23]
 [ext_resource path="res://ui/Main.tscn" type="PackedScene" id=24]
+[ext_resource path="res://res/battle.mp3" type="AudioStream" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1492.51, 47.8794 )
@@ -238,6 +239,10 @@ script = ExtResource( 22 )
 [node name="Camera2D" type="Camera2D" parent="MobileCamera"]
 anchor_mode = 0
 current = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 25 )
+volume_db = -6.674
 
 [connection signal="LevelChanged" from="." to="UILayout/LevelLabel" method="LevelChanged"]
 [connection signal="pressed" from="UILayout/FireButton/TouchScreenButton" to="." method="FireButtonPressed"]

@@ -4,13 +4,20 @@ using System;
 public class Ball : RigidBody2D
 {
 	private bool Fixed = false;
+	private bool Hit = false;
 	private Vector2 FixPosition;
+
+	private AudioStreamPlayer2D hitSound;
 
 	private float t;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		hitSound = GetNode<AudioStreamPlayer2D>("HitSound");
+
+		ContactMonitor = true;
+		ContactsReported = 1;
 	}
 
 	public void Fire(float xVelocity, float yVelocity) {
@@ -26,6 +33,7 @@ public class Ball : RigidBody2D
 		 this.LinearVelocity = new Vector2(0, 0);
 		 this.Position = position;
 		 this.Fixed = true;
+		 this.Hit = false;
 		 this.FixPosition = position;
 	 }
 
@@ -35,12 +43,18 @@ public class Ball : RigidBody2D
 		}
 
 		Fixed = false;
+
+		if (Hit || Fixed)
+		{
+			return;
+		}
+
+		// check collision with prefab
+		if (physicsState.GetContactCount() == 0) return;
+
+		GD.Print("[Ball] Hit first time");
+		hitSound.Playing = true;
+		Hit = true;
 	}
-
-
-//  public override void _Process(float delta)
-//  {
-
-//  }
 
 }

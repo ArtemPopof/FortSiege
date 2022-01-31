@@ -43,6 +43,7 @@ public class main : Node2D
     private TrajectoryPainter trajectoryPainter;
     private Node2D menu;
     private StaticToCamera uiLayer;
+    private AudioStreamPlayer2D backgroundMusic;
 
 
     [Export]
@@ -96,6 +97,7 @@ public class main : Node2D
         fireButton = GetNode<Node2D>("UILayout/FireButton");
         coinCounter = GetNode<CoinCounter>("UILayout/CoinCounter");
         fireLevelSlider = GetNode<LevelSlider>("UILayout/LevelSlider");
+        backgroundMusic = GetNode<AudioStreamPlayer2D>("BackgroundMusic");
 
         trajectoryPainter = GetNode<TrajectoryPainter>("TrajectoryDisplayer");
         camera = GetNode<MobileCamera>("MobileCamera");
@@ -188,6 +190,8 @@ public class main : Node2D
         LoadCurrentLevel();
 
         camera.Enabled = true;
+
+        backgroundMusic.Playing = true;
 
         var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
 

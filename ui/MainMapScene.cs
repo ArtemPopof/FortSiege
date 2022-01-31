@@ -42,6 +42,11 @@ public class MainMapScene : Node2D
     public void OnStartButtonPressed()
     {
         GD.Print("[MainMapScene] Start level " + selectedLevelIndex);
+
+        var music = GetNode<AudioStreamPlayer2D>("BackgroundMusic");
+        music.Autoplay = false;
+        music.Playing = false;
+
         EmitSignal("StartGame", selectedLevelIndex);
     }
 
