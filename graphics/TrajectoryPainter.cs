@@ -57,7 +57,7 @@ public class TrajectoryPainter : ColorRect
 
         var currentVelocityX = startVelocity.x;
 
-        GD.Print("LinearDump: " + linearDamp);
+        //GD.Print("LinearDump: " + linearDamp);
         while (dy2 < groundY) {
             dx = startVelocity.x * t;
             dy = startVelocity.y * t + 0.5f * 98f * t * t;
@@ -75,7 +75,7 @@ public class TrajectoryPainter : ColorRect
 
     public void SetTrajectoryStart(Vector2 position)
     {
-        GD.Print("[TrajectoryPainter] New position: " + position);
+        //GD.Print("[TrajectoryPainter] New position: " + position);
 
         RectGlobalPosition = position;
     }

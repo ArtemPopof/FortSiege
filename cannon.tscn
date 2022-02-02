@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://res/cannon.svg" type="Texture" id=1]
 [ext_resource path="res://ball.tscn" type="PackedScene" id=2]
@@ -12,10 +12,12 @@
 radius = 13.0998
 height = 117.801
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="AtlasTexture" id=2]
+
+[sub_resource type="CircleShape2D" id=3]
 radius = 32.3829
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 7.80695
 height = 43.9208
 
@@ -56,6 +58,12 @@ rotation = 0.130384
 position = Vector2( 117.67, -12 )
 scale = Vector2( 0.1, 0.1 )
 
+[node name="TouchScreenButton" type="TouchScreenButton" parent="CannonShaft"]
+position = Vector2( -55.8869, -18.4905 )
+rotation = -0.0536552
+scale = Vector2( 162.428, 31.9559 )
+normal = SubResource( 2 )
+
 [node name="StaticBody" type="StaticBody2D" parent="."]
 
 [node name="CannonBase" type="TextureRect" parent="StaticBody"]
@@ -85,13 +93,15 @@ __meta__ = {
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody"]
 position = Vector2( 63.927, 48.7517 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody"]
 position = Vector2( 5.19451, 62.5378 )
 rotation = 1.06485
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 162.283, 31.4796 )
 stream = ExtResource( 7 )
+
+[connection signal="pressed" from="CannonShaft/TouchScreenButton" to="." method="ShaftPressed"]

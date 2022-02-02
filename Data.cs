@@ -40,7 +40,7 @@ public class Data
         cannon.controlTrajectory = true;
         cannon.inPossesion = possesionArray[WEAPON_CANNON_ID];
         cannon.projectileTexture = ResourceLoader.Load("res://textures/CannonProjectile.png") as Texture;
-        cannon.projectileWeight = 5;
+        cannon.projectileWeight = 2;
 
         weapons.Add(catapult);
         weapons.Add(cannon);
