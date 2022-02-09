@@ -5,28 +5,28 @@
 [ext_resource path="res://res/peasant.svg" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 21.6362
+radius = 16.2431
 height = 3.70821
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1792, 19, 593, 681 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 640.876, -16.8724, 298.793, 764.911 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 17.8103, 5.21494 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 1266.35, 1612.55, 466.118, 713.12 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 18.0398, 4.59373 )
 
 [sub_resource type="AtlasTexture" id=7]
@@ -34,23 +34,24 @@ flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 775.91, 1622.48, 348, 683 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 24.8496, 9.98448, 248.54, 1781.21 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 4.04213, 55.6338 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1024.01, 608.76, 598.398, 939.695 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 18.292, 15.403 )
 
 [node name="DeadPeasant" type="Node2D"]
+position = Vector2( 0, -8 )
 
 [node name="Head" type="RigidBody2D" parent="."]
 position = Vector2( -0.787695, -83.6285 )
@@ -58,7 +59,7 @@ rotation = -1.58175
 mass = 0.34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-position = Vector2( 0.343536, 0.39859 )
+position = Vector2( 0.402908, 0.31459 )
 rotation = 1.52161
 shape = SubResource( 1 )
 
@@ -68,7 +69,7 @@ margin_top = -19.1955
 margin_right = 62.4402
 margin_bottom = 20.8045
 rect_rotation = 91.0033
-texture = SubResource( 4 )
+texture = SubResource( 2 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -85,7 +86,7 @@ margin_top = 6.11526
 margin_right = -0.562382
 margin_bottom = 49.1153
 rect_rotation = 273.958
-texture = SubResource( 5 )
+texture = SubResource( 3 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -93,12 +94,11 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftHand"]
 position = Vector2( 5.7252, -0.312332 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="RightHand" type="RigidBody2D" parent="."]
 position = Vector2( 21.3254, -53.6767 )
 rotation = 0.961677
-scale = Vector2( 1, 1 )
 mass = 0.2
 
 [node name="TextureRect" type="TextureRect" parent="RightHand"]
@@ -108,7 +108,7 @@ margin_right = -2.37514
 margin_bottom = 35.9778
 rect_rotation = 273.811
 rect_scale = Vector2( -0.950694, 1 )
-texture = SubResource( 5 )
+texture = SubResource( 3 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -116,7 +116,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightHand"]
 position = Vector2( 3.40547, 1.01701 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="RightLeg" type="RigidBody2D" parent="."]
 position = Vector2( 11.1101, -12.9293 )
@@ -130,7 +130,7 @@ margin_right = -4.95067
 margin_bottom = 52.6352
 rect_rotation = 273.811
 rect_scale = Vector2( 1.41441, 1 )
-texture = SubResource( 6 )
+texture = SubResource( 5 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -139,7 +139,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightLeg"]
 position = Vector2( 3.85517, 2.45213 )
 rotation = -0.0885332
-shape = SubResource( 3 )
+shape = SubResource( 6 )
 
 [node name="LeftLeg" type="RigidBody2D" parent="."]
 position = Vector2( -10.2131, -12.9248 )
@@ -147,10 +147,10 @@ rotation = 1.83966
 mass = 0.2
 
 [node name="TextureRect" type="TextureRect" parent="LeftLeg"]
-margin_left = -14.0102
-margin_top = 10.0364
-margin_right = -3.01022
-margin_bottom = 49.0364
+margin_left = -14.1153
+margin_top = 9.73579
+margin_right = -3.11535
+margin_bottom = 48.7358
 rect_rotation = 268.573
 rect_scale = Vector2( 1.41441, 1 )
 texture = SubResource( 7 )
@@ -162,7 +162,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftLeg"]
 position = Vector2( 4.38592, 0.331925 )
 rotation = 0.0766493
-shape = SubResource( 3 )
+shape = SubResource( 6 )
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2( -35.7968, -39.1208 )
@@ -174,7 +174,7 @@ margin_top = -59.6842
 margin_right = -12.5209
 margin_bottom = 65.3158
 rect_rotation = -16.0521
-texture = SubResource( 10 )
+texture = SubResource( 8 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -183,7 +183,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2( 0.127846, -0.127838 )
 rotation = -0.29288
-shape = SubResource( 11 )
+shape = SubResource( 9 )
 
 [node name="Body" type="RigidBody2D" parent="."]
 position = Vector2( -0.329493, -53.9427 )
@@ -196,7 +196,7 @@ margin_top = 20.7587
 margin_right = 24.4142
 margin_bottom = 69.7587
 rect_rotation = 268.229
-texture = SubResource( 8 )
+texture = SubResource( 10 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -204,7 +204,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 position = Vector2( 8.40702, 0.83256 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
 position = Vector2( 0, -0.0987129 )
@@ -278,6 +278,6 @@ node_b = NodePath("../LeftHand")
 [node name="BodyHead" type="PinJoint2D" parent="." groups=[
 "Explodable",
 ]]
-position = Vector2( -0.0997772, -66.4022 )
+position = Vector2( -0.756542, -62.1697 )
 node_a = NodePath("../Body")
 node_b = NodePath("../Head")

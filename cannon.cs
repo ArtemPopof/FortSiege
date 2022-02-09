@@ -17,8 +17,6 @@ public class cannon : Weapon
 
     private Vector2 lastLookAtPosition;
 
-    List<Ball> balls = new List<Ball>(3);
-
     private bool enabled;
     private bool fired;
 
@@ -33,9 +31,9 @@ public class cannon : Weapon
         lastLookAtPosition = new Vector2(Position.x + 100, Position.y);
     }
 
-    public override int GetIndex()
+    public override int GetWeaponNumber()
     {
-        return 0;
+        return 1;
     }
 
     public void ShaftPressed()
@@ -118,7 +116,7 @@ public class cannon : Weapon
         ballInstance.GlobalPosition = ballPosition.GlobalPosition;
         ball = ballInstance;
 
-        balls.Add(ballInstance);
+        Balls.Add(ballInstance);
 
         var velocity = GetBallVelocity();
         ball.Fire(velocity.x , velocity.y);
@@ -142,17 +140,17 @@ public class cannon : Weapon
     public override void Reset() {
         GD.Print("Reset cannon state");
 
-        foreach (var cannonBall in balls)
+        foreach (var cannonBall in Balls)
         {
             cannonBall.Visible = false;
             cannonBall.QueueFree();
         }
-        balls.Clear();
+        Balls.Clear();
 
         enabled = true;
         fired = false;
 
-        force = 0.1f;
+        SetForce(0.1f);
     }
 
     public override void SetEnabled(bool enabled) {
@@ -172,9 +170,4 @@ public class cannon : Weapon
 
         GD.Print("[Cannon] New velocity: " + GetBallVelocity());
     }
-
- // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//  }
 }

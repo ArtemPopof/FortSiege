@@ -25,7 +25,7 @@ public class MainMenuHeader : Panel
         buyMaskButton.Visible = !info.inPossesion;
     }
 
-    public void WeaponButtonPressed(int index)
+    public void GoToShop()
     {
         GD.Print("[MainMenuHeader] Go to weapon shop");
 

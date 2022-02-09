@@ -24,16 +24,16 @@ script = ExtResource( 4 )
 
 [node name="Background" type="Panel" parent="."]
 margin_left = -14265.3
-margin_top = -18746.2
+margin_top = -18896.2
 margin_right = 25734.7
-margin_bottom = 21253.8
+margin_bottom = 21103.8
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LevelMap" parent="." instance=ExtResource( 1 )]
-position = Vector2( 24, 201.589 )
+position = Vector2( 24, 51.5898 )
 
 [node name="MainMenuHeader" parent="." instance=ExtResource( 2 )]
 margin_left = -1.31958
@@ -71,6 +71,5 @@ __meta__ = {
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = 6.118
-autoplay = true
 
 [connection signal="pressed" from="StartButton/TouchScreenButton" to="." method="OnStartButtonPressed"]

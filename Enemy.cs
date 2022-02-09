@@ -25,7 +25,7 @@ public class Enemy : Node2D
     public static String GROUP_NAME = "Enemy";
     
     private bool died = false;
-    private bool exploded = true;
+    private bool exploded = false;
     private int deathSoundCount;
 
     private Skeleton2D skeleton;
@@ -61,16 +61,19 @@ public class Enemy : Node2D
         
         EmitSignal("EnemyDied", this);
 
-        var deadPosition = body.GlobalPosition;
-        body.QueueFree();
-
         var deadBody = deadEnemy.Instance() as Node2D;
         if (exploded)
         {
             RemoveAllExplodable(deadBody);
         }
-        //deadBody.GlobalPosition = deadPosition;
+        var deadPosition = body.Position;
+        deadPosition += new Vector2(0, 50);
+        var deadRotation = body.GlobalRotation;
+        body.QueueFree();
+        GD.Print("deadPosition: " + deadPosition);
         AddChild(deadBody);
+        deadBody.Position = deadPosition;
+        deadBody.GlobalRotation = deadRotation;
     }
 
     private void RemoveAllExplodable(Node2D deadBody)

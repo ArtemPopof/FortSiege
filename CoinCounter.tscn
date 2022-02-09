@@ -29,10 +29,11 @@ position = Vector2( -0.169571, 0 )
 script = ExtResource( 8 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 3, 0 )
-scale = Vector2( 0.016, 0.016 )
+position = Vector2( 10.7577, 0.227668 )
+scale = Vector2( 0.0834587, 0.0834588 )
 frames = SubResource( 1 )
 animation = "Shine"
+frame = 5
 playing = true
 
 [node name="Label" type="Label" parent="."]

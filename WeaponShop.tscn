@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://res/Inter/static/Inter-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://res/Inter/static/Inter-Regular.ttf" type="DynamicFontData" id=2]
@@ -12,6 +12,11 @@
 [ext_resource path="res://res/star coin shine/star coin 2.png" type="Texture" id=10]
 [ext_resource path="res://WeaponShop.cs" type="Script" id=11]
 [ext_resource path="res://WeaponInfoPanel.cs" type="Script" id=12]
+[ext_resource path="res://res/star coin shine/star coin 1.png" type="Texture" id=13]
+[ext_resource path="res://res/star coin shine/star coin 4.png" type="Texture" id=14]
+[ext_resource path="res://res/star coin shine/star coin 5.png" type="Texture" id=15]
+[ext_resource path="res://res/star coin shine/star coin 6.png" type="Texture" id=16]
+[ext_resource path="res://res/star coin shine/star coin 3.png" type="Texture" id=17]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.980392, 0.980392, 0.980392, 1 )
@@ -54,7 +59,15 @@ size = 57
 use_filter = true
 font_data = ExtResource( 7 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 17 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Shine",
+"speed": 10.0
+} ]
+
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.207843, 0.615686, 0.85098, 1 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -62,9 +75,9 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 10
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=13]
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=14]
 size = 40
 use_filter = true
 font_data = ExtResource( 1 )
@@ -262,37 +275,31 @@ custom_fonts/font = SubResource( 9 )
 text = "Buy"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer"]
 margin_top = 92.0
 margin_right = 411.0
-margin_bottom = 222.0
+margin_bottom = 162.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/MarginContainer2"]
+margin_right = 411.0
+margin_bottom = 70.0
 grow_horizontal = 0
 custom_constants/separation = 7
 alignment = 1
 
-[node name="MoneyCount" type="Label" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer"]
-margin_left = 117.0
-margin_top = 30.0
-margin_right = 197.0
-margin_bottom = 100.0
+[node name="MoneyCount" type="Label" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/MarginContainer2/HBoxContainer"]
+margin_left = 165.0
+margin_right = 245.0
+margin_bottom = 70.0
 custom_fonts/font = SubResource( 10 )
 text = "50"
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer"]
-margin_left = 204.0
-margin_right = 294.0
-margin_bottom = 130.0
-custom_constants/margin_top = 20
-custom_constants/margin_bottom = 20
-
-[node name="MoneyIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer/MarginContainer2"]
-margin_top = 20.0
-margin_right = 90.0
-margin_bottom = 110.0
-rect_min_size = Vector2( 90, 90 )
-texture = ExtResource( 10 )
-expand = true
-stretch_mode = 1
+[node name="AnimatedSprite" type="AnimatedSprite" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/MarginContainer2/HBoxContainer"]
+position = Vector2( 300.42, 33.8654 )
+scale = Vector2( 0.234191, 0.234191 )
+frames = SubResource( 11 )
+animation = "Shine"
+playing = true
 
 [node name="StartButtonContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer"]
 margin_top = 797.0
@@ -307,12 +314,12 @@ margin_right = 544.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 mouse_filter = 2
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 12 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/StartButtonContainer/StartButton"]
 position = Vector2( -1.08606, -1.13666 )
 scale = Vector2( 373.18, 84.0787 )
-normal = SubResource( 12 )
+normal = SubResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/StartButtonContainer/StartButton"]
 anchor_top = -0.00581207
@@ -329,7 +336,7 @@ __meta__ = {
 margin_top = 17.0
 margin_right = 374.0
 margin_bottom = 66.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "Start Game"
 align = 1
 

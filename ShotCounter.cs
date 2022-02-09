@@ -45,10 +45,10 @@ public class ShotCounter : Node2D
         }
     }
 
-    public void ShotPerformed() {
+    public bool ShotPerformed() {
         GD.Print("Delete texture from shot counter, shots available: " + shotsLeft);
 
-        if (shotsLeft < 0) return;
+        if (shotsLeft <= 0) return false;
         
         GD.Print("Deleting");
         shotsLeft -= 1;
@@ -57,7 +57,12 @@ public class ShotCounter : Node2D
         shotTexture.Visible = false;
         shotTexture.QueueFree();
 
-        if (shotsLeft == 0) OnNoMoreShots();
+        if (shotsLeft <= 0) {
+            OnNoMoreShots();
+            return false;
+        }
+
+        return true;
     }
 
     private void OnNoMoreShots() {

@@ -41,7 +41,7 @@ public class StorageManager {
         return true;
     }
 
-    public static void SubscibeToPropertyChange(string key, Action<string, object> callback)
+    public static int SubscibeToPropertyChange(string key, Action<string, object> callback)
     {
         if (!propertyChangeListeners.ContainsKey(key))
         {
@@ -51,6 +51,14 @@ public class StorageManager {
         var list = propertyChangeListeners[key];
 
         list.Add(callback);
+
+        return list.Count - 1;
+    }
+
+    public static void UnsubscribeToPropertyChange(string key, int index)
+    {
+        var list = propertyChangeListeners[key];
+        list.RemoveAt(index);
     }
 
     public static void StoreValue(string key, object value)

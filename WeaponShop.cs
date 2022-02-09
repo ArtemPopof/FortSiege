@@ -43,7 +43,7 @@ public class WeaponShop : Node2D
         }
 
         // can buy this weapon
-        Data.AddToPossesion(weaponIndex);
+        Data.AddWeaponToPossesion(weaponIndex);
         StorageManager.StoreValue(PropertyKeys.COIN_COUNT, currentCoinCount - weapon.cost);
         StorageManager.Save();
 
