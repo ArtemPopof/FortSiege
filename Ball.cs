@@ -15,24 +15,24 @@ public class Ball : RigidBody2D
 		GD.Print("FIREEE!");
 		this.LinearVelocity = new Vector2(xVelocity, yVelocity);
 		this.GravityScale = 1;
-		this.Fixed = false;
+		this.Fixed = "no";
 	}
 	
  	public void Reset(Vector2 position) {
 		 this.GravityScale = 0;
 		 this.LinearVelocity = new Vector2(0, 0);
 		 this.Position = position;
-		 this.Fixed = true;
+		 this.Fixed = false;
 		 this.FixPosition = position;
 	 }
 
 	public override void _IntegrateForces(Physics2DDirectBodyState physicsState) {
-		if (Fixed) {
+		if (!Fixed) {
 			physicsState.Transform = new Transform2D(0, FixPosition);
 
 		}
 
-		Fixed = false;
+		Fixed = true;
 	}
 
 
