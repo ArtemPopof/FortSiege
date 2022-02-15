@@ -2,7 +2,7 @@
 
 [ext_resource path="res://res/wood_wall.png" type="Texture" id=1]
 [ext_resource path="res://Level.cs" type="Script" id=2]
-[ext_resource path="res://enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://npc/Peasant.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefab.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -307,7 +307,7 @@ scale = Vector2( 1, 2 )
 shape = SubResource( 1 )
 
 [node name="WallLongHorizontal12" type="RigidBody2D" parent="."]
-position = Vector2( -0.698425, -431.909 )
+position = Vector2( -0.698425, -430.909 )
 rotation = 1.57079
 script = ExtResource( 4 )
 __meta__ = {
@@ -332,7 +332,7 @@ scale = Vector2( 1, 2 )
 shape = SubResource( 1 )
 
 [node name="WallLongHorizontal13" type="RigidBody2D" parent="."]
-position = Vector2( -0.698425, -455.909 )
+position = Vector2( -0.867844, -451.909 )
 rotation = 1.57079
 script = ExtResource( 4 )
 __meta__ = {
@@ -649,11 +649,11 @@ visible = false
 scale = Vector2( 1, 2 )
 shape = SubResource( 1 )
 
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0.961598, -73.924 )
+[node name="Peasant" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0.143768, 4.60049 )
 
-[node name="Enemy2" parent="." instance=ExtResource( 3 )]
-position = Vector2( -139.484, -498.822 )
+[node name="Peasant2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1.38979, -462.187 )
 
-[node name="Enemy3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 152.602, -500.858 )
+[node name="Peasant3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 269.077, 4.33778 )

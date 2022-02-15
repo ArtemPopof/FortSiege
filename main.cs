@@ -1,65 +1,15 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-
-public enum GameState
-{
-    ONGOING_GAME,
-    LEVEL_CLEARED,
-    GAME_OVER,
-    NO_MORE_SHOTS
-}
-
-public enum FireState
-{
-    READY,
-    SET_TRAJECTORY
-}
 
 public class main : Node2D
 {
-    [Signal]
-    public delegate void LevelChanged(Level level);
+    public static MobileCamera camera; 
+    
+    private Node2D uiLayout;
 
-    private int currentLevel;
-    private Level currentLevelObject;
-    private bool gameStarted = false;
-
-    private Node2D currentLevelNode;
-
-    private bool levelCleared;
-    private bool levelsCleared;
-
-    private Weapon weapon;
-    private EnemyCounterPanel counterPanel;
-    private TimerWidget timer;
-    private ShotCounter shotCounter;
-    private Label levelDoneLabel;
-    private Node2D fireButton;
-    private Background background;
-    private CoinSpawner coinSpawner;
-    private CoinCounter coinCounter;
-    private LevelSlider fireLevelSlider;
-    private TrajectoryPainter trajectoryPainter;
-    private Node2D menu;
-    private StaticToCamera uiLayer;
-    private AudioStreamPlayer2D backgroundMusic;
-
-
-    [Export]
-    private PackedScene menuScene;
-    [Export]
-    private PackedScene mapMenuScene;
-
-    private Node2D menuNode;
-    private Header header;
-    private MobileCamera camera;
-    private MainMapScene mainMenu;
-
-    private float timeSinceLastShot;
-    private bool fired;
-    private GameState state;
-    private FireState fireState;
+    private Node2D currentScene;
+    private int previousSceneIndex;
+    private int currentSceneIndex;
 
     ~main() {
         GD.Print("Enter destructor, clearing up...");
@@ -71,7 +21,11 @@ public class main : Node2D
         var startTicks = DateTime.Now.Ticks;
 
         StorageManager.Init();
+        //StorageManager.Clear();
         Data.Init();
+
+        previousSceneIndex = -1;
+        currentSceneIndex = -1;
 
         var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
 
@@ -91,355 +45,104 @@ public class main : Node2D
         UIManager.Init();
         ObjectManager.Init();
 
-        uiLayer = GetNode<StaticToCamera>("UILayout");
-        menu = GetNode<Node2D>("UILayout/Menu");
-        counterPanel = GetNode<EnemyCounterPanel>("UILayout/EnemyCounterPanel");
-        fireButton = GetNode<Node2D>("UILayout/FireButton");
-        coinCounter = GetNode<CoinCounter>("UILayout/CoinCounter");
-        fireLevelSlider = GetNode<LevelSlider>("UILayout/LevelSlider");
-        backgroundMusic = GetNode<AudioStreamPlayer2D>("BackgroundMusic");
-
-        trajectoryPainter = GetNode<TrajectoryPainter>("TrajectoryDisplayer");
         camera = GetNode<MobileCamera>("MobileCamera");
-        coinSpawner = GetNode<CoinSpawner>("CoinSpawner");
-
-        uiLayer.Connect(camera);
-
-        coinSpawner.counter = coinCounter;
-
-        // instanciate main map menu
-        var mapMenu = mapMenuScene.Instance() as Node2D;
-        uiLayer.AddChildBelowNode(menu, mapMenu);
-        mapMenu.Visible = true;
-
-        mainMenu = (mapMenu as MainMapScene);
-        mainMenu.Connect("ChangeScreen", this, "ChangeScreen");
-        mainMenu.Connect("StartGame", this, "StartGame");
-        //
+        uiLayout = GetNode<Node2D>("UILayout");
 
         var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
 
-        GD.Print($"\n[Main] Ready in {time} ms \n\n\n");
+        GD.Print($"\n[Main] Main menu scene ready in {time} ms \n\n\n");
+
+        ChangeScreen(Constants.GLOBAL_MAP_SCREEN);
+    }
+
+    public void GoToPreviousScreen()
+    {
+        if (previousSceneIndex == -1)
+        {
+            GD.PrintErr("NO PREVIOUS SCREEN, CAN'T CHANGE");
+            return;
+        }
+
+        ChangeScreen(previousSceneIndex);
     }
 
     public void ChangeScreen(int screen)
     {
-        if (screen == Constants.WEAPON_SHOP_SCREEN)
-        {
-            OpenWeaponsShop();
-            return;
-        }
-        
-        GD.Print("NO SUCH SCREEN FOUND " + screen);
-    }
-
-    private void ExitFromWeaponShop()
-    {
-        menu.Visible = true;
-        menuNode.Visible = false;
-    }
-
-    public void StartGame(int level) {
-        GD.Print("\n[Main] Start Game");
-
         var startTicks = DateTime.Now.Ticks;
 
-        currentLevel = level;
-        gameStarted = true;
-        fired = false;
-        levelsCleared = true;
-        state = GameState.ONGOING_GAME;
+        previousSceneIndex = currentSceneIndex;
+        currentSceneIndex = screen;
 
-        menu.Visible = false;
-        mainMenu.Visible = false;
-        //menuNode.Visible = false;
+        if (currentScene != null)
+        {
+            currentScene.Visible = false;
+            RemoveChild(currentScene);
+            currentScene.QueueFree();
+            currentScene = null;
+            GC.Collect();
+        }
 
-        fireLevelSlider.Visible = true;
+        Node2D sceneNode = null;
 
-        var weaponActivator = GetNode<PropertyBasedActivator>("Weapons");
-        weaponActivator.Activate();
+        if (screen == Constants.WEAPON_SHOP_SCREEN)
+        {
+            sceneNode = OpenWeaponsShop();
+        } else if (screen == Constants.GLOBAL_MAP_SCREEN)
+        {
+           sceneNode = OpenGlobalMapScreen();
+        } else if (screen == Constants.MAIN_GAME_SCREEN)
+        {
+            sceneNode = OpenGameScreen();
+        }
 
-        weapon = weaponActivator.activeChild as Weapon;
-        weapon.Reset();
-        weapon.Visible = true;
-        weapon.SetEnabled(true);
-        weapon.Connect("Fired", this, "BallFired");
-        weapon.Connect("ForceChanged", fireLevelSlider, "SetLevel");
-        weapon.Connect("ProjectilePositionChanged", trajectoryPainter, "SetTrajectoryStart");
-        weapon.Connect("FireVelocityChanged", trajectoryPainter, "SetStartVelocity");
-
-        fireLevelSlider.Connect("LevelChanged", weapon, "SetForce");
-        
-        ResetFireState();
-
-        timer = GetNode<TimerWidget>("UILayout/TimerWidget");
-        shotCounter = GetNode<ShotCounter>("UILayout/ShotCounter");
-        levelDoneLabel = GetNode<Label>("UILayout/LevelDone");
-        background = GetNode<Background>("Backgound");
-
-        timer.Reset(60);
-        background.Init();
-        coinCounter.SetCount(0);
-
-        trajectoryPainter.RectGlobalPosition = weapon.GetProjectileStartPosition();
-        trajectoryPainter.Visible = true;
-        trajectoryPainter.SetGroundY(GetNode<StaticBody2D>("StaticBody2D").GlobalPosition.y);
-
-        GD.Print("Current coin count: " + coinCounter.count);
-        
-        LoadCurrentLevel();
-
-        camera.Enabled = true;
-
-        backgroundMusic.Playing = true;
+        AddChildBelowNode(uiLayout, sceneNode);
+        sceneNode.GlobalPosition = new Vector2(0, 0);
+        sceneNode.Visible = true;
+        currentScene = sceneNode;
 
         var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
 
-        GD.Print($"\n[Main] Initialised in {time} ms \n\n\n");
+        GD.Print($"\n[Main] New scene {screen} ready in {time} ms \n\n\n");
     }
 
-    private void ResetFireState()
+    private Node2D OpenWeaponsShop()
     {
-        if (weapon.info.controlTrajectory)
-        {
-            fireState = FireState.READY;
-            GetNode<Label>("UILayout/FireButton/Label").Text = "Set";
-        }
-        else 
-        {
-            fireState = FireState.SET_TRAJECTORY;
-            GetNode<Label>("UILayout/FireButton/Label").Text = "Fire";
-        }
 
-        fireLevelSlider.SetLevel(0.0f);
-        fireButton.Visible = true;
+        var scene = ResourceLoader.Load<PackedScene>("res://WeaponShop.tscn").Instance<WeaponShop>();
+        var shopHeader = scene.GetNode<Header>("VBoxContainer/Header");  
+
+        shopHeader.Connect("BackActionFired", this, "GoToPreviousScreen");
+        scene.Connect("ScreenDone", this, "StartGame");
+
+        return scene;
     }
 
-    private void BallFired()
+    private Node2D OpenGlobalMapScreen()
     {
-        GD.Print("BallFired");
-        shotCounter.ShotPerformed();
+        var scene = ResourceLoader.Load<PackedScene>("res://ui/Main.tscn").Instance() as Node2D;
 
-        ResetFireState();
+        var mainMenu = (scene as MainMapScene);
+        mainMenu.Connect("ChangeScreen", this, "ChangeScreen");
+        mainMenu.Connect("StartGame", this, "StartGame");
+
+        return scene;
     }
 
-    private void EnemyDied(Enemy enemy)
+    private Node2D OpenGameScreen()
     {
-        coinSpawner.SpawnCoins(enemy.coinReward, enemy.GlobalPosition);
+        var scene = ResourceLoader.Load<PackedScene>("res://scenes/game.tscn");
+
+        return scene.Instance<Node2D>();
     }
 
-    public void NoMoreShots() {
-        GD.Print("Main: No more shots");
-
-        timeSinceLastShot = 0;
-        state = GameState.NO_MORE_SHOTS;
-
-        fireButton.Visible = false;
-        //GameOver("Oh no, no more shots left!");
-    }
-
-    private void LoadCurrentLevel() {
-        GD.Print("Loading level: Level" + currentLevel.ToString());
-
-        // clean up objects
-        coinSpawner.ClearCoins();
-        weapon.ClearProjectiles();
-        //
-
-        var packedLevel = ResourceLoader.Load<PackedScene>("res://Level" + (currentLevel + 1).ToString() + ".tscn");
-        var sceneObject = packedLevel.Instance<Node2D>();
-
-        var instancePosition = GetNode<Position2D>("BuildingPosition");
-
-        sceneObject.Position = instancePosition.Position;
-
-        AddChildBelowNode(weapon, sceneObject);
-
-        if (currentLevelObject != null) {
-            currentLevelObject.QueueFree();
-        }
-
-        currentLevelObject = sceneObject as Level;
-        currentLevelObject.Connect("AllEnemiesAreDead", this, "AllEnemiesAreDead");
-        currentLevelObject.Connect("AllPrefabsAreStill", this, "AllPrefabsAreStill");
-        currentLevelObject.Connect("LevelEnemyDied", this, "EnemyDied");
-        currentLevelObject.Connect("CoinCollected", this, "CoinCollected");
-        currentLevelObject.Connect("ChestDestroyed", coinSpawner, "SpawnCoins");
-
-        timer.Reset(60);
-        counterPanel.Init(currentLevelObject.getEnemies());
-        shotCounter.Init(weapon.info);
-        
-        currentLevelNode = sceneObject;
-
-        EmitSignal("LevelChanged", currentLevelObject);
-    }
-
-    private void CoinCollected(int count)
+    private void StartGame()
     {
-        coinCounter.SetCount(coinCounter.count + count);
+        ChangeScreen(Constants.MAIN_GAME_SCREEN);
     }
 
-    private void AllPrefabsAreStill()
+    private void StartGame(int levelIndex)
     {
-        GD.Print("All prefabs stay still");
+        StorageManager.StoreValue(PropertyKeys.CURRENT_LEVEL, levelIndex);
+        ChangeScreen(Constants.MAIN_GAME_SCREEN);
     }
-
-    public void FireButtonPressed() {
-        if (fireState == FireState.READY)
-        {
-            GD.Print("Set trajectory button pressed");
-            fireState = FireState.SET_TRAJECTORY;
-            weapon.currentState = FireState.SET_TRAJECTORY;
-            GetNode<Label>("FireButton/Label").Text = "Fire";
-            return;
-        }
-
-        GD.Print("Fire button pressed");
-        fired = true;
-        weapon.Fire();
-        ResetFireState();
-    }
-
-    public override void _UnhandledInput(InputEvent @event)
-	{
-		if (!(@event is InputEventScreenTouch touchEvent))
-		{
-            return;
-		}
-	}
-
-    public void Restart() {
-        GD.Print("Restart Level");
-        
-        coinCounter.SetCount(0);
-        currentLevelObject.Visible = false;
-        currentLevelObject.QueueFree();
-        weapon.Reset();
-        levelCleared = false;
-        levelsCleared = false;
-
-        state = GameState.ONGOING_GAME;
-        LoadCurrentLevel();
-
-        ResetFireState();
-        
-        levelDoneLabel.Visible = false;
-        GetNode<Node2D>("UILayout/RestartButton").Visible = false;
-    }
-
-    private void LevelOver(String message, bool gameover = false) {
-        levelDoneLabel.Text = message;
-        levelDoneLabel.Visible = true;
-        gameStarted = false;
-        fireButton.Visible = false;
-
-        GetNode<Label>("UILayout/RestartButton/HBoxContainer/MarginContainer/Label").Text = gameover ? "Restart" : "Next Level";
-        GetNode<Node2D>("UILayout/RestartButton").Visible = true;
-
-        if (!gameover)
-        {
-            levelCleared = true;
-        }
-
-        timer.Stop();
-        state = GameState.GAME_OVER;
-
-        weapon.SetEnabled(false);
-    }
-
-    private void ChangeLevel() {
-        levelCleared = false;
-        currentLevel++;
-        if (currentLevel > 4)
-        {
-            currentLevel = 1;
-        }
-        state = GameState.ONGOING_GAME;
-
-        currentLevelNode.QueueFree();
-
-        levelDoneLabel.Visible = false;
-        ResetFireState();
-
-        counterPanel.Reset();
-        coinCounter.SetCount(0);
-        weapon.Reset();      
-        timer.Reset(60);
-        background.Reset();
-        fireLevelSlider.SetLevel(0);
-
-        LoadCurrentLevel();
-    }
-
-    private void OpenWeaponsShop()
-    {
-        if (menuNode == null) {
-            menuNode =  menuScene.Instance<WeaponShop>();
-            header = menuNode.GetNode<Header>("VBoxContainer/Header");  
-
-            header.Connect("BackActionFired", this, "ExitFromWeaponShop");
-            menuNode.Connect("ScreenDone", this, "StartGame");
-
-            AddChildBelowNode(coinCounter, menuNode);
-
-            menuNode.GlobalPosition = new Vector2(0, 0);
-
-            GD.Print("MENU Y" + menuNode.GlobalPosition.y);
-        }
-
-        menuNode.Visible = true;
-        menu.Visible = false;
-    }
-
-    public void AllEnemiesAreDead() {
-        levelCleared = true;
-        var newCountCount = StorageManager.GetInt(PropertyKeys.COIN_COUNT) + coinCounter.count;
-        StorageManager.StoreValue(PropertyKeys.COIN_COUNT, newCountCount);
-        StorageManager.Save();
-        LevelOver("Level cleared!");
-    }
-
-    public void onTimeout() {
-        GD.Print("Time's up");
-
-        LevelOver("Time's up", true);
-    }
-
- // Called every frame. 'delta' is the elapsed time since the previous frame.
- public override void _Process(float delta)
- {
-     timeSinceLastShot += delta;
-
-     if (state != GameState.NO_MORE_SHOTS) {
-         return;
-     }
-
-     if (timeSinceLastShot >= 3.5f)
-     {
-         var movingPrefabs = currentLevelObject.activePrefabs;
-         if (movingPrefabs == 0)
-         {
-             GD.Print("No more shots and every object is still. Game over");
-             LevelOver("No more shots!", true);
-         }
-     }
- }
-
- public void OnLevelOverButtonPressed()
- {
-     GD.Print("Level cleared button presed");
-     
-     if (levelCleared)
-     {
-         GD.Print("Next Level");
-         ChangeLevel(); 
-     } else
-     {
-         GD.Print("Restart");
-         Restart();
-     }
-
-     GetNode<Node2D>("UILayout/RestartButton").Visible = false;
- }
 }

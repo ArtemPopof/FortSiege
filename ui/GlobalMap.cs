@@ -12,18 +12,19 @@ public class GlobalMap : Node2D
     {
         GD.Print("Open global map");
 
-        var passedLevels = StorageManager.GetString(PropertyKeys.PASSED_LEVELS_LIST);
-        if (passedLevels == null)
+        var availableLevels = StorageManager.GetString(PropertyKeys.AVAILABLE_LEVELS);
+        //availableLevels = null;
+        if (availableLevels == null)
         {
             // init with default values
-            passedLevels = "0";
-            StorageManager.StoreValue(PropertyKeys.PASSED_LEVELS_LIST, passedLevels);
+            availableLevels = "0";
+            StorageManager.StoreValue(PropertyKeys.AVAILABLE_LEVELS, availableLevels);
             StorageManager.Save();
         }
 
-        GD.Print("Levels: " + passedLevels);
+        GD.Print("Levels: " + availableLevels);
 
-        var possesedArray = Util.ToPossesionArray(passedLevels, Constants.LEVEL_COUNT);
+        var possesedArray = Util.ToPossesionArray(availableLevels, Constants.LEVEL_COUNT);
 
         var levelNodes = GetNode<Node2D>("Levels").GetChildren();
         for (int i = 0; i < possesedArray.Length; i++)
@@ -33,6 +34,7 @@ public class GlobalMap : Node2D
         }
         
         SelectedLevel = GetLastLevel(possesedArray);
+        MoveWeaponIconToLevel(levelNodes[SelectedLevel] as Node2D);
     }
 
     private void UpdateLevelState(Node2D levelNode, bool isPassed)
@@ -66,5 +68,12 @@ public class GlobalMap : Node2D
         }
 
         return max;
+    }
+
+    private void MoveWeaponIconToLevel(Node2D levelNode)
+    {
+        var weaponNode = GetNode<PropertyBasedActivator>("WeaponIcons");
+
+        weaponNode.GlobalPosition = levelNode.GlobalPosition;
     }
 }

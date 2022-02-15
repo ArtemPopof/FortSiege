@@ -7,4 +7,6 @@ public class Constants {
     public static int LEVEL_COUNT = 4;
 
     public static int WEAPON_SHOP_SCREEN = 0;
+    public static int GLOBAL_MAP_SCREEN = 1;
+    public static int MAIN_GAME_SCREEN = 2;
 }

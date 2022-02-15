@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://res/wood_wall.png" type="Texture" id=1]
 [ext_resource path="res://npc/Peasant.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Level.cs" type="Script" id=3]
 [ext_resource path="res://Prefab.cs" type="Script" id=4]
-[ext_resource path="res://StoneWall.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/Barel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Coin.tscn" type="PackedScene" id=7]
 
@@ -361,11 +360,6 @@ visible = false
 scale = Vector2( 1, 2 )
 shape = SubResource( 1 )
 
-[node name="StoneWall" parent="." instance=ExtResource( 5 )]
-position = Vector2( -181.072, -487.891 )
-rotation = -1.17091
-scale = Vector2( 1, 1 )
-
 [node name="Coin" parent="." instance=ExtResource( 7 )]
 position = Vector2( -30.9495, -423.255 )
 
@@ -377,3 +371,6 @@ position = Vector2( -1.97963, -33.4187 )
 
 [node name="Peasant" parent="." instance=ExtResource( 2 )]
 position = Vector2( 3.1203, -200.781 )
+
+[node name="Peasant2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -223.383, -256.227 )

@@ -17,8 +17,6 @@ public class cannon : Weapon
 
     private Vector2 lastLookAtPosition;
 
-    List<Ball> balls = new List<Ball>(3);
-
     private bool enabled;
     private bool fired;
 
@@ -33,30 +31,39 @@ public class cannon : Weapon
         lastLookAtPosition = new Vector2(Position.x + 100, Position.y);
     }
 
-    public override int GetIndex()
+    public override int GetWeaponNumber()
     {
-        return 0;
+        return 1;
     }
 
-    public override void _UnhandledInput(InputEvent @event)
+    public void ShaftPressed()
+    {
+        GD.Print("[Cannon] Start rotating");
+
+        currentState = FireState.SET_TRAJECTORY;
+    }
+
+    public override void _Input(InputEvent @event)
 	{                
         if (!Visible || !enabled || currentState != FireState.SET_TRAJECTORY) {
             return;
         }
 
-		if (!(@event is InputEventScreenTouch touchEvent))
+        if (@event is InputEventScreenTouch touch)
+		{
+            if (!touch.Pressed)
+            {
+                currentState = FireState.READY;
+            }
+            return;
+		}
+
+		if (!(@event is InputEventScreenDrag drag))
 		{
             return;
 		}
 
-        var screenSize = GetViewportRect().Size;
-        
-        // area with fire button clicked
-        if (touchEvent.Position.x < screenSize.x * 0.2 && touchEvent.Position.y < screenSize.y * 0.2) {
-            return;
-        }
-
-        RotateCannonToTouchPoint(touchEvent.Position);
+        RotateCannonToTouchPoint(drag.Position);
 	}
 
     private void RotateCannonToTouchPoint(Vector2 touchPoint) {
@@ -73,22 +80,29 @@ public class cannon : Weapon
         }
 
         lastLookAtPosition = touchPoint;
+
+
+        EmitSignal("ProjectilePositionChanged", GetNode<Position2D>("CannonShaft/BallPosition").GlobalPosition);
+        EmitSignal("FireVelocityChanged", GetBallVelocity());
     }
 
     private Vector2 LimitRotationPoints(Vector2 touchPoint) {
         var resultPoint = new Vector2();
 
-
         return resultPoint;
     }
 
-    private Vector2 GetBallVelocity(Vector2 touchPoint) {
+    private Vector2 GetBallVelocity() {
         var axis = GetNode<Position2D>("CannonShaft/BallPosition").GlobalPosition;
 
-        var yVelocity = touchPoint.y - axis.y;
-        var xVelocity = touchPoint.x - axis.x;
+        var rotation = GetNode<Node2D>("CannonShaft").GlobalRotation;
 
-        return new Vector2(xVelocity * force, yVelocity * force);
+        var xVelocity = 4 * GetViewportRect().Size.x * 0.1f;
+        var yVelocity = xVelocity * Mathf.Sin(rotation);
+
+        GD.Print("[Cannon] Rotation: " + rotation);
+
+        return new Vector2(Math.Max(10, xVelocity * force), yVelocity * force);
     }
 
     public override void Fire() {
@@ -102,10 +116,10 @@ public class cannon : Weapon
         ballInstance.GlobalPosition = ballPosition.GlobalPosition;
         ball = ballInstance;
 
-        balls.Add(ballInstance);
+        Balls.Add(ballInstance);
 
-        var velocity = GetBallVelocity(lastLookAtPosition);
-        ball.Fire(velocity.x + 100, velocity.y - 20);
+        var velocity = GetBallVelocity();
+        ball.Fire(velocity.x , velocity.y);
 
         fired = true;
 
@@ -126,17 +140,17 @@ public class cannon : Weapon
     public override void Reset() {
         GD.Print("Reset cannon state");
 
-        foreach (var cannonBall in balls)
+        foreach (var cannonBall in Balls)
         {
             cannonBall.Visible = false;
             cannonBall.QueueFree();
         }
-        balls.Clear();
+        Balls.Clear();
 
         enabled = true;
         fired = false;
 
-        force = 0.1f;
+        SetForce(0.1f);
     }
 
     public override void SetEnabled(bool enabled) {
@@ -150,11 +164,10 @@ public class cannon : Weapon
 
     public override void SetForce(float value)
     {
+        GD.Print("[Cannon] Set force to " + value);
         force = value;
-    }
+        EmitSignal("FireVelocityChanged", GetBallVelocity());
 
- // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//  }
+        GD.Print("[Cannon] New velocity: " + GetBallVelocity());
+    }
 }

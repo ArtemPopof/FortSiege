@@ -17,7 +17,6 @@ public class Catapult : Weapon
     [Export]
 	public PackedScene ballScene;
 
-    private List<Ball> balls;
     private Ball loadedBall;
 
     private float maxStrengthDistance;
@@ -33,18 +32,19 @@ public class Catapult : Weapon
     {
         base._Ready();
 
-        balls = new List<Ball>(5);
-
         neck = GetNode<Node2D>("Neck");
         ballPosition = GetNode<Position2D>("Neck/BallPosition");
         releaseSound = GetNode<AudioStreamPlayer2D>("ReleaseSound");
 
         maxTouchX = GetNode<Position2D>("MaxX").GlobalPosition.x;
         maxTouchY = neck.GlobalPosition.y - 10;
+
+        SetForce(0.1f);
+        neckDegreesLoading = 80;
         //maxDegreesRotation = neck.GlobalRotation;
     }
 
-    public override int GetIndex()
+    public override int GetWeaponNumber()
     {
         return 0;
     }
@@ -56,7 +56,7 @@ public class Catapult : Weapon
         ballInstance.GlobalPosition = ballPosition.GlobalPosition;
         usedProjectiles.Add(ballInstance);
         
-        balls.Add(ballInstance as Ball);
+        Balls.Add(ballInstance as Ball);
 
         loadedBall = ballInstance as Ball;
         (ballInstance as Ball).Mass = info.projectileWeight;

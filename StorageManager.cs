@@ -8,6 +8,8 @@ public class StorageManager {
     public static Dictionary data;
     public static File file;
 
+    public static System.Collections.Generic.Dictionary<string, object> gameProperties;
+
     public static System.Collections.Generic.Dictionary<string, List<Action<string, object>>> propertyChangeListeners = 
     new System.Collections.Generic.Dictionary<string, List<Action<string, object>>>(10);
 
@@ -36,12 +38,14 @@ public class StorageManager {
 
         file.Close();
 
+        gameProperties = new System.Collections.Generic.Dictionary<string, object>();
+
         GD.Print("State restored, size: " + text.Length);
 
         return true;
     }
 
-    public static void SubscibeToPropertyChange(string key, Action<string, object> callback)
+    public static int SubscibeToPropertyChange(string key, Action<string, object> callback)
     {
         if (!propertyChangeListeners.ContainsKey(key))
         {
@@ -51,6 +55,14 @@ public class StorageManager {
         var list = propertyChangeListeners[key];
 
         list.Add(callback);
+
+        return list.Count - 1;
+    }
+
+    public static void UnsubscribeToPropertyChange(string key, int index)
+    {
+        var list = propertyChangeListeners[key];
+        list.RemoveAt(index);
     }
 
     public static void StoreValue(string key, object value)

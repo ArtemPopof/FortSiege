@@ -28,8 +28,8 @@ mass = 0.16
 script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0.994322, -0.0500698 )
-scale = Vector2( 0.0147148, 0.0147148 )
+position = Vector2( 0.397095, 0.787231 )
+scale = Vector2( 0.101986, 0.101986 )
 frames = SubResource( 1 )
 animation = "Rotation"
 frame = 4

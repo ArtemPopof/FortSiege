@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://res/Inter/static/Inter-Black.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://res/star coin shine/star coin 2.png" type="Texture" id=2]
 [ext_resource path="res://PropertyLabel.cs" type="Script" id=3]
 [ext_resource path="res://Header.cs" type="Script" id=4]
+[ext_resource path="res://res/star coin shine/star coin 1.png" type="Texture" id=5]
+[ext_resource path="res://res/star coin shine/star coin 4.png" type="Texture" id=6]
+[ext_resource path="res://res/star coin shine/star coin 5.png" type="Texture" id=7]
+[ext_resource path="res://res/star coin shine/star coin 6.png" type="Texture" id=8]
+[ext_resource path="res://res/star coin shine/star coin 3.png" type="Texture" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.309804, 0.290196, 0.290196, 1 )
@@ -17,6 +22,14 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Shine",
+"speed": 10.0
+} ]
 
 [node name="Header" type="Panel"]
 margin_right = 2415.0
@@ -45,7 +58,8 @@ margin_bottom = 130.0
 custom_constants/separation = 22
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/BackButton"]
-scale = Vector2( 259.475, 80.9458 )
+position = Vector2( -29.9251, -3.69445 )
+scale = Vector2( 605.276, 152.988 )
 normal = SubResource( 2 )
 
 [node name="ArrowLeft" type="Label" parent="HBoxContainer/BackButton"]
@@ -90,16 +104,16 @@ custom_constants/separation = 10
 alignment = 2
 
 [node name="MoneyCount" type="Label" parent="HBoxContainer/HBoxContainer"]
-margin_left = 557.0
+margin_left = 647.0
 margin_top = 27.0
-margin_right = 643.0
+margin_right = 733.0
 margin_bottom = 103.0
 custom_fonts/font = SubResource( 3 )
 text = "50"
 script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/HBoxContainer"]
-margin_left = 653.0
+margin_left = 743.0
 margin_right = 773.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 20, 0 )
@@ -108,13 +122,10 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
-[node name="MoneyIcon" type="TextureRect" parent="HBoxContainer/HBoxContainer/MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 110.0
-margin_bottom = 110.0
-rect_min_size = Vector2( 90, 40 )
-texture = ExtResource( 2 )
-expand = true
-
-[connection signal="gui_input" from="HBoxContainer/BackButton/ArrowLeft" to="." method="onArrowInputSignal"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="HBoxContainer/HBoxContainer/MarginContainer"]
+position = Vector2( 56.1484, 64.8919 )
+scale = Vector2( 0.247794, 0.247794 )
+frames = SubResource( 5 )
+animation = "Shine"
+frame = 3
+playing = true

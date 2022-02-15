@@ -37,10 +37,10 @@ public class Data
         cannon.cost = 50;
         cannon.name = "Cannon";
         cannon.shotCount = 3;
-        cannon.controlTrajectory = true;
+        cannon.controlTrajectory = false;
         cannon.inPossesion = possesionArray[WEAPON_CANNON_ID];
         cannon.projectileTexture = ResourceLoader.Load("res://textures/CannonProjectile.png") as Texture;
-        cannon.projectileWeight = 5;
+        cannon.projectileWeight = 2;
 
         weapons.Add(catapult);
         weapons.Add(cannon);
@@ -48,7 +48,7 @@ public class Data
         GD.Print("weapons loaded");
     }
 
-    public static void AddToPossesion(int weaponIndex)
+    public static void AddWeaponToPossesion(int weaponIndex)
     {
         weapons[weaponIndex].inPossesion = true;
 
