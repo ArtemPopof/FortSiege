@@ -12,11 +12,11 @@ public class Catapult : Weapon
     private float currentFiringSpeed;
 
     private Position2D ballPosition;
+    private AudioStreamPlayer2D releaseSound;
     private Node2D neck;
     [Export]
 	public PackedScene ballScene;
 
-    private List<Ball> balls;
     private Ball loadedBall;
 
     private float maxStrengthDistance;
@@ -25,17 +25,28 @@ public class Catapult : Weapon
     private float maxDegreesRotation = 47.2f;
     private float firingTimeoutSeconds = -1;
 
+    private float neckDegreesLoading = 0;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        balls = new List<Ball>(5);
+        base._Ready();
 
         neck = GetNode<Node2D>("Neck");
         ballPosition = GetNode<Position2D>("Neck/BallPosition");
+        releaseSound = GetNode<AudioStreamPlayer2D>("ReleaseSound");
 
         maxTouchX = GetNode<Position2D>("MaxX").GlobalPosition.x;
         maxTouchY = neck.GlobalPosition.y - 10;
+
+        SetForce(0.1f);
+        neckDegreesLoading = 80;
         //maxDegreesRotation = neck.GlobalRotation;
+    }
+
+    public override int GetWeaponNumber()
+    {
+        return 0;
     }
 
     private void LoadWithBall() 
@@ -45,7 +56,7 @@ public class Catapult : Weapon
         ballInstance.GlobalPosition = ballPosition.GlobalPosition;
         usedProjectiles.Add(ballInstance);
         
-        balls.Add(ballInstance as Ball);
+        Balls.Add(ballInstance as Ball);
 
         loadedBall = ballInstance as Ball;
         (ballInstance as Ball).Mass = info.projectileWeight;
@@ -64,6 +75,11 @@ public class Catapult : Weapon
     public override void Fire()
     {
         NeckReleased();
+    }
+
+    public override Vector2 GetProjectileStartPosition()
+    {
+        return ballPosition.GlobalPosition;
     }
 
     public override void _Process(float delta)
@@ -95,10 +111,10 @@ public class Catapult : Weapon
 
     private void FireBall()
     {
-        GD.Print("Release ball, speed: " + firingForce);
+        GD.Print("Release ball, speed: " + GetFireVelocity().x + ", " + GetFireVelocity().y);
         GetNode<TextureRect>("Neck/BallTexture").Visible = false;
         LoadWithBall();
-        loadedBall.Fire(firingForce * 600f, (firingForce * firingForce) * -500f);
+        loadedBall.Fire(GetFireVelocity().x, GetFireVelocity().y);
 
         EmitSignal("Fired");
 
@@ -138,7 +154,17 @@ public class Catapult : Weapon
 
         var forceValue = (90 - neck.GlobalRotationDegrees) / 90f;
 
+        neckDegreesLoading = neck.GlobalRotationDegrees;
+
+        //EmitSignal("ProjectilePositionChanged", GetProjectileStartPosition());
+        EmitSignal("FireVelocityChanged", GetFireVelocity());  
         EmitSignal("ForceChanged", forceValue);
+    }
+
+    private Vector2 GetFireVelocity()
+    {
+        var force = (90 - neckDegreesLoading) / 90f;
+        return new Vector2(force * 600f, force * -300f);
     }
 
     public void NeckTouched()
@@ -155,7 +181,7 @@ public class Catapult : Weapon
         GD.Print("released");
         settingStrength = false;
 
-       //neckMaxPointDegrees = neck.GlobalRotationDegrees;
+        releaseSound.Playing = true;
 
         firing = true;
         firingTime = 0;
@@ -166,6 +192,11 @@ public class Catapult : Weapon
     {
         GD.Print("Set catapult neck rotation to " + value * 90 + " degrees");
         neck.RotationDegrees = maxDegreesRotation - (value * (90 - maxDegreesRotation));
+
+        neckDegreesLoading = neck.GlobalRotationDegrees;
+
+        //EmitSignal("ProjectilePositionChanged", GetProjectileStartPosition());
+        EmitSignal("FireVelocityChanged", GetFireVelocity());
     }
 
     public override void SetTrajectory(float value)

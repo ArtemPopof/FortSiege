@@ -71,7 +71,7 @@ public class Clouds : Node2D
 
     private void Respawn(Cloud cloud)
     {
-        GD.Print("Respawn cloud");
+        //GD.Print("Respawn cloud");
         var visible = GD.Randf() < 0.3;
         cloud.Visible = visible;
         if (!visible) return;

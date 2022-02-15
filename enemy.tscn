@@ -27,6 +27,20 @@ extents = Vector2( 16.0279, 5.6837 )
 mass = 4.19
 script = ExtResource( 2 )
 
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( 9, -23 )
+rotation = 0.726517
+rest = Transform2D( 0.747493, 0.66427, -0.66427, 0.747493, 9, -23 )
+default_length = 20.0
+
+[node name="Bone2D2" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( -13.4185, -24.3299 )
+rotation = 2.03863
+rest = Transform2D( -0.450953, 0.892547, -0.892547, -0.450953, -13.4185, -24.3299 )
+default_length = 20.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.58505, -42.1507 )
 shape = SubResource( 1 )

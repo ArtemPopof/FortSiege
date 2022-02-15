@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://res/catapult.svg" type="Texture" id=1]
 [ext_resource path="res://res/catapult_neck.svg" type="Texture" id=2]
 [ext_resource path="res://Catapult.cs" type="Script" id=3]
 [ext_resource path="res://res/wood_wall.png" type="Texture" id=4]
 [ext_resource path="res://res/stone.svg" type="Texture" id=5]
+[ext_resource path="res://res/release.wav" type="AudioStream" id=6]
 [ext_resource path="res://StoneBall.tscn" type="PackedScene" id=7]
 
 [node name="Catapult" type="Node2D"]
@@ -62,6 +63,10 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ReleaseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -7.786
 
 [connection signal="pressed" from="Neck/TouchScreenButton" to="." method="NeckTouched"]
 [connection signal="released" from="Neck/TouchScreenButton" to="." method="NeckReleased"]

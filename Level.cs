@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 public class Level : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
     [Export]
     public String name = "Default Level";
 
@@ -88,6 +84,7 @@ public class Level : Node2D
         EmitSignal("LevelEnemyDied", enemy);
 
         if (enemiesLeft == 0) {
+            GD.Print("[" + name + "] EMIT ALL ENEMIES DIED SIGNAL");
             EmitSignal("AllEnemiesAreDead");
         }
     }
@@ -99,13 +96,15 @@ public class Level : Node2D
  // Called every frame. 'delta' is the elapsed time since the previous frame.
  public override void _Process(float delta)
  {
-    activePrefabs = 0;
+    var newActivePrefabs = 0;
      foreach (var prefab in prefabs)
      {
          if (prefab.moving) {
-             activePrefabs++;
+             newActivePrefabs++;
          }
      }
+
+     activePrefabs = newActivePrefabs;
 
      deltaToShot += delta;
 

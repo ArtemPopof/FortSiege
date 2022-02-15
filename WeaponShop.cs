@@ -19,7 +19,8 @@ public class WeaponShop : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        weaponIndex = 0;
+        var hasSomeStartIndexFromCaller = StorageManager.gameProperties.ContainsKey(PropertyKeys.SCENE_ARG_1);
+        weaponIndex = hasSomeStartIndexFromCaller ? (int) StorageManager.gameProperties[PropertyKeys.SCENE_ARG_1] : 0;
 
         swiper = GetNode<Swiper>("VBoxContainer/HBoxContainer/SwiperPanel/VBoxContainer/Swiper");
         infoPanel = GetNode<WeaponInfoPanel>("VBoxContainer/HBoxContainer/InfoPanel");
@@ -27,6 +28,8 @@ public class WeaponShop : Node2D
         swiper.Connect("Swiped", this, "WeaponIndexChanged");
 
         infoPanel.SetInfo(Data.weapons[0]);
+        
+        swiper.SwipeTo(weaponIndex);
     }
 
     public void BuyButtonPressed()
@@ -43,7 +46,7 @@ public class WeaponShop : Node2D
         }
 
         // can buy this weapon
-        Data.AddToPossesion(weaponIndex);
+        Data.AddWeaponToPossesion(weaponIndex);
         StorageManager.StoreValue(PropertyKeys.COIN_COUNT, currentCoinCount - weapon.cost);
         StorageManager.Save();
 

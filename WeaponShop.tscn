@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://res/Inter/static/Inter-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://res/Inter/static/Inter-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,11 +7,15 @@
 [ext_resource path="res://res/cannon.png" type="Texture" id=5]
 [ext_resource path="res://SlideCounter.cs" type="Script" id=6]
 [ext_resource path="res://res/Inter/static/Inter-Black.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://res/Inter/static/Inter-Medium.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Header.tscn" type="PackedScene" id=9]
 [ext_resource path="res://res/star coin shine/star coin 2.png" type="Texture" id=10]
 [ext_resource path="res://WeaponShop.cs" type="Script" id=11]
 [ext_resource path="res://WeaponInfoPanel.cs" type="Script" id=12]
+[ext_resource path="res://res/star coin shine/star coin 1.png" type="Texture" id=13]
+[ext_resource path="res://res/star coin shine/star coin 4.png" type="Texture" id=14]
+[ext_resource path="res://res/star coin shine/star coin 5.png" type="Texture" id=15]
+[ext_resource path="res://res/star coin shine/star coin 6.png" type="Texture" id=16]
+[ext_resource path="res://res/star coin shine/star coin 3.png" type="Texture" id=17]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.980392, 0.980392, 0.980392, 1 )
@@ -35,8 +39,6 @@ font_data = ExtResource( 2 )
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="AtlasTexture" id=7]
-
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.207843, 0.615686, 0.85098, 1 )
 corner_radius_top_left = 13
@@ -44,17 +46,22 @@ corner_radius_top_right = 13
 corner_radius_bottom_right = 13
 corner_radius_bottom_left = 13
 
-[sub_resource type="DynamicFont" id=9]
-size = 61
-use_filter = true
-font_data = ExtResource( 8 )
-
 [sub_resource type="DynamicFont" id=10]
 size = 57
 use_filter = true
 font_data = ExtResource( 7 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 17 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Shine",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=7]
+
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.207843, 0.615686, 0.85098, 1 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -62,9 +69,9 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 10
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=13]
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=14]
 size = 40
 use_filter = true
 font_data = ExtResource( 1 )
@@ -104,10 +111,10 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/SwiperPanel"]
-anchor_left = -0.00586703
+anchor_left = -0.00660189
 anchor_top = 0.003302
-anchor_right = 0.966509
-anchor_bottom = 0.003302
+anchor_right = 0.965777
+anchor_bottom = 0.00330195
 margin_left = 39.974
 margin_top = 14.9385
 margin_right = 1730.93
@@ -235,11 +242,6 @@ custom_constants/margin_right = 150
 custom_constants/margin_left = 150
 custom_constants/margin_bottom = 250
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer"]
-position = Vector2( 152.801, 0 )
-scale = Vector2( 279.901, 249.089 )
-normal = SubResource( 7 )
-
 [node name="BuyPanel" type="Panel" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer"]
 margin_left = 150.0
 margin_right = 564.0
@@ -250,49 +252,54 @@ custom_styles/panel = SubResource( 8 )
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel"]
 margin_right = 411.0
 margin_bottom = 327.0
-custom_constants/separation = 17
+custom_constants/separation = 50
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer"]
 margin_right = 411.0
-margin_bottom = 75.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 70.0
+custom_fonts/font = SubResource( 10 )
 text = "Buy"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer"]
-margin_top = 92.0
+margin_top = 120.0
 margin_right = 411.0
-margin_bottom = 222.0
+margin_bottom = 190.0
 grow_horizontal = 0
 custom_constants/separation = 7
 alignment = 1
 
 [node name="MoneyCount" type="Label" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer"]
-margin_left = 117.0
-margin_top = 30.0
-margin_right = 197.0
-margin_bottom = 100.0
+margin_left = 132.0
+margin_right = 212.0
+margin_bottom = 70.0
 custom_fonts/font = SubResource( 10 )
 text = "50"
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer"]
-margin_left = 204.0
-margin_right = 294.0
-margin_bottom = 130.0
-custom_constants/margin_top = 20
-custom_constants/margin_bottom = 20
+[node name="Container" type="Container" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer"]
+margin_left = 219.0
+margin_right = 279.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 60, 50 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="MoneyIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer/MarginContainer2"]
-margin_top = 20.0
-margin_right = 90.0
-margin_bottom = 110.0
-rect_min_size = Vector2( 90, 90 )
-texture = ExtResource( 10 )
-expand = true
-stretch_mode = 1
+[node name="AnimatedSprite" type="AnimatedSprite" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer/Container"]
+position = Vector2( 46.1865, 35.1144 )
+scale = Vector2( 0.234191, 0.234191 )
+frames = SubResource( 11 )
+animation = "Shine"
+frame = 4
+playing = true
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/MarginContainer"]
+position = Vector2( 152.801, 0 )
+scale = Vector2( 416.062, 331.535 )
+normal = SubResource( 7 )
 
 [node name="StartButtonContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer"]
 margin_top = 797.0
@@ -307,16 +314,18 @@ margin_right = 544.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 mouse_filter = 2
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 12 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/StartButtonContainer/StartButton"]
 position = Vector2( -1.08606, -1.13666 )
 scale = Vector2( 373.18, 84.0787 )
-normal = SubResource( 12 )
+normal = SubResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/InfoPanel/VBoxContainer/StartButtonContainer/StartButton"]
-anchor_top = -0.00581207
-anchor_bottom = -0.00581207
+anchor_left = -0.00334029
+anchor_top = 0.00980225
+anchor_right = -0.00334029
+anchor_bottom = 0.00980225
 margin_left = 2.0
 margin_top = 0.464966
 margin_right = 376.0
@@ -329,7 +338,7 @@ __meta__ = {
 margin_top = 17.0
 margin_right = 374.0
 margin_bottom = 66.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "Start Game"
 align = 1
 

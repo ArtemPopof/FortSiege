@@ -1,0 +1,221 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://res/peasant_atlas.svg" type="Texture" id=1]
+[ext_resource path="res://res/enemy.svg" type="Texture" id=2]
+[ext_resource path="res://Enemy.cs" type="Script" id=3]
+[ext_resource path="res://res/peasant.svg" type="Texture" id=4]
+[ext_resource path="res://res/death1.wav" type="AudioStream" id=5]
+[ext_resource path="res://res/death2.wav" type="AudioStream" id=6]
+[ext_resource path="res://res/death3.wav" type="AudioStream" id=7]
+[ext_resource path="res://npc/DeadPeasant.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/GameObject.cs" type="Script" id=9]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 21.6362
+height = 3.70821
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 17.8103, 5.21494 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 18.0398, 4.59373 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 18.292, 15.403 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1792, 19, 593, 681 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 640.876, -16.8724, 298.793, 764.911 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1266.35, 1612.55, 466.118, 713.12 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 775.91, 1622.48, 348, 683 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 24.8496, 9.98448, 248.54, 1781.21 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1024.01, 608.76, 598.398, 939.695 )
+
+[node name="Peasant" type="Node2D"]
+script = ExtResource( 3 )
+deadEnemy = ExtResource( 8 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="DeathSounds" type="Node" parent="Sounds"]
+
+[node name="Death1" type="AudioStreamPlayer2D" parent="Sounds/DeathSounds"]
+stream = ExtResource( 5 )
+volume_db = -12.791
+
+[node name="Death2" type="AudioStreamPlayer2D" parent="Sounds/DeathSounds"]
+stream = ExtResource( 6 )
+volume_db = -8.899
+
+[node name="Death3" type="AudioStreamPlayer2D" parent="Sounds/DeathSounds"]
+stream = ExtResource( 7 )
+volume_db = -11.679
+
+[node name="RidigBody" type="RigidBody2D" parent="."]
+position = Vector2( 0, -65 )
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RidigBody"]
+position = Vector2( -0.392892, -29.9764 )
+rotation = -0.06014
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RidigBody"]
+position = Vector2( -24.7072, 4.22549 )
+rotation = 2.06692
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="RidigBody"]
+position = Vector2( 22.4397, 3.69817 )
+rotation = 0.961677
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="RidigBody"]
+position = Vector2( 9.4079, 45.3107 )
+rotation = 1.46232
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="RidigBody"]
+position = Vector2( -11.6982, 45.2154 )
+rotation = 1.65667
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="RidigBody"]
+position = Vector2( -1.45942, 8.42951 )
+rotation = 1.60624
+shape = SubResource( 4 )
+
+[node name="Head" type="Node2D" parent="RidigBody"]
+position = Vector2( -0.787695, -29.6285 )
+rotation = -1.58175
+
+[node name="TextureRect" type="TextureRect" parent="RidigBody/Head"]
+margin_left = 23.2924
+margin_top = -19.1862
+margin_right = 63.2924
+margin_bottom = 20.8138
+rect_rotation = 91.0033
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightHand" type="Node2D" parent="RidigBody"]
+position = Vector2( 21.3254, 0.323288 )
+rotation = 0.961677
+
+[node name="TextureRect" type="TextureRect" parent="RidigBody/RightHand"]
+margin_left = -17.3751
+margin_top = -7.02215
+margin_right = -2.37514
+margin_bottom = 35.9778
+rect_rotation = 273.811
+rect_scale = Vector2( -0.950694, 1 )
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightLeg" type="Node2D" parent="RidigBody"]
+position = Vector2( 11.7884, 42.1258 )
+rotation = 1.51732
+scale = Vector2( 1.01435, 1.25412 )
+
+[node name="TextureRect" type="TextureRect" parent="RidigBody/RightLeg"]
+margin_left = -19.9507
+margin_top = 9.63522
+margin_right = -4.95067
+margin_bottom = 52.6352
+rect_rotation = 273.811
+rect_scale = Vector2( 1.41441, 1 )
+texture = SubResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftLeg" type="Node2D" parent="RidigBody"]
+position = Vector2( -11.7957, 39.7187 )
+rotation = 1.64326
+scale = Vector2( 1.11348, 1.12959 )
+
+[node name="TextureRect" type="TextureRect" parent="RidigBody/LeftLeg"]
+margin_left = -14.0102
+margin_top = 10.0364
+margin_right = -3.01022
+margin_bottom = 49.0364
+rect_rotation = 268.573
+rect_scale = Vector2( 1.41441, 1 )
+texture = SubResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pike" type="TextureRect" parent="RidigBody"]
+margin_left = -64.9202
+margin_top = -67.4828
+margin_right = -52.9202
+margin_bottom = 57.5172
+rect_rotation = -16.0521
+texture = SubResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftHand" type="Node2D" parent="RidigBody"]
+position = Vector2( -22.2566, -0.958122 )
+rotation = 2.06692
+
+[node name="TextureRect" type="TextureRect" parent="RidigBody/LeftHand"]
+margin_left = -15.5624
+margin_top = 6.11526
+margin_right = -0.562382
+margin_bottom = 49.1153
+rect_rotation = 273.958
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Body" type="Node2D" parent="RidigBody"]
+position = Vector2( -0.470009, -0.0832367 )
+rotation = 1.60624
+
+[node name="TextureRect" type="TextureRect" parent="RidigBody/Body"]
+margin_left = -15.5858
+margin_top = 20.7587
+margin_right = 24.4142
+margin_bottom = 69.7587
+rect_rotation = 268.229
+texture = SubResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

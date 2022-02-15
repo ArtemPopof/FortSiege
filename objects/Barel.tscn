@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://res/barrel.svg" type="Texture" id=1]
+[ext_resource path="res://objects/Barel.cs" type="Script" id=2]
+[ext_resource path="res://res/cannon_shot.wav" type="AudioStream" id=3]
+[ext_resource path="res://vfx/particles/explosions/Explosion.tscn" type="PackedScene" id=4]
+[ext_resource path="res://physics/ExplosiveSphere.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/GameObject.cs" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15.1508, 26.7383 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7.17812, 2.11173 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4.82691, 1.69631 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 6.817, 3.36217 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 3.18462, 3.59653 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 2.0073, 4.00754 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 2.11799, 4.20193 )
+
+[node name="RigidBody2D" type="RigidBody2D"]
+mass = 2.24
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 0 )
+shape = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -20.0
+margin_top = -32.0
+margin_right = 22.0
+margin_bottom = 27.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Explosion" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0.6701, 0 )
+emitting = false
+one_shot = true
+script = null
+
+[node name="Fragments" type="Node2D" parent="."]
+visible = false
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Fragments"]
+position = Vector2( 0, -19 )
+mass = 0.22
+script = ExtResource( 6 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Fragments/RigidBody2D"]
+position = Vector2( -18.8381, -13.6695 )
+scale = Vector2( 0.0745048, 0.089828 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 61.7837, 38.7598, 85.359, 17.4634, 82.6086, 34.5948, 460.959, 75.1632, 277.457, 250.325, 43.2377, 60.5277 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/RigidBody2D"]
+position = Vector2( 1.01674, -2.03348 )
+shape = SubResource( 2 )
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="Fragments"]
+position = Vector2( 0, 21 )
+mass = 0.17
+script = ExtResource( 6 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="Fragments/RigidBody2D2"]
+position = Vector2( -19.2829, -53.098 )
+scale = Vector2( 0.0745048, 0.089828 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 107.472, 624.29, 185.087, 562.037, 232.851, 520.299, 273.791, 525.958, 480.196, 650.464, 70.7967, 659.661 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/RigidBody2D2"]
+position = Vector2( 0, 0.44482 )
+shape = SubResource( 3 )
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="Fragments"]
+position = Vector2( 5, 5 )
+mass = 0.34
+script = ExtResource( 6 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="Fragments/RigidBody2D3"]
+position = Vector2( -24.41, -37.225 )
+scale = Vector2( 0.0745048, 0.089828 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 249.909, 349.103, 280.614, 306.657, 331.789, 291.801, 445.226, 377.399, 448.638, 636.316, 148.412, 387.303 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/RigidBody2D3"]
+position = Vector2( 0.826096, 0.381275 )
+rotation = -2.25834
+shape = SubResource( 4 )
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="Fragments"]
+position = Vector2( -7, -9 )
+mass = 0.18
+script = ExtResource( 6 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="Fragments/RigidBody2D4"]
+position = Vector2( -12.41, -23.225 )
+scale = Vector2( 0.0745048, 0.089828 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 46.0622, 129.802, 55.4443, 95.1381, 72.5026, 71.7932, 317.289, 283.312, 160.353, 371.74, 97.2371, 310.194 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/RigidBody2D4"]
+position = Vector2( 0, -1.14383 )
+shape = SubResource( 5 )
+
+[node name="RigidBody2D5" type="RigidBody2D" parent="Fragments"]
+position = Vector2( -9, 12 )
+mass = 0.13
+script = ExtResource( 6 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="Fragments/RigidBody2D5"]
+position = Vector2( -10.2829, -44.098 )
+scale = Vector2( 0.0745048, 0.089828 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 75.0613, 388.718, 81.8846, 325.05, 127.089, 389.426, 214.939, 493.417, 222.616, 525.251, 70.7967, 659.661 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/RigidBody2D5"]
+position = Vector2( 0, 0.635464 )
+shape = SubResource( 6 )
+
+[node name="RigidBody2D6" type="RigidBody2D" parent="Fragments"]
+position = Vector2( 8.93646, -11 )
+mass = 0.11
+script = ExtResource( 6 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="Fragments/RigidBody2D6"]
+position = Vector2( -28.2829, -21.098 )
+scale = Vector2( 0.0745048, 0.089828 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 277.202, 248.649, 344.582, 191.347, 422.198, 118.483, 460.959, 75.1632, 440.962, 363.958, 292.555, 256.43 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/RigidBody2D6"]
+position = Vector2( 0.699005, 0 )
+shape = SubResource( 7 )
+
+[node name="ExplosiveSphere" parent="." instance=ExtResource( 5 )]
+visible = false

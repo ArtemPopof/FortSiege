@@ -1,14 +1,17 @@
 using Godot;
 using Godot.Collections;
 using System.Collections.Generic;
+using System;
 
 public class StorageManager {
 
     public static Dictionary data;
     public static File file;
 
-    public static System.Collections.Generic.Dictionary<string, List<PropertyChangeListener>> propertyChangeListeners = 
-    new System.Collections.Generic.Dictionary<string, List<PropertyChangeListener>>(10);
+    public static System.Collections.Generic.Dictionary<string, object> gameProperties;
+
+    public static System.Collections.Generic.Dictionary<string, List<Action<string, object>>> propertyChangeListeners = 
+    new System.Collections.Generic.Dictionary<string, List<Action<string, object>>>(10);
 
     // true if some properties was loaded, false if properties are empty
     public static bool Init()
@@ -35,21 +38,31 @@ public class StorageManager {
 
         file.Close();
 
+        gameProperties = new System.Collections.Generic.Dictionary<string, object>();
+
         GD.Print("State restored, size: " + text.Length);
 
         return true;
     }
 
-    public static void SubscibeToPropertyChange(string key, PropertyChangeListener listener)
+    public static int SubscibeToPropertyChange(string key, Action<string, object> callback)
     {
         if (!propertyChangeListeners.ContainsKey(key))
         {
-            propertyChangeListeners.Add(key, new List<PropertyChangeListener>(5));
+            propertyChangeListeners.Add(key, new List<Action<string, object>>(5));
         }
 
         var list = propertyChangeListeners[key];
 
-        list.Add(listener);
+        list.Add(callback);
+
+        return list.Count - 1;
+    }
+
+    public static void UnsubscribeToPropertyChange(string key, int index)
+    {
+        var list = propertyChangeListeners[key];
+        list.RemoveAt(index);
     }
 
     public static void StoreValue(string key, object value)
@@ -74,7 +87,7 @@ public class StorageManager {
 
         foreach (var listener in list)
         {
-            listener.PropertyChanged(key, value);
+            listener.Invoke(key, value);
         }
     }
 

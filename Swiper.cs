@@ -52,6 +52,20 @@ public class Swiper : HBoxContainer
         EmitSignal("Swiped", currentIndex);
     }
 
+    public void SwipeTo(int index)
+    {
+        if (currentIndex == index) return;
+
+        EmitSignal("Swiped", index);
+        var currentRectX = RectPosition.x;
+        var diff = (currentIndex - index);
+
+        animatingTargetRectX = currentRectX + diff * slideWidth;
+        state = SwipeState.ANIMATING;
+
+        currentIndex = index;
+    }
+
     public override void _Input(InputEvent @event)
 	{                        
         if (!Visible) {

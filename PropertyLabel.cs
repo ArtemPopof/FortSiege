@@ -1,28 +1,26 @@
 using Godot;
 using System;
 
-public class PropertyLabel : Label, PropertyChangeListener
+public class PropertyLabel : Label
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+    private int propertyIndex;
 
-    // Called when the node enters the scene tree for the first time.
+    ~PropertyLabel()
+    {
+        StorageManager.UnsubscribeToPropertyChange(PropertyKeys.COIN_COUNT, propertyIndex);
+    }
+
     public override void _Ready()
     {
-        StorageManager.SubscibeToPropertyChange(PropertyKeys.COIN_COUNT, this);
+        propertyIndex = StorageManager.SubscibeToPropertyChange(PropertyKeys.COIN_COUNT, (key, value) => 
+        {
+                if (!IsInstanceValid(this)) {
+                    return;
+                }
+            
+                Text = value.ToString();
+        });
 
         Text = StorageManager.GetInt(PropertyKeys.COIN_COUNT).ToString();
     }
-
-    public void PropertyChanged(string key, object value)
-    {
-        Text = value.ToString();
-    }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

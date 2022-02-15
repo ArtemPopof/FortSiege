@@ -1,0 +1,249 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://res/map.png" type="Texture" id=1]
+[ext_resource path="res://res/stone.svg" type="Texture" id=2]
+[ext_resource path="res://res/catapult.svg" type="Texture" id=3]
+[ext_resource path="res://res/Cinzel/Cinzel-VariableFont_wght.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://res/catapult_neck.svg" type="Texture" id=5]
+[ext_resource path="res://res/cannon.png" type="Texture" id=6]
+[ext_resource path="res://PropertyBasedActivator.cs" type="Script" id=7]
+[ext_resource path="res://res/knight.svg" type="Texture" id=8]
+[ext_resource path="res://ui/GlobalMap.cs" type="Script" id=9]
+[ext_resource path="res://res/peasant_preview.svg" type="Texture" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+outline_size = 1
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0705882, 0.490196, 0, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 9
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 1054.42, 138.987, 1631.31, 2259.05 )
+
+[node name="LevelMap" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -84.6853
+margin_top = 25.082
+margin_right = 2708.32
+margin_bottom = 1540.08
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Levels" type="Node2D" parent="."]
+position = Vector2( 34, 142 )
+
+[node name="Level1" type="Node2D" parent="Levels"]
+position = Vector2( 273.478, 1003.6 )
+
+[node name="Label" type="Label" parent="Levels/Level1"]
+margin_left = 67.2226
+margin_top = -19.0586
+margin_right = 303.222
+margin_bottom = 73.9416
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 0 )
+text = "Level 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PassedMark4" type="Panel" parent="Levels/Level1"]
+margin_left = -38.0
+margin_top = -39.809
+margin_right = 42.0
+margin_bottom = 41.191
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Levels/Level1"]
+margin_left = -93.0
+margin_top = -230.0
+margin_right = 85.0
+margin_bottom = 15.0
+texture = SubResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level2" type="Node2D" parent="Levels"]
+position = Vector2( 508.842, 825.111 )
+
+[node name="Label2" type="Label" parent="Levels/Level2"]
+margin_left = -306.282
+margin_top = -222.147
+margin_right = -70.2821
+margin_bottom = -129.147
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 0.27451 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 0 )
+text = "Level 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PassedMark4" type="Panel" parent="Levels/Level2"]
+margin_left = -38.0
+margin_top = -39.809
+margin_right = 42.0
+margin_bottom = 41.191
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="Levels/Level2"]
+margin_left = -93.0
+margin_top = -230.0
+margin_right = 85.0
+margin_bottom = 15.0
+texture = SubResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level3" type="Node2D" parent="Levels"]
+position = Vector2( 729.947, 612.58 )
+
+[node name="Label3" type="Label" parent="Levels/Level3"]
+margin_left = 41.7699
+margin_top = -228.806
+margin_right = 277.769
+margin_bottom = -135.806
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 0 )
+text = "Level 3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PassedMark4" type="Panel" parent="Levels/Level3"]
+margin_left = -39.0
+margin_top = -36.809
+margin_right = 41.0
+margin_bottom = 44.191
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="Levels/Level3"]
+margin_left = -81.4149
+margin_top = -215.736
+margin_right = 63.5851
+margin_bottom = 29.2643
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level4" type="Node2D" parent="Levels"]
+position = Vector2( 981.044, 760.232 )
+
+[node name="Label4" type="Label" parent="Levels/Level4"]
+margin_left = 47.2155
+margin_top = -152.61
+margin_right = 283.216
+margin_bottom = -59.6106
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 0 )
+text = "Level 4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PassedMark4" type="Panel" parent="Levels/Level4"]
+margin_left = -38.0
+margin_top = -39.809
+margin_right = 42.0
+margin_bottom = 41.191
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="Levels/Level4"]
+margin_left = -81.1518
+margin_top = -227.149
+margin_right = 63.8482
+margin_bottom = 17.8511
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WeaponIcons" type="Node2D" parent="."]
+position = Vector2( 151, 1131 )
+script = ExtResource( 7 )
+property = "CurrentWeapon"
+
+[node name="Catapult" type="Node2D" parent="WeaponIcons"]
+position = Vector2( -6, 4 )
+
+[node name="Ball" type="TextureRect" parent="WeaponIcons/Catapult"]
+margin_left = -83.2228
+margin_top = -81.7336
+margin_right = -33.2228
+margin_bottom = -31.7336
+rect_scale = Vector2( 1.00332, 1 )
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Neck" type="TextureRect" parent="WeaponIcons/Catapult"]
+margin_left = -70.7803
+margin_top = -78.4631
+margin_right = 106.22
+margin_bottom = -36.4631
+rect_rotation = 30.4651
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Catapult" type="TextureRect" parent="WeaponIcons/Catapult"]
+margin_left = -108.789
+margin_top = -81.4631
+margin_right = 91.211
+margin_bottom = 66.5369
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cannon" type="Node2D" parent="WeaponIcons"]
+visible = false
+
+[node name="Cannon" type="TextureRect" parent="WeaponIcons/Cannon"]
+margin_left = -129.758
+margin_top = -50.8904
+margin_right = 132.242
+margin_bottom = 66.1096
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

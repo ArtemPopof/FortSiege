@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://res/wood_wall.png" type="Texture" id=1]
-[ext_resource path="res://enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://npc/Peasant.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefab.cs" type="Script" id=3]
 [ext_resource path="res://Level.cs" type="Script" id=4]
+[ext_resource path="res://objects/Barel.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10.2233, 40.1178 )
@@ -17,7 +18,7 @@ script = ExtResource( 4 )
 name = "Level 3"
 
 [node name="Wall" type="RigidBody2D" parent="."]
-position = Vector2( -190.879, -40.2808 )
+position = Vector2( -195.879, -39.2808 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -38,7 +39,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Wall2" type="RigidBody2D" parent="."]
-position = Vector2( -46.8787, -40.2808 )
+position = Vector2( -51.8787, -39.2808 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -59,7 +60,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="WallLongHorizontal2" type="RigidBody2D" parent="."]
-position = Vector2( -118.054, -90.4878 )
+position = Vector2( -123.054, -89.4878 )
 rotation = 1.57079
 script = ExtResource( 3 )
 __meta__ = {
@@ -84,7 +85,7 @@ scale = Vector2( 1, 2 )
 shape = SubResource( 1 )
 
 [node name="Wall3" type="RigidBody2D" parent="."]
-position = Vector2( -190.879, -140.281 )
+position = Vector2( -195.879, -139.281 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -105,7 +106,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Wall4" type="RigidBody2D" parent="."]
-position = Vector2( -46.8787, -140.572 )
+position = Vector2( -51.8787, -139.572 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -126,7 +127,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Wall5" type="RigidBody2D" parent="."]
-position = Vector2( -190.879, -241.281 )
+position = Vector2( -195.879, -240.281 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -147,7 +148,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Wall6" type="RigidBody2D" parent="."]
-position = Vector2( -46.8787, -241.281 )
+position = Vector2( -51.8787, -240.281 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -168,7 +169,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="WallLongHorizontal4" type="RigidBody2D" parent="."]
-position = Vector2( -118.054, -291.488 )
+position = Vector2( -123.054, -290.488 )
 rotation = 1.57079
 script = ExtResource( 3 )
 __meta__ = {
@@ -193,7 +194,7 @@ scale = Vector2( 1, 2 )
 shape = SubResource( 1 )
 
 [node name="Wall7" type="RigidBody2D" parent="."]
-position = Vector2( -190.879, -341.281 )
+position = Vector2( -195.879, -340.281 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -214,7 +215,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Wall8" type="RigidBody2D" parent="."]
-position = Vector2( -46.8787, -341.281 )
+position = Vector2( -51.8787, -340.281 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -235,7 +236,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="WallHorVeryLong" type="RigidBody2D" parent="."]
-position = Vector2( 0.915176, -391.117 )
+position = Vector2( -4.08482, -391.117 )
 rotation = 1.57079
 script = ExtResource( 3 )
 __meta__ = {
@@ -259,7 +260,7 @@ position = Vector2( 3.05176e-05, 4.29153e-06 )
 shape = SubResource( 2 )
 
 [node name="WallHorVeryLong2" type="RigidBody2D" parent="."]
-position = Vector2( -1.8524, -190.885 )
+position = Vector2( -4.8524, -190.885 )
 rotation = 1.57079
 script = ExtResource( 3 )
 __meta__ = {
@@ -390,7 +391,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="WallLongHorizontal7" type="RigidBody2D" parent="."]
-position = Vector2( -253.01, -67.0695 )
+position = Vector2( -258.01, -66.0695 )
 rotation = 0.614225
 script = ExtResource( 3 )
 __meta__ = {
@@ -503,7 +504,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Wall16" type="RigidBody2D" parent="."]
-position = Vector2( 186.122, -341.281 )
+position = Vector2( 186.546, -341.281 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -523,14 +524,14 @@ __meta__ = {
 visible = false
 shape = SubResource( 1 )
 
-[node name="Enemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 241.069, -74.4353 )
+[node name="RigidBody2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( -3.37036, -27.5979 )
 
-[node name="Enemy2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2.15478, -281.069 )
+[node name="Peasant" parent="." instance=ExtResource( 2 )]
+position = Vector2( -3.76309, -202.006 )
 
-[node name="Enemy3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 167.02, -480.684 )
+[node name="Peasant2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 230.265, 3.3374 )
 
-[node name="Enemy4" parent="." instance=ExtResource( 2 )]
-position = Vector2( -169.778, -483.402 )
+[node name="Peasant3" parent="." instance=ExtResource( 2 )]
+position = Vector2( -345.885, 5.08652 )

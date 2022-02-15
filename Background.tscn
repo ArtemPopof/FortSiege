@@ -21,7 +21,7 @@ __meta__ = {
 [node name="Clouds" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 4 )
 cloudCount = 15
-maxY = 325
+maxY = 850
 
 [node name="TerrainBack" type="TextureRect" parent="."]
 margin_top = 5.0
