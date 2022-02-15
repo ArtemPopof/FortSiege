@@ -12,7 +12,14 @@ public class PropertyLabel : Label
 
     public override void _Ready()
     {
-        propertyIndex = StorageManager.SubscibeToPropertyChange(PropertyKeys.COIN_COUNT, (key, value) => Text = value.ToString());
+        propertyIndex = StorageManager.SubscibeToPropertyChange(PropertyKeys.COIN_COUNT, (key, value) => 
+        {
+                if (!IsInstanceValid(this)) {
+                    return;
+                }
+            
+                Text = value.ToString();
+        });
 
         Text = StorageManager.GetInt(PropertyKeys.COIN_COUNT).ToString();
     }

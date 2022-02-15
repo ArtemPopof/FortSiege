@@ -8,6 +8,8 @@ public class StorageManager {
     public static Dictionary data;
     public static File file;
 
+    public static System.Collections.Generic.Dictionary<string, object> gameProperties;
+
     public static System.Collections.Generic.Dictionary<string, List<Action<string, object>>> propertyChangeListeners = 
     new System.Collections.Generic.Dictionary<string, List<Action<string, object>>>(10);
 
@@ -35,6 +37,8 @@ public class StorageManager {
         data = dataLocal;
 
         file.Close();
+
+        gameProperties = new System.Collections.Generic.Dictionary<string, object>();
 
         GD.Print("State restored, size: " + text.Length);
 

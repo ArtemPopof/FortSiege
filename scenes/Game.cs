@@ -115,7 +115,7 @@ public class Game : Node2D
         background.Init();
         coinCounter.SetCount(0);
 
-        trajectoryPainter.RectGlobalPosition = weapon.GetProjectileStartPosition();
+        trajectoryPainter.SetTrajectoryStart(weapon.GetProjectileStartPosition());
         trajectoryPainter.Visible = true;
         trajectoryPainter.SetGroundY(GetNode<StaticBody2D>("StaticBody2D").GlobalPosition.y);
 
@@ -187,7 +187,7 @@ public class Game : Node2D
 
         sceneObject.Position = instancePosition.Position;
 
-        AddChildBelowNode(weapon, sceneObject);
+        AddChildBelowNode(trajectoryPainter, sceneObject);
 
         if (currentLevelObject != null) {
             currentLevelObject.QueueFree();
@@ -330,6 +330,8 @@ public class Game : Node2D
          return;
      }
 
+     GD.Print("Moving prefabs: " + currentLevelObject.activePrefabs);
+
      if (timeSinceLastShot >= 3.5f)
      {
          var hasNoMovingPrefabs = currentLevelObject.activePrefabs == 0 && !isAnyMovingBalls(weapon.Balls);
@@ -347,7 +349,6 @@ public class Game : Node2D
      {
          if (ball.LinearVelocity.LengthSquared() > 5f)
          {
-             GD.Print("Ball velocity: " + ball.LinearVelocity.LengthSquared());
              return true;
          }
      }

@@ -38,6 +38,9 @@ public class Catapult : Weapon
 
         maxTouchX = GetNode<Position2D>("MaxX").GlobalPosition.x;
         maxTouchY = neck.GlobalPosition.y - 10;
+
+        SetForce(0.1f);
+        neckDegreesLoading = 80;
         //maxDegreesRotation = neck.GlobalRotation;
     }
 

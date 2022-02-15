@@ -4,6 +4,8 @@ using System;
 public class main : Node2D
 {
     public static MobileCamera camera; 
+    
+    private Node2D uiLayout;
 
     private Node2D currentScene;
     private int previousSceneIndex;
@@ -19,6 +21,7 @@ public class main : Node2D
         var startTicks = DateTime.Now.Ticks;
 
         StorageManager.Init();
+        //StorageManager.Clear();
         Data.Init();
 
         previousSceneIndex = -1;
@@ -43,6 +46,7 @@ public class main : Node2D
         ObjectManager.Init();
 
         camera = GetNode<MobileCamera>("MobileCamera");
+        uiLayout = GetNode<Node2D>("UILayout");
 
         var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
 
@@ -91,7 +95,7 @@ public class main : Node2D
             sceneNode = OpenGameScreen();
         }
 
-        AddChild(sceneNode);
+        AddChildBelowNode(uiLayout, sceneNode);
         sceneNode.GlobalPosition = new Vector2(0, 0);
         sceneNode.Visible = true;
         currentScene = sceneNode;
@@ -129,6 +133,11 @@ public class main : Node2D
         var scene = ResourceLoader.Load<PackedScene>("res://scenes/game.tscn");
 
         return scene.Instance<Node2D>();
+    }
+
+    private void StartGame()
+    {
+        ChangeScreen(Constants.MAIN_GAME_SCREEN);
     }
 
     private void StartGame(int levelIndex)

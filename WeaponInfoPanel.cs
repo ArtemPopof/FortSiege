@@ -19,7 +19,7 @@ public class WeaponInfoPanel : Panel
     public override void _Ready()
     {
         nameLabel = GetNode<Label>("VBoxContainer/WeaponName");
-        costLabel = GetNode<Label>("VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/MarginContainer2/HBoxContainer/MoneyCount");
+        costLabel = GetNode<Label>("VBoxContainer/MarginContainer/BuyPanel/VBoxContainer/HBoxContainer/MoneyCount");
         startButton = GetNode<Panel>("VBoxContainer/StartButtonContainer/StartButton");
     }
 

@@ -168,7 +168,6 @@ __meta__ = {
 }
 
 [node name="BuyButton" type="Panel" parent="HBoxContainer/AvailableWeapons/Cannon"]
-visible = false
 margin_left = -1.0
 margin_right = 251.0
 margin_bottom = 221.0

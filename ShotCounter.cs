@@ -28,17 +28,18 @@ public class ShotCounter : Node2D
             texture.Visible = false;
             texture.QueueFree();
         }
+        shotTextures.Clear();
 
         this.maxShots = weaponInfo.shotCount;
         this.shotsLeft = weaponInfo.shotCount;
 
         var referenceTexture = GetNode<TextureRect>("referenceShotTexture");
-        referenceTexture.Texture = weaponInfo.projectileTexture;
 
         for (int i = 0; i < maxShots; i++) {
             var newTexture = referenceTexture.Duplicate() as TextureRect;
             newTexture.RectPosition = new Vector2(i * (referenceTexture.RectSize.x + 20), 0);
             newTexture.Visible = true;
+            newTexture.Texture = weaponInfo.projectileTexture;
             AddChild(newTexture);
 
             shotTextures.Push(newTexture);

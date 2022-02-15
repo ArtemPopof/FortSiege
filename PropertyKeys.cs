@@ -5,4 +5,7 @@ public class PropertyKeys {
     public const string CURRENT_WEAPON = "CurrentWeapon";
 
     public const string CURRENT_LEVEL = "currentLevel";
+
+
+    public const string SCENE_ARG_1 = "SceneArg1";
 }

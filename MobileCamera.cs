@@ -18,8 +18,8 @@ public class MobileCamera : Node2D
     public delegate void ZoomChanged(Vector2 zoom);
 
     public bool Enabled { get; set; }
-    private Vector2 zoomStartPos;
-    private Vector2 dragStartPos;
+
+    private Vector2[] touches;
     private Vector2 cameraDragStartPos;
     private float zoomStartDistance;
 
@@ -36,6 +36,8 @@ public class MobileCamera : Node2D
 
         touchZoomSpeed = GetViewportRect().Size.x;
         touchZoomSpeed *= touchZoomSpeed * 10;
+
+        touches = new Vector2[2];
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -81,17 +83,18 @@ public class MobileCamera : Node2D
             {
                 if (state == CameraState.DRAG && touch.Index > 0)
                 {
-                    GD.Print("Touch second time");
+                    GD.Print("Touch second time: " + touch.Position);
+
                     state = CameraState.ZOOM;
-                    zoomStartPos = touch.Position;
-                    zoomStartDistance = zoomStartPos.DistanceSquaredTo(dragStartPos);
+                    touches[1] = touch.Position;
+                    zoomStartDistance = touches[1].DistanceSquaredTo(touches[0]);
 
                     return;
                 }
 
-                GD.Print("Start moving camera");
+                GD.Print("Start moving camera: " + touch.Position);
                 state = CameraState.DRAG;
-                dragStartPos = touch.Position;
+                touches[0] = touch.Position;
                 cameraDragStartPos = Position;
             }
             else
@@ -117,11 +120,9 @@ public class MobileCamera : Node2D
 
         if (state == CameraState.ZOOM)
         {
-            var newDistance = drag.Position.DistanceSquaredTo(dragStartPos);
-            var altDistance = drag.Position.DistanceSquaredTo(zoomStartPos);
-            var realNewDistance = Mathf.Max(newDistance, altDistance);
+            touches[drag.Index] = drag.Position;
 
-            var zoomDiff = (realNewDistance - zoomStartDistance) / touchZoomSpeed;
+            var zoomDiff = ((touches[1].DistanceSquaredTo(touches[0]) - zoomStartDistance) / zoomStartDistance) * zoomSpeed;
 
             camera.Zoom = new Vector2(camera.Zoom.x - zoomDiff, camera.Zoom.y - zoomDiff);
             if (camera.Zoom.x > 1f)
@@ -135,26 +136,30 @@ public class MobileCamera : Node2D
 
             EmitSignal("ZoomChanged", camera.Zoom);
 
-            GD.Print("Zoomed " + zoomDiff);
+            GD.Print("Zoomed " + camera.Zoom);
 
             // center camera between two touch points
-            Vector2 centeredPosition;
-            if (realNewDistance == newDistance)
-            {
-                centeredPosition = (dragStartPos - drag.Position) / 2;
-            }
-            else
-            {
-                centeredPosition = (zoomStartPos - drag.Position) / 2;
-            }
+            var centeredPosition = (touches[0] + touches[1]) / 2;
 
-            Position = GetPositionInBounds(centeredPosition);
+             //GD.Print("Central point: " + centeredPosition);
+
+            var cameraViewportWidth = camera.Zoom.x * GetViewportRect().Size.x;
+            var cameraViewportHeight = camera.Zoom.y * GetViewportRect().Size.y;
+            var cameraDiff = (centeredPosition - new Vector2(cameraViewportWidth / 2.0f, cameraViewportHeight / 2.0f) ) * new Vector2(zoomDiff, zoomDiff);
+
+            Position = GetPositionInBounds(Position + cameraDiff);
             EmitSignal("Moved", Position);
             return;
         }
 
-        var diff = (dragStartPos - drag.Position);
+        var diff = (touches[drag.Index] - drag.Position) * camera.Zoom;
+        //touches[drag.Index] = drag.Position;
+
+        GD.Print("Diff: " + diff);
+        GD.Print("touches[0]: " + touches[drag.Index]);
         var cameraPos = cameraDragStartPos + diff;
+
+        GD.Print(cameraPos);
 
         Position = GetPositionInBounds(cameraPos);
         EmitSignal("Moved", Position);

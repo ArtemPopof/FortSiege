@@ -59,9 +59,9 @@ position = Vector2( 117.67, -12 )
 scale = Vector2( 0.1, 0.1 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="CannonShaft"]
-position = Vector2( -55.8869, -18.4905 )
+position = Vector2( -74.3039, -36.2772 )
 rotation = -0.0536552
-scale = Vector2( 162.428, 31.9559 )
+scale = Vector2( 207.302, 69.3256 )
 normal = SubResource( 2 )
 
 [node name="StaticBody" type="StaticBody2D" parent="."]

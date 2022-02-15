@@ -25,15 +25,26 @@ public class MainMenuHeader : Panel
         buyMaskButton.Visible = !info.inPossesion;
     }
 
+    public void GoToShop(int index)
+    {
+        StorageManager.gameProperties.Add(PropertyKeys.SCENE_ARG_1, index);
+
+        GoToShop();
+    }
+
     public void GoToShop()
     {
         GD.Print("[MainMenuHeader] Go to weapon shop");
-
         EmitSignal("ChangeScreen", Constants.WEAPON_SHOP_SCREEN);
     }
 
     public void ChangeWeaponButtonPressed(int index)
     {
+        if (!Data.weapons[index].inPossesion) 
+        {
+            return;
+        }
+
         GD.Print("[MainMenuHeader] Changing current weapon to " + Data.weapons[index].name);
 
         EmitSignal("ChangeWeapon", index);
