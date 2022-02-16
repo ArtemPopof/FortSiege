@@ -11,6 +11,8 @@ public class main : Node2D
     private int previousSceneIndex;
     private int currentSceneIndex;
 
+    private long startLoadingTicks;
+
     ~main() {
         GD.Print("Enter destructor, clearing up...");
         StorageManager.Save();
@@ -68,7 +70,7 @@ public class main : Node2D
 
     public void ChangeScreen(int screen)
     {
-        var startTicks = DateTime.Now.Ticks;
+        startLoadingTicks = DateTime.Now.Ticks;
 
         previousSceneIndex = currentSceneIndex;
         currentSceneIndex = screen;
@@ -83,7 +85,7 @@ public class main : Node2D
         }
 
         Node2D sceneNode = null;
-
+        bool async = false;
         if (screen == Constants.WEAPON_SHOP_SCREEN)
         {
             sceneNode = OpenWeaponsShop();
@@ -92,17 +94,27 @@ public class main : Node2D
            sceneNode = OpenGlobalMapScreen();
         } else if (screen == Constants.MAIN_GAME_SCREEN)
         {
+            var loadingController = StartLoading();
+            loadingController.Connect("Complete", this, "AsyncSceneLoadingComplete");
+            async = true;
             sceneNode = OpenGameScreen();
+            sceneNode.Connect("ProgressChanged", loadingController, "SetProgress");
         }
+
+        currentScene = sceneNode;
 
         AddChildBelowNode(uiLayout, sceneNode);
         sceneNode.GlobalPosition = new Vector2(0, 0);
         sceneNode.Visible = true;
-        currentScene = sceneNode;
 
-        var time = (DateTime.Now.Ticks - startTicks) / (TimeSpan.TicksPerMillisecond);
+        if (async)
+        {
+            return;
+        }
 
-        GD.Print($"\n[Main] New scene {screen} ready in {time} ms \n\n\n");
+        var time = (DateTime.Now.Ticks - startLoadingTicks) / (TimeSpan.TicksPerMillisecond);
+
+        GD.Print($"\n[Main] New scene {currentScene.Name} ready in {time} ms \n\n\n");
     }
 
     private Node2D OpenWeaponsShop()
@@ -126,6 +138,22 @@ public class main : Node2D
         mainMenu.Connect("StartGame", this, "StartGame");
 
         return scene;
+    }
+
+    private LoadingScreen StartLoading()
+    {
+        var scene = ResourceLoader.Load<PackedScene>("res://scenes/LoadingScreen.tscn").Instance<LoadingScreen>();
+
+        AddChild(scene);
+
+        return scene;
+    }
+
+    private void AsyncSceneLoadingComplete()
+    {
+        var time = (DateTime.Now.Ticks - startLoadingTicks) / (TimeSpan.TicksPerMillisecond);
+
+        GD.Print($"\n[Main] New scene {currentScene.Name} ready in {time} ms \n\n\n");
     }
 
     private Node2D OpenGameScreen()

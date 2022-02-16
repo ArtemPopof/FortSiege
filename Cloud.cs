@@ -12,6 +12,8 @@ public class Cloud : TextureRect
     private float opacity;
     private float distance;
 
+    public float BasicAlpha = 0;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -28,7 +30,7 @@ public class Cloud : TextureRect
 
         scale = (GD.Randf() * MAX_SCALE) * (distance * 2);
         if (scale > MAX_SCALE) scale = MAX_SCALE;
-        opacity = distance;
+        opacity = BasicAlpha + distance;
 
         Expand = true;
         RectSize = new Vector2(RectSize.x * 0.1f, RectScale.y * 0.1f);
