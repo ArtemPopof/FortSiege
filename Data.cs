@@ -25,6 +25,7 @@ public class Data
         var possesionArray = Util.ToPossesionArray(possesion, weapons.Capacity);
 
         var catapult = new WeaponInfo();
+        catapult.index = 0;
         catapult.cost = 0;
         catapult.name = "Catapult";
         catapult.controlTrajectory = false;
@@ -32,8 +33,10 @@ public class Data
         catapult.shotCount = 4;
         catapult.projectileTexture = ResourceLoader.Load("res://textures/CatapultProjectile.svg") as Texture;
         catapult.projectileWeight = 7;
+        catapult.power = 1;
 
         var cannon = new WeaponInfo();
+        cannon.index = 1;
         cannon.cost = 50;
         cannon.name = "Cannon";
         cannon.shotCount = 3;
@@ -41,6 +44,7 @@ public class Data
         cannon.inPossesion = possesionArray[WEAPON_CANNON_ID];
         cannon.projectileTexture = ResourceLoader.Load("res://textures/CannonProjectile.png") as Texture;
         cannon.projectileWeight = 2;
+        cannon.power = 5;
 
         weapons.Add(catapult);
         weapons.Add(cannon);

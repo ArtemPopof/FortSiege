@@ -11,7 +11,7 @@
 [ext_resource path="res://res/star coin shine/star coin 3.png" type="Texture" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.309804, 0.290196, 0.290196, 1 )
+bg_color = Color( 0.309804, 0.290196, 0.290196, 0.784314 )
 
 [sub_resource type="AtlasTexture" id=2]
 
@@ -53,16 +53,25 @@ __meta__ = {
 }
 
 [node name="BackButton" type="HBoxContainer" parent="HBoxContainer"]
-margin_right = 500.0
+margin_right = 234.0
 margin_bottom = 130.0
 custom_constants/separation = 22
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/BackButton"]
 position = Vector2( -29.9251, -3.69445 )
-scale = Vector2( 605.276, 152.988 )
+scale = Vector2( 605.276, 158.694 )
 normal = SubResource( 2 )
 
-[node name="ArrowLeft" type="Label" parent="HBoxContainer/BackButton"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/BackButton"]
+margin_right = 59.0
+margin_bottom = 130.0
+custom_constants/margin_top = -3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArrowLeft" type="Label" parent="HBoxContainer/BackButton/MarginContainer"]
+margin_top = -3.0
 margin_right = 59.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 55, 0 )
@@ -79,24 +88,26 @@ __meta__ = {
 [node name="Label" type="Label" parent="HBoxContainer/BackButton"]
 margin_left = 81.0
 margin_top = 27.0
-margin_right = 500.0
+margin_right = 234.0
 margin_bottom = 103.0
 custom_fonts/font = SubResource( 3 )
-text = "Choose Level"
+text = "back"
+align = 1
+valign = 1
 
 [node name="Spacer" type="Panel" parent="HBoxContainer"]
-margin_left = 504.0
-margin_right = 1504.0
+margin_left = 238.0
+margin_right = 1508.0
 margin_bottom = 130.0
-rect_min_size = Vector2( 1000, 0 )
+rect_min_size = Vector2( 1270, 0 )
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
-margin_left = 1508.0
-margin_right = 2281.0
+margin_left = 1512.0
+margin_right = 2285.0
 margin_bottom = 130.0
 grow_horizontal = 0
 rect_min_size = Vector2( 773, 0 )
@@ -123,9 +134,9 @@ custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="HBoxContainer/HBoxContainer/MarginContainer"]
-position = Vector2( 56.1484, 64.8919 )
+position = Vector2( 51.9946, 66.0456 )
 scale = Vector2( 0.247794, 0.247794 )
 frames = SubResource( 5 )
 animation = "Shine"
-frame = 3
+frame = 5
 playing = true

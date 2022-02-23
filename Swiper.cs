@@ -21,7 +21,7 @@ public class Swiper : HBoxContainer
 
     private float minXToSwipe = 200f;
 
-    private int currentIndex;
+    public int CurrentIndex {private set; get;}
 
     private SwipeState state;
 
@@ -39,7 +39,7 @@ public class Swiper : HBoxContainer
     public override void _Ready()
     {
         state = SwipeState.IDLE;
-        currentIndex = 0;
+        CurrentIndex = 0;
         slideWidth = (this.RectSize.x * this.RectScale.x) / (itemCount);
         minXToSwipe = (this.RectSize.x * this.RectScale.x) / (itemCount) / 6;
         scrollEndingSpeed = (this.RectSize.x * this.RectScale.x) / (itemCount) * 2;
@@ -49,21 +49,21 @@ public class Swiper : HBoxContainer
         GD.Print("Swipe speed: " + scrollEndingSpeed);
         GD.Print("Slide width: " + slideWidth);
 
-        EmitSignal("Swiped", currentIndex);
+        EmitSignal("Swiped", CurrentIndex);
     }
 
     public void SwipeTo(int index)
     {
-        if (currentIndex == index) return;
+        if (CurrentIndex == index) return;
 
         EmitSignal("Swiped", index);
         var currentRectX = RectPosition.x;
-        var diff = (currentIndex - index);
+        var diff = (CurrentIndex - index);
 
         animatingTargetRectX = currentRectX + diff * slideWidth;
         state = SwipeState.ANIMATING;
 
-        currentIndex = index;
+        CurrentIndex = index;
     }
 
     public override void _Input(InputEvent @event)
@@ -124,7 +124,7 @@ public class Swiper : HBoxContainer
         var diff = RectPosition.x - swiperStartPoint;
         animatingDirection = diff > 0 ? 1 : -1;
 
-        var cantSlide = (currentIndex - animatingDirection) < 0 || (currentIndex - animatingDirection) > itemCount - 1;
+        var cantSlide = (CurrentIndex - animatingDirection) < 0 || (CurrentIndex - animatingDirection) > itemCount - 1;
 
         if (edgeLeft || Mathf.Abs(diff) < minXToSwipe || cantSlide)
         {
@@ -135,8 +135,8 @@ public class Swiper : HBoxContainer
         }
 
         GD.Print("Swipe!");
-        currentIndex -= animatingDirection;
-        EmitSignal("Swiped", currentIndex);
+        CurrentIndex -= animatingDirection;
+        EmitSignal("Swiped", CurrentIndex);
         animatingTargetRectX = swiperStartPoint + animatingDirection * slideWidth;
     }
 

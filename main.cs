@@ -120,11 +120,11 @@ public class main : Node2D
     private Node2D OpenWeaponsShop()
     {
 
-        var scene = ResourceLoader.Load<PackedScene>("res://WeaponShop.tscn").Instance<WeaponShop>();
-        var shopHeader = scene.GetNode<Header>("VBoxContainer/Header");  
+        var scene = ResourceLoader.Load<PackedScene>("res://scenes/WeaponWorkshop.tscn").Instance<WeaponWorkshop>();
+        var shopHeader = scene.GetNode<Header>("Header");  
 
         shopHeader.Connect("BackActionFired", this, "GoToPreviousScreen");
-        scene.Connect("ScreenDone", this, "StartGame");
+        //scene.Connect("ScreenDone", this, "StartGame");
 
         return scene;
     }
