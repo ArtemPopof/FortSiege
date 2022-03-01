@@ -1,5 +1,6 @@
 using Godot;
 
+using System;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
@@ -7,6 +8,8 @@ public abstract class Dialog : Node2D
 {
     private Dictionary<int, Label> labelsWithPlaceholder;
     public Vector2 size;
+
+    private Action<bool> resultCallback;
 
     public bool Show(params object[] args)
     {
@@ -18,6 +21,24 @@ public abstract class Dialog : Node2D
         Visible = true;
 
         return true;
+    }
+
+    public void ShowForResult(Action<bool> callback, params object[] args)
+    {
+        Show(args);
+
+        resultCallback = callback;
+    }
+
+    public void FinishWithResult(bool result)
+    {
+        Close();
+
+        if (resultCallback != null)
+        {
+            resultCallback.Invoke(result);
+            resultCallback = null;
+        }
     }
 
     public void Close()

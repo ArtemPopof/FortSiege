@@ -43,7 +43,6 @@ public class main : Node2D
 
         // erase all cache
         //StorageManager.Clear();
-
         UIManager.Init();
         ObjectManager.Init();
 

@@ -9,5 +9,15 @@ public class WeaponInfo {
     public bool inPossesion;
     public bool controlTrajectory;
     public Texture projectileTexture;
-    public float power;
+    public int power;
+
+    public int maxPower;
+    public int maxShotCount;
+    public float maxProjectileWeight;
+
+
+    public int GetWeaponUpgradeCost(float valueOfCurrentParam)
+    {
+        return (int) ((cost / 5) + (valueOfCurrentParam * 5));
+    }
 }

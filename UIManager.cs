@@ -2,8 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-
-
 public class UIManager : Node2D
 {
     private class MaybeLoadedDialog {
@@ -29,6 +27,7 @@ public class UIManager : Node2D
     }
 
     public const int NOT_ENOUGH_MONEY_TO_BUY_DIALOG = 0;
+    public const int YES_NO_DIALOG = 1;
 
     public static UIManager instance;
 
@@ -79,9 +78,7 @@ public class UIManager : Node2D
         if (x == -1 || y == -1)
         {
             // center the dialog
-            var screenX = (GetViewportRect().Size.x - dialog.size.x) / 2;
-            var screenY = (GetViewportRect().Size.y - dialog.size.y) / 2;
-            dialog.GlobalPosition = new Vector2(screenX, screenY);
+            CenterDialog(dialog);
         } else {
             dialog.GlobalPosition = new Vector2(x, y);
         }
@@ -91,9 +88,18 @@ public class UIManager : Node2D
         return true;
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    public static void ShowDialogForResult(int dialogId, Action<bool> callback, params object[] args)
+    {
+        var dialog = instance.dialogScenes[dialogId].GetDialogOrInitFirst(instance);
+        GD.Print("[UIManager] Show dialog for result " + dialog.Name);
+
+        dialog.ShowForResult(callback, args);
+    }
+
+    private void CenterDialog(Dialog dialog)
+    {
+        var screenX = (GetViewportRect().Size.x - dialog.size.x) / 2;
+        var screenY = (GetViewportRect().Size.y - dialog.size.y) / 2;
+        dialog.GlobalPosition = new Vector2(screenX, screenY);
+    }
 }
