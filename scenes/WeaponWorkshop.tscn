@@ -1,0 +1,643 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://res/Full-Background.png" type="Texture" id=1]
+[ext_resource path="res://Header.tscn" type="PackedScene" id=2]
+[ext_resource path="res://res/catapult.svg" type="Texture" id=4]
+[ext_resource path="res://widgets/HorizontalLevel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ShotCounter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://res/Cinzel/Cinzel-VariableFont_wght.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://SlideCounter.cs" type="Script" id=8]
+[ext_resource path="res://res/catapult_neck.svg" type="Texture" id=9]
+[ext_resource path="res://res/trajectory.png" type="Texture" id=10]
+[ext_resource path="res://res/Cinzel/static/Cinzel-Medium.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://res/star coin shine/star coin 1.png" type="Texture" id=12]
+[ext_resource path="res://res/star coin shine/star coin 4.png" type="Texture" id=13]
+[ext_resource path="res://res/star coin shine/star coin 2.png" type="Texture" id=14]
+[ext_resource path="res://res/star coin shine/star coin 3.png" type="Texture" id=15]
+[ext_resource path="res://res/star coin shine/star coin 5.png" type="Texture" id=16]
+[ext_resource path="res://res/star coin shine/star coin 6.png" type="Texture" id=17]
+[ext_resource path="res://scenes/WeaponWorkshop.cs" type="Script" id=18]
+[ext_resource path="res://Swiper.cs" type="Script" id=19]
+[ext_resource path="res://res/Inter/static/Inter-Bold.ttf" type="DynamicFontData" id=20]
+[ext_resource path="res://res/cannon.png" type="Texture" id=21]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 0.568627 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color( 0, 0, 0, 0.0941176 )
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.772549 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 20 )
+
+[sub_resource type="AtlasTexture" id=5]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 70
+outline_size = 3
+outline_color = Color( 0, 0, 0, 0.192157 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="DynamicFont" id=9]
+size = 59
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 56
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0, 0, 0, 0.760784 )
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="AtlasTexture" id=12]
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "Shine",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=14]
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="AtlasTexture" id=16]
+
+[sub_resource type="DynamicFont" id=17]
+size = 34
+font_data = ExtResource( 11 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0, 0, 0, 0.611765 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="WeaponWorkshop" type="Node2D"]
+script = ExtResource( 18 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -6.05945
+margin_top = -2.86536
+margin_right = 2408.95
+margin_bottom = 1365.13
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" parent="." instance=ExtResource( 2 )]
+margin_left = -0.955078
+margin_right = 2414.04
+
+[node name="WeaponSwiper" type="HBoxContainer" parent="."]
+margin_right = 2406.0
+margin_bottom = 1364.0
+alignment = 1
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+itemCount = 2
+
+[node name="Catapult" type="Panel" parent="WeaponSwiper"]
+margin_right = 2420.0
+margin_bottom = 1364.0
+rect_min_size = Vector2( 2420, 0 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponSwiper/Catapult"]
+margin_left = 1230.0
+margin_top = 573.0
+margin_right = 1783.0
+margin_bottom = 760.0
+rect_rotation = 56.589
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="WeaponSwiper/Catapult"]
+anchor_left = 3.13247e-05
+anchor_top = -0.00162047
+anchor_right = 3.13247e-05
+anchor_bottom = -0.00162047
+margin_left = 885.03
+margin_top = 612.793
+margin_right = 1781.03
+margin_bottom = 1231.8
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cannon" type="Panel" parent="WeaponSwiper"]
+margin_left = 2424.0
+margin_right = 4844.0
+margin_bottom = 1364.0
+rect_min_size = Vector2( 2420, 0 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="WeaponSwiper/Cannon"]
+margin_left = 885.0
+margin_top = 743.0
+margin_right = 1849.0
+margin_bottom = 1197.0
+texture = ExtResource( 21 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ModificationPanel" type="Panel" parent="."]
+margin_left = 81.0
+margin_top = 251.0
+margin_right = 869.0
+margin_bottom = 1128.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpgradePanel" type="Panel" parent="ModificationPanel"]
+margin_left = 552.0
+margin_top = 214.0
+margin_right = 752.0
+margin_bottom = 300.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ModificationPanel/UpgradePanel"]
+margin_left = -9.0
+margin_right = 220.0
+margin_bottom = 85.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="ModificationPanel/UpgradePanel/HBoxContainer"]
+margin_left = 63.0
+margin_top = 18.0
+margin_right = 117.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "50"
+
+[node name="MarginContainer" type="MarginContainer" parent="ModificationPanel/UpgradePanel/HBoxContainer"]
+margin_left = 121.0
+margin_right = 166.0
+margin_bottom = 85.0
+custom_constants/margin_top = 20
+custom_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="ModificationPanel/UpgradePanel/HBoxContainer/MarginContainer"]
+margin_top = 20.0
+margin_right = 45.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 45, 0 )
+texture = ExtResource( 14 )
+expand = true
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="ModificationPanel/UpgradePanel"]
+position = Vector2( -13.0587, -18.9946 )
+scale = Vector2( 225.373, 118.529 )
+normal = SubResource( 5 )
+
+[node name="UpgradePanel2" type="Panel" parent="ModificationPanel"]
+margin_left = 552.0
+margin_top = 334.0
+margin_right = 752.0
+margin_bottom = 420.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ModificationPanel/UpgradePanel2"]
+margin_left = -9.0
+margin_right = 220.0
+margin_bottom = 85.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="ModificationPanel/UpgradePanel2/HBoxContainer"]
+margin_left = 63.0
+margin_top = 18.0
+margin_right = 117.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "50"
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="ModificationPanel/UpgradePanel2/HBoxContainer"]
+position = Vector2( -4.05872, -14.9946 )
+scale = Vector2( 225.373, 118.529 )
+normal = SubResource( 5 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ModificationPanel/UpgradePanel2/HBoxContainer"]
+margin_left = 121.0
+margin_right = 166.0
+margin_bottom = 85.0
+custom_constants/margin_top = 20
+custom_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="ModificationPanel/UpgradePanel2/HBoxContainer/MarginContainer"]
+margin_top = 20.0
+margin_right = 45.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 45, 0 )
+texture = ExtResource( 14 )
+expand = true
+
+[node name="UpgradePanel3" type="Panel" parent="ModificationPanel"]
+margin_left = 552.0
+margin_top = 456.0
+margin_right = 752.0
+margin_bottom = 542.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton3" type="TouchScreenButton" parent="ModificationPanel/UpgradePanel3"]
+position = Vector2( -13.0587, -13.9946 )
+scale = Vector2( 225.373, 118.529 )
+normal = SubResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ModificationPanel/UpgradePanel3"]
+margin_left = -9.0
+margin_right = 220.0
+margin_bottom = 85.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="ModificationPanel/UpgradePanel3/HBoxContainer"]
+margin_left = 63.0
+margin_top = 18.0
+margin_right = 117.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "50"
+
+[node name="MarginContainer" type="MarginContainer" parent="ModificationPanel/UpgradePanel3/HBoxContainer"]
+margin_left = 121.0
+margin_right = 166.0
+margin_bottom = 85.0
+custom_constants/margin_top = 20
+custom_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="ModificationPanel/UpgradePanel3/HBoxContainer/MarginContainer"]
+margin_top = 20.0
+margin_right = 45.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 45, 0 )
+texture = ExtResource( 14 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ModificationPanel"]
+anchor_left = -0.00152141
+anchor_top = 0.00126009
+anchor_right = -0.00152139
+anchor_bottom = 0.00126009
+margin_left = -0.801129
+margin_top = 0.894867
+margin_right = 791.199
+margin_bottom = 881.895
+custom_constants/separation = 42
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="ModificationPanel/VBoxContainer"]
+margin_right = 792.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="WeaponName" type="Label" parent="ModificationPanel/VBoxContainer"]
+margin_top = 42.0
+margin_right = 792.0
+margin_bottom = 138.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Weapon name"
+align = 1
+
+[node name="Panel2" type="Panel" parent="ModificationPanel/VBoxContainer"]
+margin_top = 180.0
+margin_right = 792.0
+margin_bottom = 180.0
+custom_styles/panel = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShotCount" type="HBoxContainer" parent="ModificationPanel/VBoxContainer"]
+margin_top = 222.0
+margin_right = 792.0
+margin_bottom = 302.0
+
+[node name="Panel" type="Panel" parent="ModificationPanel/VBoxContainer/ShotCount"]
+margin_right = 20.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 20, 0 )
+custom_styles/panel = SubResource( 8 )
+
+[node name="Label" type="Label" parent="ModificationPanel/VBoxContainer/ShotCount"]
+margin_left = 24.0
+margin_right = 203.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Shots"
+
+[node name="ShotCounter" parent="ModificationPanel/VBoxContainer/ShotCount" instance=ExtResource( 6 )]
+position = Vector2( 275.671, 1.28436 )
+
+[node name="BallWeight" type="HBoxContainer" parent="ModificationPanel/VBoxContainer"]
+margin_top = 344.0
+margin_right = 792.0
+margin_bottom = 424.0
+
+[node name="Panel" type="Panel" parent="ModificationPanel/VBoxContainer/BallWeight"]
+margin_right = 20.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 20, 50 )
+custom_styles/panel = SubResource( 8 )
+
+[node name="Label" type="Label" parent="ModificationPanel/VBoxContainer/BallWeight"]
+margin_left = 24.0
+margin_right = 256.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Weight"
+
+[node name="HorizontalLevel" parent="ModificationPanel/VBoxContainer/BallWeight" instance=ExtResource( 5 )]
+position = Vector2( 290.302, -10.1885 )
+scale = Vector2( 1.5, 1 )
+
+[node name="PowerLevel" type="HBoxContainer" parent="ModificationPanel/VBoxContainer"]
+margin_top = 466.0
+margin_right = 792.0
+margin_bottom = 546.0
+
+[node name="Panel" type="Panel" parent="ModificationPanel/VBoxContainer/PowerLevel"]
+margin_right = 20.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 20, 0 )
+custom_styles/panel = SubResource( 8 )
+
+[node name="Label" type="Label" parent="ModificationPanel/VBoxContainer/PowerLevel"]
+margin_left = 24.0
+margin_right = 226.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Power"
+
+[node name="HorizontalLevel2" parent="ModificationPanel/VBoxContainer/PowerLevel" instance=ExtResource( 5 )]
+position = Vector2( 290.3, -11.189 )
+scale = Vector2( 1.5, 1 )
+
+[node name="Rating" type="HBoxContainer" parent="ModificationPanel/VBoxContainer"]
+margin_top = 588.0
+margin_right = 792.0
+margin_bottom = 664.0
+rect_pivot_offset = Vector2( -405.9, -340.706 )
+alignment = 1
+
+[node name="Label" type="Label" parent="ModificationPanel/VBoxContainer/Rating"]
+margin_left = 242.0
+margin_right = 549.0
+margin_bottom = 76.0
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Rating: 5.0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ModificationPanel/VBoxContainer"]
+margin_top = 706.0
+margin_right = 792.0
+margin_bottom = 706.0
+rect_pivot_offset = Vector2( -405.9, -340.706 )
+alignment = 1
+
+[node name="BuyPanel" type="Panel" parent="ModificationPanel"]
+margin_top = 677.0
+margin_right = 788.0
+margin_bottom = 877.0
+rect_min_size = Vector2( 0, 200 )
+custom_styles/panel = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BeforeBuy" type="HBoxContainer" parent="ModificationPanel/BuyPanel"]
+margin_right = 787.0
+margin_bottom = 203.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="ModificationPanel/BuyPanel/BeforeBuy"]
+scale = Vector2( 792.728, 206.553 )
+normal = SubResource( 12 )
+
+[node name="Label2" type="Label" parent="ModificationPanel/BuyPanel/BeforeBuy"]
+margin_left = 329.0
+margin_top = 77.0
+margin_right = 383.0
+margin_bottom = 126.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "50"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ModificationPanel/BuyPanel/BeforeBuy"]
+position = Vector2( 432.654, 99.9102 )
+scale = Vector2( 0.199878, 0.199878 )
+frames = SubResource( 13 )
+animation = "Shine"
+frame = 2
+playing = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ModificationPanel/BuyPanel/BeforeBuy"]
+margin_left = 387.0
+margin_right = 457.0
+margin_bottom = 203.0
+rect_min_size = Vector2( 70, 0 )
+
+[node name="AfterBuy" type="HBoxContainer" parent="ModificationPanel/BuyPanel"]
+visible = false
+margin_right = 701.0
+margin_bottom = 203.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="ModificationPanel/BuyPanel/AfterBuy"]
+scale = Vector2( 708.281, 213.184 )
+normal = SubResource( 14 )
+
+[node name="Label2" type="Label" parent="ModificationPanel/BuyPanel/AfterBuy"]
+margin_left = 273.0
+margin_top = 70.0
+margin_right = 428.0
+margin_bottom = 132.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Select"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 1287.0
+margin_right = 2391.0
+margin_bottom = 1287.0
+color = Color( 0.25098, 0.0392157, 0.0392157, 0.580392 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+itemCount = 2
+
+[node name="Extension1" type="Panel" parent="."]
+margin_left = 948.0
+margin_top = 197.0
+margin_right = 1355.0
+margin_bottom = 529.0
+custom_styles/panel = SubResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Extension1"]
+scale = Vector2( 407.009, 325.095 )
+normal = SubResource( 16 )
+
+[node name="Extension" type="VBoxContainer" parent="Extension1"]
+margin_left = 13.0
+margin_top = 5.0
+margin_right = 386.0
+margin_bottom = 306.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Extension1/Extension"]
+margin_right = 373.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 17 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Shot trajectory"
+
+[node name="Panel" type="Panel" parent="Extension1/Extension"]
+margin_top = 51.0
+margin_right = 373.0
+margin_bottom = 301.0
+rect_min_size = Vector2( 0, 250 )
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Extension1/Extension/Panel"]
+margin_left = 9.0
+margin_top = 2.0
+margin_right = 359.0
+margin_bottom = 250.0
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyPanel" type="Panel" parent="Extension1/Extension/Panel"]
+margin_top = -1.0
+margin_right = 373.0
+margin_bottom = 249.0
+rect_min_size = Vector2( 0, 250 )
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Extension1/Extension/Panel/BuyPanel"]
+margin_top = -7.0
+margin_right = 373.0
+margin_bottom = 252.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Extension1/Extension/Panel/BuyPanel/HBoxContainer"]
+margin_left = 122.0
+margin_top = 105.0
+margin_right = 176.0
+margin_bottom = 154.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "50"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Extension1/Extension/Panel/BuyPanel/HBoxContainer"]
+position = Vector2( 223.293, 127.557 )
+scale = Vector2( 0.199878, 0.199878 )
+frames = SubResource( 13 )
+animation = "Shine"
+frame = 4
+playing = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Extension1/Extension/Panel/BuyPanel/HBoxContainer"]
+margin_left = 180.0
+margin_right = 250.0
+margin_bottom = 259.0
+rect_min_size = Vector2( 70, 0 )
+
+[connection signal="pressed" from="ModificationPanel/UpgradePanel/TouchScreenButton" to="." method="UpgradeShotCount"]
+[connection signal="pressed" from="ModificationPanel/UpgradePanel2/HBoxContainer/TouchScreenButton2" to="." method="UpgradeWeight"]
+[connection signal="pressed" from="ModificationPanel/UpgradePanel3/TouchScreenButton3" to="." method="UpgradePower"]
+[connection signal="pressed" from="ModificationPanel/BuyPanel/BeforeBuy/TouchScreenButton" to="." method="BuyButtonPressed"]
+[connection signal="pressed" from="ModificationPanel/BuyPanel/AfterBuy/TouchScreenButton" to="." method="SelectCurrentWeapon"]
+[connection signal="pressed" from="Extension1/TouchScreenButton" to="." method="OnExtentionBuyClicked" binds= [ 0 ]]

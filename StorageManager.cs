@@ -13,11 +13,18 @@ public class StorageManager {
     public static System.Collections.Generic.Dictionary<string, List<Action<string, object>>> propertyChangeListeners = 
     new System.Collections.Generic.Dictionary<string, List<Action<string, object>>>(10);
 
+    public static bool IsInitialized()
+    {
+        return gameProperties != null;
+    }
+
     // true if some properties was loaded, false if properties are empty
     public static bool Init()
     {        
         // var directory = new Directory();
         // directory.Remove("user://data.txt");
+
+        gameProperties = new System.Collections.Generic.Dictionary<string, object>();
 
         GD.Print("Reading saved state from disk...");
 

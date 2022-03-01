@@ -10,6 +10,8 @@ public class Clouds : Node2D
     public int cloudCount = 10;
     [Export]
     public int maxY = 200;
+    [Export]
+    public float MinAlpha = 0;
 
     private List<Cloud> clouds;
 
@@ -39,6 +41,7 @@ public class Clouds : Node2D
         for (int i = 0; i < count; i++)
         {
             var cloud = new Cloud();
+            cloud.BasicAlpha = MinAlpha;
             cloud.Texture = cloudTextures[(int) (GD.RandRange(0, cloudTextures.Count - 1))];
             cloud.RectGlobalPosition = new Vector2(GetViewportRect().Size.x * GD.Randf(), maxY * GD.Randf());
             cloud.Visible = true;

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading;
 using System.Collections.Generic;
 
 public enum GameState
@@ -20,6 +21,8 @@ public class Game : Node2D
 {
     [Signal]
     public delegate void LevelChanged(Level level);
+    [Signal]
+    public delegate void ProgressChanged(float progress);
 
     private int currentLevel;
     private Level currentLevelObject;
@@ -57,6 +60,13 @@ public class Game : Node2D
 
     public override void _Ready()
     {
+        new System.Threading.Thread(new ThreadStart(_Init)).Start();
+    }
+
+    public void _Init()
+    {
+        GD.Print("[Game] Start loading");
+
         uiLayer = GetNode<StaticToCamera>("UILayout");
         menu = GetNode<Node2D>("UILayout/Menu");
         counterPanel = GetNode<EnemyCounterPanel>("UILayout/EnemyCounterPanel");
@@ -73,9 +83,10 @@ public class Game : Node2D
 
         coinSpawner.counter = coinCounter;
 
+        EmitSignal("ProgressChanged", 10);
+
         StartGame(StorageManager.GetInt(PropertyKeys.CURRENT_LEVEL));
     }
-
 
     private void StartGame(int level) {
         currentLevel = level;
@@ -92,6 +103,8 @@ public class Game : Node2D
 
         var weaponActivator = GetNode<PropertyBasedActivator>("Weapons");
         weaponActivator.Activate();
+
+        EmitSignal("ProgressChanged", 15);
 
         weapon = weaponActivator.ActiveChild as Weapon;
         weapon.Reset();
@@ -110,6 +123,8 @@ public class Game : Node2D
         shotCounter = GetNode<ShotCounter>("UILayout/ShotCounter");
         levelDoneLabel = GetNode<Label>("UILayout/LevelDone");
         background = GetNode<Background>("Backgound");
+
+        EmitSignal("ProgressChanged", 20);
         
         timer.Reset(60);
         background.Init();
@@ -120,12 +135,16 @@ public class Game : Node2D
         trajectoryPainter.SetGroundY(GetNode<StaticBody2D>("StaticBody2D").GlobalPosition.y);
 
         GD.Print("Current coin count: " + coinCounter.count);
+
+        EmitSignal("ProgressChanged", 25);
         
         LoadCurrentLevel();
 
         camera.Enabled = true;
 
         backgroundMusic.Playing = true;
+
+        EmitSignal("ProgressChanged", 100);
     }
 
     private void ResetFireState()
@@ -183,6 +202,8 @@ public class Game : Node2D
         var packedLevel = ResourceLoader.Load<PackedScene>("res://Level" + (currentLevel + 1).ToString() + ".tscn");
         var sceneObject = packedLevel.Instance<Node2D>();
 
+        EmitSignal("ProgressChanged", 65);
+
         var instancePosition = GetNode<Position2D>("BuildingPosition");
 
         sceneObject.Position = instancePosition.Position;
@@ -199,6 +220,8 @@ public class Game : Node2D
         currentLevelObject.Connect("LevelEnemyDied", this, "EnemyDied");
         currentLevelObject.Connect("CoinCollected", this, "CoinCollected");
         currentLevelObject.Connect("ChestDestroyed", coinSpawner, "SpawnCoins");
+
+        EmitSignal("ProgressChanged", 80);
 
         timer.Reset(60);
         counterPanel.Init(currentLevelObject.getEnemies());
