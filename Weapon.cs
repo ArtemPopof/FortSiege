@@ -32,7 +32,7 @@ public abstract class Weapon : Node2D
     public abstract void Reset();
     public abstract void SetEnabled(bool enabled);
     public abstract void Fire();
-     public abstract void SetTrajectory(float value);
+    public abstract void SetTrajectory(Vector2 trajectory);
     public abstract void SetForce(float value);
     public abstract Vector2 GetProjectileStartPosition();
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://graphics/TrajectoryPainter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://PropertyBasedActivator.cs" type="Script" id=18]
 [ext_resource path="res://res/Cinzel/static/Cinzel-Bold.ttf" type="DynamicFontData" id=19]
 [ext_resource path="res://scenes/Game.cs" type="Script" id=20]
+[ext_resource path="res://widgets/Joystick.tscn" type="PackedScene" id=21]
+[ext_resource path="res://res/Cinzel/static/Cinzel-Black.ttf" type="DynamicFontData" id=22]
 [ext_resource path="res://LevelLabel.cs" type="Script" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -35,6 +37,26 @@ outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 17 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 0, 0, 0.509804 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.8, 0.8, 0.8, 0.796078 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 13
+
+[sub_resource type="AtlasTexture" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 36
+font_data = ExtResource( 22 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 20 )
@@ -92,6 +114,7 @@ color = Color( 1, 1, 1, 0 )
 script = ExtResource( 16 )
 
 [node name="FireButton" type="Node2D" parent="UILayout"]
+visible = false
 position = Vector2( 77.54, 150 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="UILayout/FireButton"]
@@ -223,6 +246,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Panel3" type="Panel" parent="UILayout"]
+margin_left = 64.0
+margin_top = 861.0
+margin_right = 291.0
+margin_bottom = 1083.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="UILayout/Panel3"]
+position = Vector2( -14.5222, -11.0827 )
+scale = Vector2( 261.871, 253.21 )
+normal = SubResource( 5 )
+
+[node name="Label" type="Label" parent="UILayout/Panel3"]
+margin_right = 231.0
+margin_bottom = 225.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 0.811765 )
+text = "FIRE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Joystick" parent="UILayout" instance=ExtResource( 21 )]
+position = Vector2( 2042.44, 933.368 )
+
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )
 volume_db = -6.674
@@ -233,3 +286,4 @@ volume_db = -6.674
 [connection signal="Timeout" from="UILayout/TimerWidget" to="." method="onTimeout"]
 [connection signal="StartGame" from="UILayout/Menu" to="." method="OnMenuGameStartedSignal"]
 [connection signal="pressed" from="UILayout/RestartButton/HBoxContainer/MarginContainer/MarginContainer/TouchScreenButton" to="." method="OnLevelOverButtonPressed"]
+[connection signal="pressed" from="UILayout/Panel3/TouchScreenButton" to="." method="FireButtonPressed"]

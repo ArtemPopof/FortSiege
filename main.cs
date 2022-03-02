@@ -24,6 +24,7 @@ public class main : Node2D
 
         StorageManager.Init();
         //StorageManager.Clear();
+        StorageManager.StoreValue(PropertyKeys.COIN_COUNT, 999);
         Data.Init();
 
         previousSceneIndex = -1;

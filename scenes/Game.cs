@@ -47,6 +47,7 @@ public class Game : Node2D
     private Node2D menu;
     private StaticToCamera uiLayer;
     private AudioStreamPlayer2D backgroundMusic;
+    private Joystick joystick;
 
     //private Node2D menuNode;
     private Header header;
@@ -76,6 +77,7 @@ public class Game : Node2D
         backgroundMusic = GetNode<AudioStreamPlayer2D>("BackgroundMusic");
         trajectoryPainter = GetNode<TrajectoryPainter>("TrajectoryDisplayer");
         coinSpawner = GetNode<CoinSpawner>("CoinSpawner");
+        joystick = GetNode<Joystick>("UILayout/Joystick");
 
         camera = main.camera;
 
@@ -116,6 +118,10 @@ public class Game : Node2D
         weapon.Connect("FireVelocityChanged", trajectoryPainter, "SetStartVelocity");
 
         fireLevelSlider.Connect("LevelChanged", weapon, "SetForce");
+        if (weapon.info.controlTrajectory)
+        {
+            joystick.Connect("VectorChanged", weapon, "SetTrajectory");
+        }
         
         ResetFireState();
 
@@ -162,7 +168,7 @@ public class Game : Node2D
         }
 
         fireLevelSlider.SetLevel(0.0f);
-        fireButton.Visible = true;
+        //fireButton.Visible = true;
     }
 
     private void BallFired()
@@ -243,14 +249,14 @@ public class Game : Node2D
     }
 
     public void FireButtonPressed() {
-        if (fireState == FireState.READY)
-        {
-            GD.Print("Set trajectory button pressed");
-            fireState = FireState.SET_TRAJECTORY;
-            weapon.currentState = FireState.SET_TRAJECTORY;
-            GetNode<Label>("FireButton/Label").Text = "Fire";
-            return;
-        }
+        // if (fireState == FireState.READY)
+        // {
+        //     GD.Print("Set trajectory button pressed");
+        //     fireState = FireState.SET_TRAJECTORY;
+        //     weapon.currentState = FireState.SET_TRAJECTORY;
+        //     GetNode<Label>("FireButton/Label").Text = "Fire";
+        //     return;
+        // }
 
         GD.Print("Fire button pressed");
         fired = true;

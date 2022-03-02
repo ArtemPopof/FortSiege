@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://widgets/Joystick.cs" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+shadow_color = Color( 0, 0, 0, 0.435294 )
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0.235294 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 13
+
+[node name="Joystick" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TouchScreenButton" type="Panel" parent="."]
+visible = false
+margin_left = -168.648
+margin_top = -167.912
+margin_right = 167.352
+margin_bottom = 168.088
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = -12.0
+margin_top = -53.0
+margin_right = 95.0
+margin_bottom = 54.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="Panel" parent="."]
+margin_left = -97.567
+margin_top = -139.681
+margin_right = 182.433
+margin_bottom = 140.319
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gui_input" from="TouchScreenButton" to="." method="ProcessInputEvent"]

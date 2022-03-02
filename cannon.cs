@@ -157,9 +157,18 @@ public class cannon : Weapon
         this.enabled = enabled;
     }
 
-    public override void SetTrajectory(float value)
+    public override void SetTrajectory(Vector2 vector)
     {
-        // NO IMPLEMENTATION FOR CANNON YET, CONTROLLED BY TOUCHING THE SCREEN
+        var force = vector.Length();
+        SetForce(force);
+        EmitSignal("ProjectilePositionChanged", GetNode<Position2D>("CannonShaft/BallPosition").GlobalPosition);
+
+        var radians = Mathf.Atan2(vector.y, vector.x);
+        radians = Mathf.Clamp(radians, -0.54f, 0.34f);
+
+        //GD.Print("[Cannon] set angle " + radians);
+
+        GetNode<Node2D>("CannonShaft").GlobalRotation = (float) radians;
     }
 
     public override void SetForce(float value)

@@ -199,7 +199,7 @@ public class Catapult : Weapon
         EmitSignal("FireVelocityChanged", GetFireVelocity());
     }
 
-    public override void SetTrajectory(float value)
+    public override void SetTrajectory(Vector2 vector)
     {
         // NOTHING TO DO, CATAPULT CAN'T CONTROL TRAJECTORY
     }

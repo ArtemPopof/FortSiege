@@ -58,7 +58,7 @@ public class Data
         cannon.cost = 70;
         cannon.name = "Cannon";
         cannon.shotCount = 2 + StorageManager.GetInt(PropertyKeys.WEAPON_SHOT_COUNT_MODIFICATION + "1");
-        cannon.controlTrajectory = false;
+        cannon.controlTrajectory = true;
         cannon.inPossesion = possesionArray[WEAPON_CANNON_ID];
         cannon.projectileTexture = ResourceLoader.Load("res://textures/CannonProjectile.png") as Texture;
         cannon.projectileWeight = 2 + StorageManager.GetInt(PropertyKeys.WEAPON_WEIGHT_MODIFICATION + "1");
