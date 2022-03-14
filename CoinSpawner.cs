@@ -12,6 +12,7 @@ public class CoinSpawner : Node
     [Export]
     public CoinCounter counter;
 
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -27,7 +28,7 @@ public class CoinSpawner : Node
             var randomVelY = GD.RandRange(-5, 5);
 
             var newCoin = coinScene.Instance<Coin>();
-            newCoin.LinearVelocity = new Vector2((float) randomVelX, (float) randomVelY);
+            //newCoin.LinearVelocity = new Vector2((float) randomVelX, (float) randomVelY);
             newCoin.GlobalPosition = position;
 
             AddChild(newCoin);
@@ -35,6 +36,8 @@ public class CoinSpawner : Node
             if (counter != null) {
                 newCoin.Connect("CollectCoin", this, "CoinCollected");
             }
+
+            newCoin.AutoCollect(counter.GlobalPosition);
         }
     }
 

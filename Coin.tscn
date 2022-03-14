@@ -22,9 +22,8 @@ extents = Vector2( 5.81519, 5.84248 )
 
 [sub_resource type="AtlasTexture" id=3]
 
-[node name="Coin" type="RigidBody2D"]
+[node name="Coin" type="KinematicBody2D"]
 input_pickable = true
-mass = 0.16
 script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -32,12 +31,12 @@ position = Vector2( 0.397095, 0.787231 )
 scale = Vector2( 0.101986, 0.101986 )
 frames = SubResource( 1 )
 animation = "Rotation"
-frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.179047, 0.2179 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="CollectSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
@@ -47,5 +46,4 @@ position = Vector2( -32.5686, -33.4571 )
 scale = Vector2( 67.8916, 66.8844 )
 normal = SubResource( 3 )
 
-[connection signal="input_event" from="." to="." method="OnInputEvent"]
 [connection signal="pressed" from="TouchScreenButton" to="." method="OnClicked"]

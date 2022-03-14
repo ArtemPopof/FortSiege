@@ -10,7 +10,7 @@ public class ShotCounter : Node2D
     private Stack<TextureRect> shotTextures;
 
     private int maxShots;
-    private int shotsLeft;
+    public int ShotsLeft {private set; get;}
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -31,7 +31,7 @@ public class ShotCounter : Node2D
         shotTextures.Clear();
 
         this.maxShots = weaponInfo.shotCount;
-        this.shotsLeft = weaponInfo.shotCount;
+        this.ShotsLeft = weaponInfo.shotCount;
 
         var referenceTexture = GetNode<TextureRect>("referenceShotTexture");
 
@@ -47,18 +47,18 @@ public class ShotCounter : Node2D
     }
 
     public bool ShotPerformed() {
-        GD.Print("Delete texture from shot counter, shots available: " + shotsLeft);
+        GD.Print("Delete texture from shot counter, shots available: " + ShotsLeft);
 
-        if (shotsLeft <= 0) return false;
+        if (ShotsLeft <= 0) return false;
         
         GD.Print("Deleting");
-        shotsLeft -= 1;
+        ShotsLeft -= 1;
         var shotTexture = shotTextures.Pop();
         GD.Print("Delete " + shotTexture);
         shotTexture.Visible = false;
         shotTexture.QueueFree();
 
-        if (shotsLeft <= 0) {
+        if (ShotsLeft <= 0) {
             OnNoMoreShots();
             return false;
         }

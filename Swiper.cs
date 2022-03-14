@@ -18,6 +18,8 @@ public class Swiper : HBoxContainer
     public float scrollEndingSpeed = 2.0f;
     [Export]
     public int itemCount = 1;
+    [Export]
+    public bool freeScrollMode = false;
 
     private float minXToSwipe = 200f;
 
@@ -88,8 +90,11 @@ public class Swiper : HBoxContainer
             } else if (state == SwipeState.SWIPING)
             {
                 GD.Print("Released");
-                state = SwipeState.ANIMATING;
-                SwipeOrAbort();
+                if (!freeScrollMode)
+                {
+                    state = SwipeState.ANIMATING;
+                    SwipeOrAbort();
+                }
             }
 
             return;
@@ -125,6 +130,18 @@ public class Swiper : HBoxContainer
         animatingDirection = diff > 0 ? 1 : -1;
 
         var cantSlide = (CurrentIndex - animatingDirection) < 0 || (CurrentIndex - animatingDirection) > itemCount - 1;
+
+        // if (freeScrollMode)
+        // {
+        //     if (cantSlide)
+        //     {
+        //         GD.Print("Edge, can't swipe further");
+        //         animatingDirection *= -1;
+        //         animatingTargetRectX = swiperStartPoint;
+        //     }
+
+        //     return;
+        // }
 
         if (edgeLeft || Mathf.Abs(diff) < minXToSwipe || cantSlide)
         {

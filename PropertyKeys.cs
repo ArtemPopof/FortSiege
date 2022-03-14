@@ -8,6 +8,8 @@ public class PropertyKeys {
     public const string WEAPON_POWER_MODIFICATION = "PowerModification";
     public const string WEAPON_WEIGHT_MODIFICATION = "WeightModification";
     public const string WEAPON_SHOT_COUNT_MODIFICATION = "ShotCountModification";
+    public const string LAST_LEVEL_RATING = "LastLevelRating";
 
     public const string SCENE_ARG_1 = "SceneArg1";
+
 }

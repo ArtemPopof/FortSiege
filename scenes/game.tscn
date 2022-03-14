@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://graphics/TrajectoryPainter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://scenes/Game.cs" type="Script" id=20]
 [ext_resource path="res://widgets/Joystick.tscn" type="PackedScene" id=21]
 [ext_resource path="res://res/Cinzel/static/Cinzel-Black.ttf" type="DynamicFontData" id=22]
+[ext_resource path="res://widgets/LevelCompleteDialog.tscn" type="PackedScene" id=23]
 [ext_resource path="res://LevelLabel.cs" type="Script" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -275,6 +276,8 @@ __meta__ = {
 
 [node name="Joystick" parent="UILayout" instance=ExtResource( 21 )]
 position = Vector2( 2042.44, 933.368 )
+
+[node name="LevelCompleteDialog" parent="UILayout" instance=ExtResource( 23 )]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )

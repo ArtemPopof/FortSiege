@@ -16,7 +16,7 @@ public class TimerWidget : Node2D
     private bool over;
 
     private float timeLeft;
-    private int timeLeftInt;
+    public int TimeLeftInt {private set; get;}
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -40,7 +40,7 @@ public class TimerWidget : Node2D
     public void Reset(int startTime) {
         GD.Print("Reset TimerWidget " + startTime);
         timeLeft = startTime;
-        timeLeftInt = startTime;
+        TimeLeftInt = startTime;
         SetTime(startTime);
         over = false;
         running = true;
@@ -58,9 +58,9 @@ public class TimerWidget : Node2D
         }
         //GD.Print("Timer: " + timeLeft);
 
-        if (timeLeftInt != (((int)timeLeft))) {
-            timeLeftInt = (int) timeLeft;
-            SetTime(timeLeftInt);
+        if (TimeLeftInt != (((int)timeLeft))) {
+            TimeLeftInt = (int) timeLeft;
+            SetTime(TimeLeftInt);
         }
     }
 

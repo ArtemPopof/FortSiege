@@ -43,7 +43,7 @@ public class main : Node2D
         var startTicks = DateTime.Now.Ticks;
 
         // erase all cache
-        //StorageManager.Clear();
+        //  StorageManager.Clear();
         UIManager.Init();
         ObjectManager.Init();
 

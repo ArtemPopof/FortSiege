@@ -15,6 +15,7 @@ public class Data
 
     public static List<WeaponInfo> weapons;
     public static List<WeaponExtention> extentions;
+    public static List<LevelInfo> levels;
 
     public static Dictionary<int, List<WeaponExtention>> weaponExtentions;
 
@@ -83,6 +84,12 @@ public class Data
         weaponExtentions = new Dictionary<int, List<WeaponExtention>>();
         weaponExtentions.Add(0, extentions);
         weaponExtentions.Add(1, extentions);
+
+        levels = new List<LevelInfo>();
+    
+        var level1 = new LevelInfo();
+        level1.index = 0;
+        level1.name = "Level 1";
 
         GD.Print("Data loaded");
     }

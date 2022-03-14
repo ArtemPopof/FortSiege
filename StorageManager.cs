@@ -21,8 +21,8 @@ public class StorageManager {
     // true if some properties was loaded, false if properties are empty
     public static bool Init()
     {        
-        // var directory = new Directory();
-        // directory.Remove("user://data.txt");
+        //var directory = new Directory();
+        //directory.Remove("user://data.txt");
 
         gameProperties = new System.Collections.Generic.Dictionary<string, object>();
 

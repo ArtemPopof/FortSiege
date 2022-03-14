@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://res/star.png" type="Texture" id=1]
+[ext_resource path="res://res/star-2.png" type="Texture" id=2]
+[ext_resource path="res://widgets/Rating.cs" type="Script" id=3]
+
+[node name="RatingWidget" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Reference" type="Node2D" parent="."]
+
+[node name="Hollow" type="TextureRect" parent="Reference"]
+margin_left = -167.0
+margin_top = -1.0
+margin_right = -67.0
+margin_bottom = 99.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Filled" type="TextureRect" parent="Reference"]
+margin_left = -51.0
+margin_top = -1.0
+margin_right = 49.0
+margin_bottom = 99.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="Reference"]
+margin_left = 61.0
+margin_top = -1.0
+margin_right = 161.0
+margin_bottom = 99.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

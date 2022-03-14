@@ -138,5 +138,5 @@ position = Vector2( 51.9946, 66.0456 )
 scale = Vector2( 0.247794, 0.247794 )
 frames = SubResource( 5 )
 animation = "Shine"
-frame = 5
+frame = 3
 playing = true

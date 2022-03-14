@@ -4,50 +4,44 @@ using System;
 public class MainMapScene : Node2D
 {
     [Signal]
-    public delegate void ChangeScreen(String screen);
+    public delegate void ChangeScreen(int screen);
     [Signal]
     public delegate void StartGame(int levelIndex);
 
-    private MainMenuHeader header;
     private GlobalMap map;
 
     private int selectedLevelIndex;
 
     public override void _Ready()
     {
-        header = GetNode<MainMenuHeader>("MainMenuHeader");
-        header.Connect("ChangeScreen", this, "OnChangeScreen");
-        header.Connect("ChangeWeapon", this, "ChangeWeapon");
-
         map = GetNode<GlobalMap>("LevelMap");
 
         map.Init();
 
         selectedLevelIndex = map.SelectedLevel;
+
+        map.Connect("LaunchSelectedLevel", this, "OnStartLevel");
     }
 
-    public void OnChangeScreen(String screen)
+    public void OnChangeScreen(int screen)
     {
         EmitSignal("ChangeScreen", screen);
     }
 
-    public void ChangeWeapon(int index)
+    public void GoToWorkshop()
     {
-        StorageManager.StoreValue(PropertyKeys.CURRENT_WEAPON, index);
-        StorageManager.Save();
-
-        map.Update();
+        OnChangeScreen(Constants.WEAPON_SHOP_SCREEN);
     }
 
-    public void OnStartButtonPressed()
+    public void OnStartLevel(int level)
     {
-        GD.Print("[MainMapScene] Start level " + selectedLevelIndex);
+        GD.Print("[MainMapScene] Start level " + level);
 
         var music = GetNode<AudioStreamPlayer2D>("BackgroundMusic");
         music.Autoplay = false;
         music.Playing = false;
 
-        EmitSignal("StartGame", selectedLevelIndex);
+        EmitSignal("StartGame", level);
     }
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://res/Cinzel/Cinzel-VariableFont_wght.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://res/catapult.svg" type="Texture" id=2]
@@ -6,38 +6,34 @@
 [ext_resource path="res://ui/MainMenuHeader.cs" type="Script" id=4]
 [ext_resource path="res://res/cannon.png" type="Texture" id=5]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.239216, 0.0352941, 0.0352941, 1 )
+[sub_resource type="Theme" id=1]
 
-[sub_resource type="Theme" id=2]
-
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 58
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0, 0, 0.498039 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 62
 use_filter = true
 font_data = ExtResource( 3 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=6]
 region = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="AtlasTexture" id=7]
 
 [sub_resource type="AtlasTexture" id=8]
 
 [sub_resource type="AtlasTexture" id=9]
 
-[sub_resource type="AtlasTexture" id=10]
-
 [node name="MainMenuHeader" type="Panel"]
 margin_right = 2412.0
 margin_bottom = 221.0
-custom_styles/panel = SubResource( 1 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -50,7 +46,7 @@ margin_bottom = 221.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
-theme = SubResource( 2 )
+theme = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,7 +67,7 @@ custom_constants/separation = 22
 margin_top = 71.0
 margin_right = 327.0
 margin_bottom = 150.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Fort Sidge"
 
 [node name="AvailableWeapons" type="HBoxContainer" parent="HBoxContainer"]
@@ -86,7 +82,7 @@ custom_constants/separation = 10
 margin_right = 250.0
 margin_bottom = 221.0
 rect_min_size = Vector2( 250, 0 )
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/AvailableWeapons/Catapult"]
 margin_right = 250.0
@@ -114,7 +110,7 @@ __meta__ = {
 visible = false
 margin_right = 250.0
 margin_bottom = 221.0
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -122,7 +118,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="HBoxContainer/AvailableWeapons/Catapult/Panel"]
 margin_right = 256.0
 margin_bottom = 222.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Buy"
 align = 1
 valign = 1
@@ -132,18 +128,18 @@ __meta__ = {
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/AvailableWeapons/Catapult/Panel"]
 scale = Vector2( 0.505747, 0.445262 )
-normal = SubResource( 7 )
+normal = SubResource( 6 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/AvailableWeapons/Catapult"]
 scale = Vector2( 254.276, 225.554 )
-normal = SubResource( 8 )
+normal = SubResource( 7 )
 
 [node name="Cannon" type="Panel" parent="HBoxContainer/AvailableWeapons"]
 margin_left = 260.0
 margin_right = 510.0
 margin_bottom = 221.0
 rect_min_size = Vector2( 250, 0 )
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/AvailableWeapons/Cannon"]
 margin_right = 250.0
@@ -171,7 +167,7 @@ __meta__ = {
 margin_left = -1.0
 margin_right = 251.0
 margin_bottom = 221.0
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -179,7 +175,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="HBoxContainer/AvailableWeapons/Cannon/BuyButton"]
 margin_right = 256.0
 margin_bottom = 222.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Buy"
 align = 1
 valign = 1
@@ -189,11 +185,11 @@ __meta__ = {
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/AvailableWeapons/Cannon/BuyButton"]
 scale = Vector2( 251.761, 220.675 )
-normal = SubResource( 9 )
+normal = SubResource( 8 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/AvailableWeapons/Cannon"]
 scale = Vector2( 254.276, 225.554 )
-normal = SubResource( 8 )
+normal = SubResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 2021.0
@@ -213,7 +209,7 @@ margin_left = 1.0
 margin_top = 2.34912
 margin_right = 401.0
 margin_bottom = 223.349
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Shop"
 align = 1
 valign = 1
@@ -223,7 +219,7 @@ __meta__ = {
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="HBoxContainer/HBoxContainer"]
 scale = Vector2( 400.375, 225.555 )
-normal = SubResource( 10 )
+normal = SubResource( 9 )
 
 [connection signal="pressed" from="HBoxContainer/AvailableWeapons/Catapult/Panel/TouchScreenButton" to="." method="GoToShop" binds= [ 0 ]]
 [connection signal="pressed" from="HBoxContainer/AvailableWeapons/Catapult/TouchScreenButton" to="." method="ChangeWeaponButtonPressed" binds= [ 0 ]]

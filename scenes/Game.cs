@@ -48,6 +48,7 @@ public class Game : Node2D
     private StaticToCamera uiLayer;
     private AudioStreamPlayer2D backgroundMusic;
     private Joystick joystick;
+    private LevelCompleteDialog completeDialog;
 
     //private Node2D menuNode;
     private Header header;
@@ -56,6 +57,7 @@ public class Game : Node2D
 
     private float timeSinceLastShot;
     private bool fired;
+    private bool restarted;
     private GameState state;
     private FireState fireState;
 
@@ -78,6 +80,7 @@ public class Game : Node2D
         trajectoryPainter = GetNode<TrajectoryPainter>("TrajectoryDisplayer");
         coinSpawner = GetNode<CoinSpawner>("CoinSpawner");
         joystick = GetNode<Joystick>("UILayout/Joystick");
+        completeDialog = GetNode<LevelCompleteDialog>("UILayout/LevelCompleteDialog");
 
         camera = main.camera;
 
@@ -94,6 +97,7 @@ public class Game : Node2D
         currentLevel = level;
         gameStarted = true;
         fired = false;
+        restarted = false;
         levelsCleared = true;
         state = GameState.ONGOING_GAME;
 
@@ -123,6 +127,8 @@ public class Game : Node2D
             joystick.Connect("VectorChanged", weapon, "SetTrajectory");
         }
         
+        completeDialog.Connect("Continue", this, "ChangeLevel");
+
         ResetFireState();
 
         timer = GetNode<TimerWidget>("UILayout/TimerWidget");
@@ -281,6 +287,7 @@ public class Game : Node2D
         weapon.Reset();
         levelCleared = false;
         levelsCleared = false;
+        restarted = true;
 
         state = GameState.ONGOING_GAME;
         LoadCurrentLevel();
@@ -293,22 +300,50 @@ public class Game : Node2D
 
     private void LevelOver(String message, bool gameover = false) {
         levelDoneLabel.Text = message;
-        levelDoneLabel.Visible = true;
         gameStarted = false;
         fireButton.Visible = false;
 
         GetNode<Label>("UILayout/RestartButton/HBoxContainer/MarginContainer/Label").Text = gameover ? "Restart" : "Complete";
-        GetNode<Node2D>("UILayout/RestartButton").Visible = true;
 
         if (!gameover)
         {
             levelCleared = true;
+            var rating = CalculateRating();
+            StorageManager.StoreValue(PropertyKeys.LAST_LEVEL_RATING + currentLevel, rating);
+            StorageManager.Save();
+            completeDialog.Show(coinCounter, rating);
+        }
+        else
+        {
+            GetNode<Node2D>("UILayout/RestartButton").Visible = true;
+            levelDoneLabel.Visible = true;
         }
 
         timer.Stop();
         state = GameState.GAME_OVER;
 
         weapon.SetEnabled(false);
+    }
+
+    private int CalculateRating()
+    {
+        var rating = 3;
+        if (restarted)
+        {
+            rating -= 1;
+        }
+
+        if (shotCounter.ShotsLeft == 0)
+        {
+            rating -= 1;
+        }
+
+        if (timer.TimeLeftInt == 0)
+        {
+            rating -= 1;
+        }
+
+        return rating;
     }
 
     private void ChangeLevel() {
@@ -319,6 +354,7 @@ public class Game : Node2D
             currentLevel = 1;
         }
         state = GameState.ONGOING_GAME;
+        restarted = false;
 
         currentLevelNode.QueueFree();
 
