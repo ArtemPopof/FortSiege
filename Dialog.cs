@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public abstract class Dialog : Node2D
 {
     private Dictionary<int, Label> labelsWithPlaceholder;
+    private String[] initialText;
+
     public Vector2 size;
 
     private Action<bool> resultCallback;
@@ -46,15 +48,29 @@ public abstract class Dialog : Node2D
         Visible = false;
     }
 
+    public void Reset()
+    {
+        var labels = FindAllLabelChildren(this, new List<Label>());
+
+        for (var i = 0; i < labels.Count; i++)
+        {
+            labels[i].Text = initialText[i];
+        }
+    }
+
     public void Init()
     {
        GD.Print("Init dialog " + Name);
        
        var labels = FindAllLabelChildren(this, new List<Label>());
+
+       initialText = new string[labels.Count];
        labelsWithPlaceholder = new Dictionary<int, Label>(labels.Count);
 
-       foreach (Label label in labels)
+       for (int i = 0; i < labels.Count; i++)
        {
+            var label = labels[i];
+            initialText[i] = label.Text;
             Regex regex = new Regex(@"\$\d");
             MatchCollection matches = regex.Matches(label.Text);
             foreach (Match match in matches)

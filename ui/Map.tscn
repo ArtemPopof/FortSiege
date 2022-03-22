@@ -40,7 +40,7 @@ region = Rect2( 1054.42, 138.987, 1631.31, 2259.05 )
 [sub_resource type="AtlasTexture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0, 0, 0, 0.254902 )
+bg_color = Color( 0, 0, 0, 0.396078 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 0.87451 )
@@ -69,7 +69,7 @@ corner_radius_bottom_left = 45
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="DynamicFont" id=10]
-size = 70
+size = 79
 outline_color = Color( 0, 0, 0, 0.192157 )
 font_data = ExtResource( 22 )
 
@@ -81,7 +81,7 @@ corner_radius_bottom_left = 50
 [sub_resource type="AtlasTexture" id=12]
 
 [sub_resource type="DynamicFont" id=13]
-size = 65
+size = 92
 font_data = ExtResource( 20 )
 
 [node name="LevelMap" type="Node2D"]
@@ -90,6 +90,7 @@ script = ExtResource( 9 )
 [node name="Swiper" type="HBoxContainer" parent="."]
 margin_right = 5204.0
 margin_bottom = 1380.0
+mouse_filter = 0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -785,16 +786,16 @@ custom_styles/panel = SubResource( 9 )
 [node name="Title" type="Label" parent="LevelDialog/Panel/VBoxContainer"]
 margin_top = 42.0
 margin_right = 1126.0
-margin_bottom = 127.0
+margin_bottom = 139.0
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Level name"
 align = 1
 
 [node name="Panel2" type="Panel" parent="LevelDialog/Panel/VBoxContainer"]
-margin_top = 169.0
+margin_top = 181.0
 margin_right = 1126.0
-margin_bottom = 569.0
+margin_bottom = 581.0
 rect_min_size = Vector2( 0, 400 )
 custom_styles/panel = SubResource( 9 )
 __meta__ = {
@@ -806,9 +807,9 @@ position = Vector2( 560, 386.667 )
 scale = Vector2( 2, 2 )
 
 [node name="Last rating" type="Label" parent="LevelDialog/Panel/VBoxContainer"]
-margin_top = 611.0
+margin_top = 623.0
 margin_right = 1126.0
-margin_bottom = 696.0
+margin_bottom = 720.0
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Last rating"
@@ -838,10 +839,10 @@ scale = Vector2( 1132.01, 206.553 )
 normal = SubResource( 12 )
 
 [node name="Label2" type="Label" parent="LevelDialog/Panel/Button/Container"]
-margin_left = 496.0
-margin_top = 62.0
-margin_right = 632.0
-margin_bottom = 141.0
+margin_left = 468.0
+margin_top = 45.0
+margin_right = 660.0
+margin_bottom = 158.0
 custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )

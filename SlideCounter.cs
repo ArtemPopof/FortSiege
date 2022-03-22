@@ -23,7 +23,7 @@ public class SlideCounter : ColorRect
         currentIndex = 0;
 
         var sizeOfWidgets = itemCount * CIRCLE_SIZE + (itemCount - 1) * SPACING;
-        startX = (RectSize.x / 2 / itemCount) - sizeOfWidgets / 2;
+        startX = (RectSize.x / 2) - sizeOfWidgets / 2;
     }
 
     public override void _Draw()

@@ -8,9 +8,13 @@ public class GlobalMap : Node2D
 
     public int SelectedLevel {get; private set;} = 0;
 
+    private Swiper swiper;
+
     public void Init()
     {
         GD.Print("Open global map");
+
+        swiper = GetNode<Swiper>("Swiper");
 
         var availableLevels = StorageManager.GetString(PropertyKeys.AVAILABLE_LEVELS);
         //availableLevels = null;
@@ -64,6 +68,8 @@ public class GlobalMap : Node2D
     {
         GD.Print("[GlobalMap] Play level " + level);
 
+        swiper.SwipeEnabled = false;
+
         //var levelInfo = Data.levels[level];
         var lastRating = StorageManager.GetInt(PropertyKeys.LAST_LEVEL_RATING + level.ToString());
 
@@ -73,6 +79,7 @@ public class GlobalMap : Node2D
         levelTitle.Text = "Level " + (level + 1);
         ratingWidget.Init(3, lastRating);
         GetNode<Node2D>("LevelDialog").Visible = true;
+
 
         SelectedLevel = level;
     }
@@ -105,5 +112,7 @@ public class GlobalMap : Node2D
     public void CloseLevelDialog()
     {
         GetNode<Node2D>("LevelDialog").Visible = false;
+
+        swiper.SwipeEnabled = true;
     }
 }

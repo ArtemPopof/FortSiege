@@ -145,7 +145,7 @@ position = Vector2( 551.586, -399.065 )
 scale = Vector2( 0.559476, 0.559476 )
 frames = SubResource( 6 )
 animation = "Shine"
-frame = 3
+frame = 2
 playing = true
 
 [node name="RatingWidget" parent="Panel/VBoxContainer" instance=ExtResource( 3 )]

@@ -501,7 +501,6 @@ position = Vector2( 432.654, 99.9102 )
 scale = Vector2( 0.199878, 0.199878 )
 frames = SubResource( 13 )
 animation = "Shine"
-frame = 4
 playing = true
 
 [node name="MarginContainer" type="MarginContainer" parent="ModificationPanel/BuyPanel/BeforeBuy"]
@@ -512,7 +511,7 @@ rect_min_size = Vector2( 70, 0 )
 
 [node name="AfterBuy" type="HBoxContainer" parent="ModificationPanel/BuyPanel"]
 visible = false
-margin_right = 701.0
+margin_right = 790.0
 margin_bottom = 203.0
 alignment = 1
 __meta__ = {
@@ -520,23 +519,23 @@ __meta__ = {
 }
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="ModificationPanel/BuyPanel/AfterBuy"]
-scale = Vector2( 708.281, 213.184 )
+scale = Vector2( 789.473, 213.184 )
 normal = SubResource( 14 )
 
 [node name="Label2" type="Label" parent="ModificationPanel/BuyPanel/AfterBuy"]
-margin_left = 273.0
-margin_top = 70.0
-margin_right = 428.0
-margin_bottom = 132.0
+margin_left = 332.0
+margin_top = 77.0
+margin_right = 457.0
+margin_bottom = 126.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "Select"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_top = 1287.0
-margin_right = 2391.0
-margin_bottom = 1287.0
+margin_top = 1231.0
+margin_right = 2409.0
+margin_bottom = 1281.0
 color = Color( 0.25098, 0.0392157, 0.0392157, 0.580392 )
 script = ExtResource( 8 )
 __meta__ = {
@@ -629,6 +628,7 @@ position = Vector2( 223.293, 127.557 )
 scale = Vector2( 0.199878, 0.199878 )
 frames = SubResource( 13 )
 animation = "Shine"
+frame = 2
 playing = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Extension1/Extension/Panel/BuyPanel/HBoxContainer"]

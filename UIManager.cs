@@ -20,8 +20,10 @@ public class UIManager : Node2D
                 instancedDialog = scene.Instance<Dialog>();
                 instancedDialog.Init();
                 parent.AddChild(instancedDialog);
+                return instancedDialog;
             }
 
+            instancedDialog.Reset();
             return instancedDialog;
         }
     }
@@ -91,6 +93,7 @@ public class UIManager : Node2D
     public static void ShowDialogForResult(int dialogId, Action<bool> callback, params object[] args)
     {
         var dialog = instance.dialogScenes[dialogId].GetDialogOrInitFirst(instance);
+        instance.CenterDialog(dialog);
         GD.Print("[UIManager] Show dialog for result " + dialog.Name);
 
         dialog.ShowForResult(callback, args);

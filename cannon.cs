@@ -20,20 +20,22 @@ public class cannon : Weapon
     private bool enabled;
     private bool fired;
 
-    private float force;
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         base._Ready();
         fired = false;
-        force = 0.1f;
         lastLookAtPosition = new Vector2(Position.x + 100, Position.y);
     }
 
     public override int GetWeaponNumber()
     {
         return 1;
+    }
+
+    public override void Init()
+    {
+        SetForce(0.1f);
     }
 
     public void ShaftPressed()
@@ -102,7 +104,7 @@ public class cannon : Weapon
 
         GD.Print("[Cannon] Rotation: " + rotation);
 
-        return new Vector2(Math.Max(10, xVelocity * force), yVelocity * force);
+        return new Vector2(Math.Max(10, xVelocity * fireForce), yVelocity * fireForce);
     }
 
     public override void Fire() {
@@ -174,7 +176,7 @@ public class cannon : Weapon
     public override void SetForce(float value)
     {
         GD.Print("[Cannon] Set force to " + value);
-        force = value;
+        fireForce = value;
         EmitSignal("FireVelocityChanged", GetBallVelocity());
 
         GD.Print("[Cannon] New velocity: " + GetBallVelocity());

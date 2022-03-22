@@ -19,6 +19,8 @@ public abstract class Weapon : Node2D
     [Signal]
     public delegate void ProjectilePositionChanged(Vector2 projectilePosition);
 
+    protected float fireForce;
+
     public List<Ball> Balls {get; set;}
 
     public override void _Ready()
@@ -26,6 +28,12 @@ public abstract class Weapon : Node2D
         info = Data.weapons[GetIndex()];
         
         Balls = new List<Ball>(info.shotCount + 1);
+    }
+
+    public virtual void Init()
+    {
+        fireForce = 0.1f;
+        EmitSignal("ForceChanged", fireForce);
     }
 
     public abstract int GetWeaponNumber();

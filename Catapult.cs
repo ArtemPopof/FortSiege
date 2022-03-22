@@ -8,7 +8,6 @@ public class Catapult : Weapon
     private bool settingStrength = false;
     private bool firing = false;
     private float firingTime = 0;
-    private float firingForce;
     private float currentFiringSpeed;
 
     private Position2D ballPosition;
@@ -39,7 +38,6 @@ public class Catapult : Weapon
         maxTouchX = GetNode<Position2D>("MaxX").GlobalPosition.x;
         maxTouchY = neck.GlobalPosition.y - 10;
 
-        SetForce(0.1f);
         neckDegreesLoading = 80;
         //maxDegreesRotation = neck.GlobalRotation;
     }
@@ -96,7 +94,7 @@ public class Catapult : Weapon
             return;
         }
 
-        currentFiringSpeed = firingForce + (firingTime * (firingForce * 82.5f));
+        currentFiringSpeed = fireForce + (firingTime * (fireForce * 82.5f));
         currentFiringSpeed /= 100.0f;
 
         neck.GlobalRotationDegrees = neck.GlobalRotationDegrees + currentFiringSpeed;
@@ -185,11 +183,19 @@ public class Catapult : Weapon
 
         firing = true;
         firingTime = 0;
-        firingForce = (90 - neck.GlobalRotationDegrees) / 90f;
+        fireForce = (90 - neck.GlobalRotationDegrees) / 90f;
+    }
+
+    public override void Init()
+    {
+        SetForce(0.1f);
     }
 
     public override void SetForce(float value)
     {
+        fireForce = value;
+
+        GD.Print("[Catapult] SetForce = " + value);
         GD.Print("Set catapult neck rotation to " + value * 90 + " degrees");
         neck.RotationDegrees = maxDegreesRotation - (value * (90 - maxDegreesRotation));
 

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class ShotCounter : Node2D
 {
+    [Export]
+    public bool changeTextureSize = false;
+
     [Signal]
     public delegate void NoMoreShots();
 
@@ -41,6 +44,7 @@ public class ShotCounter : Node2D
             newTexture.Visible = true;
             newTexture.Texture = weaponInfo.projectileTexture;
             AddChild(newTexture);
+            newTexture.RectSize = referenceTexture.RectSize;
 
             shotTextures.Push(newTexture);
         }

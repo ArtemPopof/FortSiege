@@ -36,6 +36,8 @@ public class Swiper : HBoxContainer
 
     private float slideWidth;
 
+    public Boolean SwipeEnabled {set; get;} = true;
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -70,7 +72,7 @@ public class Swiper : HBoxContainer
 
     public override void _Input(InputEvent @event)
 	{                        
-        if (!Visible) {
+        if (!Visible || !SwipeEnabled) {
             return;
         }
 

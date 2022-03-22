@@ -38,7 +38,7 @@ public class Game : Node2D
     private TimerWidget timer;
     private ShotCounter shotCounter;
     private Label levelDoneLabel;
-    private Node2D fireButton;
+    private Panel fireButton;
     private Background background;
     private CoinSpawner coinSpawner;
     private CoinCounter coinCounter;
@@ -73,7 +73,7 @@ public class Game : Node2D
         uiLayer = GetNode<StaticToCamera>("UILayout");
         menu = GetNode<Node2D>("UILayout/Menu");
         counterPanel = GetNode<EnemyCounterPanel>("UILayout/EnemyCounterPanel");
-        fireButton = GetNode<Node2D>("UILayout/FireButton");
+        fireButton = GetNode<Panel>("UILayout/Fire");
         coinCounter = GetNode<CoinCounter>("UILayout/CoinCounter");
         fireLevelSlider = GetNode<LevelSlider>("UILayout/LevelSlider");
         backgroundMusic = GetNode<AudioStreamPlayer2D>("BackgroundMusic");
@@ -120,6 +120,7 @@ public class Game : Node2D
         weapon.Connect("ForceChanged", fireLevelSlider, "SetLevel");
         weapon.Connect("ProjectilePositionChanged", trajectoryPainter, "SetTrajectoryStart");
         weapon.Connect("FireVelocityChanged", trajectoryPainter, "SetStartVelocity");
+        weapon.Init();
 
         fireLevelSlider.Connect("LevelChanged", weapon, "SetForce");
         if (weapon.info.controlTrajectory)
@@ -156,6 +157,8 @@ public class Game : Node2D
 
         backgroundMusic.Playing = true;
 
+        weapon.Init();
+
         EmitSignal("ProgressChanged", 100);
     }
 
@@ -174,7 +177,7 @@ public class Game : Node2D
         }
 
         fireLevelSlider.SetLevel(0.0f);
-        //fireButton.Visible = true;
+        fireButton.Visible = true;
     }
 
     private void BallFired()

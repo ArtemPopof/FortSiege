@@ -46,7 +46,7 @@ public class Data
         catapult.controlTrajectory = false;
         catapult.inPossesion = possesionArray[WEAPON_CATAPULT_ID];
         catapult.shotCount = 2 + StorageManager.GetInt(PropertyKeys.WEAPON_SHOT_COUNT_MODIFICATION + "0");
-        catapult.projectileTexture = ResourceLoader.Load("res://textures/CatapultProjectile.svg") as Texture;
+        catapult.projectileTexture = ResourceLoader.Load("res://res/stone.png") as Texture;
         catapult.projectileWeight = 7 + StorageManager.GetInt(PropertyKeys.WEAPON_WEIGHT_MODIFICATION + "0");
         catapult.power = 1 + + StorageManager.GetInt(PropertyKeys.WEAPON_POWER_MODIFICATION + "0");
 

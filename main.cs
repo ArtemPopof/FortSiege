@@ -24,7 +24,7 @@ public class main : Node2D
 
         StorageManager.Init();
         //StorageManager.Clear();
-        StorageManager.StoreValue(PropertyKeys.COIN_COUNT, 999);
+        //StorageManager.StoreValue(PropertyKeys.COIN_COUNT, 0);
         Data.Init();
 
         previousSceneIndex = -1;
@@ -43,7 +43,7 @@ public class main : Node2D
         var startTicks = DateTime.Now.Ticks;
 
         // erase all cache
-        //  StorageManager.Clear();
+        //StorageManager.Clear();
         UIManager.Init();
         ObjectManager.Init();
 

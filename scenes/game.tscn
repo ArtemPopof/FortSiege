@@ -81,20 +81,6 @@ position = Vector2( -0.785157, -0.523132 )
 [node name="BuildingPosition" type="Position2D" parent="."]
 position = Vector2( 1537.01, 1241.02 )
 
-[node name="Weapons" type="Node2D" parent="."]
-position = Vector2( 188.253, 1208.75 )
-script = ExtResource( 18 )
-property = "CurrentWeapon"
-
-[node name="Catapult" parent="Weapons" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 0, -30 )
-
-[node name="Cannon" parent="Weapons" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( -64, -50 )
-testVelocity = Vector2( 0, 0 )
-
 [node name="CoinSpawner" parent="." instance=ExtResource( 11 )]
 position = Vector2( 56, 15 )
 
@@ -169,9 +155,9 @@ scale = Vector2( 3, 3 )
 [node name="LevelSlider" parent="UILayout" instance=ExtResource( 10 )]
 visible = false
 margin_left = 131.664
-margin_top = 321.214
+margin_top = 217.214
 margin_right = 257.664
-margin_bottom = 881.213
+margin_bottom = 777.213
 color = Color( 1, 1, 1, 0.384314 )
 
 [node name="MonitorPlotPanelPerf" parent="UILayout" instance=ExtResource( 14 )]
@@ -247,22 +233,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel3" type="Panel" parent="UILayout"]
-margin_left = 64.0
-margin_top = 861.0
-margin_right = 291.0
-margin_bottom = 1083.0
+[node name="Fire" type="Panel" parent="UILayout"]
+margin_left = 104.0
+margin_top = 877.0
+margin_right = 331.0
+margin_bottom = 1099.0
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="UILayout/Panel3"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="UILayout/Fire"]
 position = Vector2( -14.5222, -11.0827 )
 scale = Vector2( 261.871, 253.21 )
 normal = SubResource( 5 )
 
-[node name="Label" type="Label" parent="UILayout/Panel3"]
+[node name="Label" type="Label" parent="UILayout/Fire"]
 margin_right = 231.0
 margin_bottom = 225.0
 custom_fonts/font = SubResource( 6 )
@@ -278,10 +264,27 @@ __meta__ = {
 position = Vector2( 2042.44, 933.368 )
 
 [node name="LevelCompleteDialog" parent="UILayout" instance=ExtResource( 23 )]
+visible = false
+
+[node name="Weapons" type="Node2D" parent="."]
+position = Vector2( 188.253, 1208.75 )
+script = ExtResource( 18 )
+property = "CurrentWeapon"
+
+[node name="Catapult" parent="Weapons" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 0, -30 )
+
+[node name="Cannon" parent="Weapons" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -64, -50 )
+testVelocity = Vector2( 0, 0 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 1181.7, 520.493 )
 stream = ExtResource( 12 )
 volume_db = -6.674
+attenuation = 1e-05
 
 [connection signal="LevelChanged" from="." to="UILayout/LevelLabel" method="LevelChanged"]
 [connection signal="pressed" from="UILayout/FireButton/TouchScreenButton" to="." method="FireButtonPressed"]
@@ -289,4 +292,4 @@ volume_db = -6.674
 [connection signal="Timeout" from="UILayout/TimerWidget" to="." method="onTimeout"]
 [connection signal="StartGame" from="UILayout/Menu" to="." method="OnMenuGameStartedSignal"]
 [connection signal="pressed" from="UILayout/RestartButton/HBoxContainer/MarginContainer/MarginContainer/TouchScreenButton" to="." method="OnLevelOverButtonPressed"]
-[connection signal="pressed" from="UILayout/Panel3/TouchScreenButton" to="." method="FireButtonPressed"]
+[connection signal="pressed" from="UILayout/Fire/TouchScreenButton" to="." method="FireButtonPressed"]

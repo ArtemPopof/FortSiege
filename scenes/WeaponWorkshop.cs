@@ -43,7 +43,7 @@ public class WeaponWorkshop : Node2D
         power.UpdateLevel((int) weaponInfo.power);
 
         var ratingValue = (weaponInfo.power * 4) + weaponInfo.shotCount + (weaponInfo.projectileWeight);
-        rating.Text = "Rating: " + ((ratingValue / 6.0).ToString());
+        rating.Text = "Rating: " + ((ratingValue / 6.0).ToString("0.0"));
 
         if (weaponInfo.inPossesion)
         {
@@ -58,6 +58,9 @@ public class WeaponWorkshop : Node2D
         {
             afterBuyPanel.Visible = false;
             beforeBuyPanel.Visible = true;
+
+            var text = GetNode<Label>("ModificationPanel/BuyPanel/BeforeBuy/Label2");
+            text.Text = weaponInfo.cost.ToString();
         }
 
         UpdateUpgradeButtons(weaponInfo);
@@ -129,9 +132,7 @@ public class WeaponWorkshop : Node2D
             StorageManager.Save();
 
             UpdateCurrentWeaponInfo(weapon);
-        },  $"Do you really want to buy {weapon.name} for {weapon.cost} coins?");
-
-
+        },  $"Do you really want to buy {weapon.name} \n for {weapon.cost} coins?");
     }
 
     private bool CheckCanBuy(int price)
@@ -163,7 +164,7 @@ public class WeaponWorkshop : Node2D
         UpgradeAttribute(PropertyKeys.WEAPON_POWER_MODIFICATION, Data.weapons[swiper.CurrentIndex].power);
     }
 
-    private void UpgradeWieght()
+    private void UpgradeWeight()
     {
         GD.Print("Trying to upgrade weight");
         UpgradeAttribute(PropertyKeys.WEAPON_WEIGHT_MODIFICATION, Data.weapons[swiper.CurrentIndex].projectileWeight);
@@ -207,7 +208,7 @@ public class WeaponWorkshop : Node2D
             UpdateCurrentWeaponInfo(currentInfo);
 
             GD.Print($"Upgraded {key} successfully");
-        },  $"Do you really want to upgrade for {upgradeCost} coins?");
+        },  $"Do you really want to upgrade \n for {upgradeCost} coins?");
 
     }
 }
